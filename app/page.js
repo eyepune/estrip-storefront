@@ -3,7 +3,6 @@ import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ReactLenis } from '@studio-freight/react-lenis';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -27,7 +26,7 @@ export default function Home() {
       const canvas = canvasRef.current;
       if (canvas) {
         const context = canvas.getContext("2d");
-        const frameCount = 410; // Approx frames for a 14s video at 30fps
+        const frameCount = 385; // Fixed to exact number of extracted frames
         const images = [];
         const imageSeq = { frame: 1 };
 
@@ -183,7 +182,7 @@ export default function Home() {
   ];
 
   return (
-    <ReactLenis root options={{ lerp: 0.1, duration: 1.2, smoothTouch: true, syncTouch: true }}>
+    <>
       {/* Navbar */}
       <nav className="glass-nav bg-white/95 shadow-sm border-b border-gray-100 sticky top-0 z-50 transition-all duration-300">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
@@ -287,7 +286,7 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="creative-card group">
                 <div className="creative-img transition-transform duration-500 group-hover:scale-[1.05] relative h-full">
-                  <Image src="https://estrip.in/cdn/shop/files/1_31.png?v=1783498397" alt="Laundry strips" fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
+                  <Image src="https://estrip.in/cdn/shop/files/pdp_s1_1.png?v=1783917607&width=480" alt="Laundry strips" fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
                 </div>
                 <div className="creative-content relative z-10 p-6 bg-white m-4 rounded-xl shadow-lg border border-gray-100">
                   <h3 className="text-xl font-bold mb-2">Time to Strip</h3>
@@ -386,7 +385,7 @@ export default function Home() {
                     muted 
                     loop 
                     playsInline 
-                    preload="none"
+                    preload="metadata"
                     onMouseEnter={(e) => e.target.play()}
                     onMouseLeave={(e) => e.target.pause()}
                   />
@@ -518,6 +517,6 @@ export default function Home() {
           </div>
         </div>
       )}
-    </ReactLenis>
+    </>
   );
 }

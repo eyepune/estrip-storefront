@@ -16,7 +16,7 @@ git add .
 
 # 3. Commit the changes
 Write-Host "Committing changes..."
-git commit -m "feat: cinematic video architecture and speed optimizations"
+git commit -m "fix: resolve Next.js unused imports and restore native scroll"
 
 # 4. Set the remote repository
 Write-Host "Linking to GitHub repository: $RepoUrl"
@@ -35,5 +35,3 @@ if ($LASTEXITCODE -eq 0) {
 } else {
     Write-Host "❌ Failed to push. Make sure you are logged into GitHub Desktop or CLI." -ForegroundColor Red
 }
-
-Read-Host -Prompt "Press Enter to exit"

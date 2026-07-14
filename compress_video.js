@@ -13,6 +13,7 @@ ffmpeg(inputVideo)
     .outputOptions([
         '-vf scale=-1:480', // Scale to 480p
         '-c:v libx264',     // Use H.264 codec for wide compatibility
+        '-pix_fmt yuv420p', // CRITICAL: Required for HTML5 video players to decode colors
         '-crf 28',          // High compression (lower quality, much smaller file)
         '-preset fast',
         '-an'               // Remove audio entirely
