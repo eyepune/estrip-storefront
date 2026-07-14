@@ -32,7 +32,7 @@ export default function Home() {
           trigger: containerRef.current,
           start: "top top",
           end: "bottom bottom",
-          scrub: 0.1, // Ultra-fast, immediate scrubbing sync
+          scrub: 1, // Smooth 1-second catchup to hide video decode lag
           onUpdate: (self) => {
             if (videoRef.current && videoRef.current.duration) {
               videoRef.current.currentTime = self.progress * videoRef.current.duration;
@@ -66,11 +66,14 @@ export default function Home() {
       autoVideos.forEach((vid) => {
         ScrollTrigger.create({
           trigger: vid,
-          start: "top bottom",
-          end: "bottom top",
-          onEnter: () => vid.play(),
+          start: "top 150%", // Start loading/playing way before it hits the screen to prevent freezing
+          end: "bottom -50%",
+          onEnter: () => {
+            if(vid.readyState === 0) vid.load();
+            vid.play().catch(()=>{});
+          },
           onLeave: () => vid.pause(),
-          onEnterBack: () => vid.play(),
+          onEnterBack: () => vid.play().catch(()=>{}),
           onLeaveBack: () => vid.pause(),
         });
       });
@@ -150,7 +153,7 @@ export default function Home() {
   ];
 
   return (
-    <ReactLenis root options={{ lerp: 0.25, duration: 0.8, smoothTouch: true }}>
+    <ReactLenis root options={{ lerp: 0.1, duration: 1.2, smoothTouch: true, syncTouch: true }}>
       {/* Navbar */}
       <nav className="glass-nav sticky top-0 z-50 transition-all duration-300">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
