@@ -92,23 +92,7 @@ export default function Home() {
         return () => window.removeEventListener("resize", resizeCanvas);
       }
 
-      // Smart Video Pausing (Performance Optimization)
-      const autoVideos = document.querySelectorAll('.auto-pause');
-      autoVideos.forEach((vid) => {
-        ScrollTrigger.create({
-          trigger: vid,
-          start: "top 150%", // Start loading/playing way before it hits the screen to prevent freezing
-          end: "bottom -50%",
-          onEnter: () => {
-            if(vid.readyState === 0) vid.load();
-            vid.play().catch(()=>{});
-          },
-          onLeave: () => vid.pause(),
-          onEnterBack: () => vid.play().catch(()=>{}),
-          onLeaveBack: () => vid.pause(),
-        });
-      });
-
+      // Removed heavy GSAP video decoders for buttery scroll performance
       // Connected Scroll Reveal Animations
       const fadeElements = document.querySelectorAll('.fade-up-element');
       fadeElements.forEach((el) => {
@@ -186,7 +170,7 @@ export default function Home() {
   return (
     <ReactLenis root options={{ lerp: 0.1, duration: 1.2, smoothTouch: true, syncTouch: true }}>
       {/* Navbar */}
-      <nav className="glass-nav sticky top-0 z-50 transition-all duration-300">
+      <nav className="glass-nav bg-white/95 shadow-sm border-b border-gray-100 sticky top-0 z-50 transition-all duration-300">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           <a href="#" className="logo block relative w-24 h-10">
             <Image src="https://estrip.in/cdn/shop/files/Primary-Logo_Blue-scaled_1.png?v=1777612281" alt="E-strip Logo" fill className="object-contain" sizes="96px" priority />
@@ -228,7 +212,7 @@ export default function Home() {
             
             {/* Foreground Overlay Text */}
             <div ref={textRef} className="relative z-20 text-center max-w-4xl mx-auto px-6 mt-20">
-              <div className="inline-block px-4 py-2 bg-white/20 backdrop-blur-md text-white rounded-full font-semibold text-sm mb-6 pointer-events-auto border border-white/30">
+              <div className="inline-block px-4 py-2 bg-black/40 text-white rounded-full font-semibold text-sm mb-6 pointer-events-auto border border-white/30">
                 🍃 100% Plant-Based & Plastic-Free
               </div>
               <h1 className="text-5xl md:text-7xl font-bold leading-tight mb-6 text-white drop-shadow-2xl">
@@ -254,15 +238,7 @@ export default function Home() {
         </section>
 
         {/* Features / Benefits */}
-        <section className="py-24 relative overflow-hidden bg-black" id="features">
-          <video 
-            muted 
-            playsInline 
-            loop
-            preload="none"
-            className="auto-pause absolute inset-0 w-full h-full object-cover opacity-30"
-            src="/Products_montage_estrip.in_1080p_202607150148.mp4"
-          />
+        <section className="py-24 relative overflow-hidden bg-gradient-to-b from-gray-900 to-black" id="features">
           <div className="max-w-7xl mx-auto px-6 relative z-10">
             <h2 className="fade-up-element text-4xl font-bold text-center mb-16 text-white drop-shadow-lg">Why Switch to E-strip?</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -290,7 +266,7 @@ export default function Home() {
                 <div className="creative-img transition-transform duration-500 group-hover:scale-[1.05] relative h-full">
                   <Image src="https://estrip.in/cdn/shop/files/1_31.png?v=1783498397" alt="Laundry strips" fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
                 </div>
-                <div className="creative-content relative z-10 p-6 bg-white/90 m-4 rounded-xl shadow-lg backdrop-blur-md">
+                <div className="creative-content relative z-10 p-6 bg-white m-4 rounded-xl shadow-lg border border-gray-100">
                   <h3 className="text-xl font-bold mb-2">Time to Strip</h3>
                   <p className="text-sm">The power of regular brands compressed into a lightweight strip that gives your clothes a proper good wash. <strong>Strip for the planet.</strong></p>
                 </div>
@@ -299,16 +275,16 @@ export default function Home() {
                 <div className="creative-img transition-transform duration-500 group-hover:scale-[1.05] relative h-full">
                    <Image src="https://estrip.in/cdn/shop/files/2_25.png?v=1783498480" alt="Machine use" fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
                 </div>
-                <div className="creative-content relative z-10 p-6 bg-white/90 m-4 rounded-xl shadow-lg backdrop-blur-md">
+                <div className="creative-content relative z-10 p-6 bg-white m-4 rounded-xl shadow-lg border border-gray-100">
                   <h3 className="text-xl font-bold mb-2">Easy to use</h3>
                   <p className="text-sm">Pop the strip directly into the drum of your washing machine alongside clothes & start. Suitable for all types of machines.</p>
                 </div>
               </div>
               <div className="creative-card group">
-                <div className="creative-img relative overflow-hidden group-hover:scale-[1.05] transition-transform duration-500 h-full">
-                  <video muted playsInline loop preload="none" className="auto-pause absolute inset-0 w-full h-full object-cover" src="/Products_montage_estrip.in_1080p_202607150148.mp4" />
+                <div className="creative-img transition-transform duration-500 group-hover:scale-[1.05] relative h-full">
+                  <Image src="https://estrip.in/cdn/shop/files/pdp_s3.png?v=1783917395&width=480" alt="Micro-Enzyme" fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
                 </div>
-                <div className="creative-content">
+                <div className="creative-content relative z-10 p-6 bg-white m-4 rounded-xl shadow-lg border border-gray-100">
                   <h3>Micro-Enzyme Tech</h3>
                   <p>Watch as plant-based enzymes break down tough stains at the fiber level, leaving no residue behind.</p>
                 </div>
@@ -329,7 +305,7 @@ export default function Home() {
                       {product.badge}
                     </div>
                   )}
-                  <div className="h-64 bg-gray-50 relative mix-blend-multiply flex items-center justify-center">
+                  <div className="h-64 bg-gray-50 relative flex items-center justify-center">
                     <Image src={product.image} alt={product.name} fill className="object-contain p-4" sizes="(max-width: 768px) 100vw, 33vw" />
                   </div>
                   <div className="p-8 flex flex-col flex-1">
@@ -352,15 +328,7 @@ export default function Home() {
         </section>
 
         {/* Subscription Upsell Section */}
-        <section className="py-32 relative overflow-hidden bg-black text-white flex items-center justify-center">
-          <video 
-            muted 
-            playsInline 
-            loop
-            preload="none"
-            className="auto-pause absolute inset-0 w-full h-full object-cover opacity-50"
-            src="/Products_montage_estrip.in_1080p_202607150148.mp4"
-          />
+        <section className="py-32 relative overflow-hidden bg-gradient-to-r from-blue-900 to-black text-white flex items-center justify-center">
           <div className="fade-up-element relative z-10 max-w-4xl mx-auto px-6 text-center">
             <h2 className="text-5xl md:text-6xl font-bold mb-6 drop-shadow-2xl">Never run out of clean.</h2>
             <p className="text-xl md:text-2xl text-gray-200 mb-10 max-w-2xl mx-auto drop-shadow-md">
@@ -383,14 +351,16 @@ export default function Home() {
                 <div key={idx} className="fade-up-element relative rounded-2xl overflow-hidden shadow-lg group aspect-[9/16] bg-black">
                   <video 
                     src={vid} 
-                    className="auto-pause absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-300 group-hover:scale-105"
+                    className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-300 group-hover:scale-105"
                     muted 
                     loop 
                     playsInline 
                     preload="none"
+                    onMouseEnter={(e) => e.target.play()}
+                    onMouseLeave={(e) => e.target.pause()}
                   />
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="w-12 h-12 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center">
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                    <div className="w-12 h-12 bg-white/50 rounded-full flex items-center justify-center">
                       <i className="fa-solid fa-play text-white text-xl"></i>
                     </div>
                   </div>
