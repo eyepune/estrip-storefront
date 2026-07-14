@@ -32,7 +32,7 @@ export default function Home() {
           trigger: containerRef.current,
           start: "top top",
           end: "bottom bottom",
-          scrub: 0.5, // Faster, more responsive scrubbing
+          scrub: 0.1, // Ultra-fast, immediate scrubbing sync
           onUpdate: (self) => {
             if (videoRef.current && videoRef.current.duration) {
               videoRef.current.currentTime = self.progress * videoRef.current.duration;
@@ -150,7 +150,7 @@ export default function Home() {
   ];
 
   return (
-    <ReactLenis root options={{ lerp: 0.1, duration: 1.2, smoothTouch: true }}>
+    <ReactLenis root options={{ lerp: 0.25, duration: 0.8, smoothTouch: true }}>
       {/* Navbar */}
       <nav className="glass-nav sticky top-0 z-50 transition-all duration-300">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
@@ -181,7 +181,7 @@ export default function Home() {
 
       <main>
         {/* Cinematic Video Scrubbing Hero Section */}
-        <section ref={containerRef} className="relative h-[300vh] bg-black">
+        <section ref={containerRef} className="relative h-[200vh] bg-black">
           
           {/* Sticky Video Container */}
           <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
