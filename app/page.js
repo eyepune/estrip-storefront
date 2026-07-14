@@ -17,26 +17,62 @@ export default function Home() {
   const toggleAiFinder = () => setIsAiFinderOpen(!isAiFinderOpen);
   const toggleChat = () => setIsChatOpen(!isChatOpen);
 
-  const videoRef = useRef(null);
+  const canvasRef = useRef(null);
   const containerRef = useRef(null);
   const textRef = useRef(null);
 
   useEffect(() => {
     let ctx = gsap.context(() => {
-      // Ensure video is ready before measuring duration
-      const initScroll = () => {
-        if (!videoRef.current) return;
-        
-        // Pin the video and scrub it
+      // Apple-Style Canvas Scrubbing
+      const canvas = canvasRef.current;
+      if (canvas) {
+        const context = canvas.getContext("2d");
+        const frameCount = 410; // Approx frames for a 14s video at 30fps
+        const images = [];
+        const imageSeq = { frame: 1 };
+
+        for (let i = 1; i <= frameCount; i++) {
+          const img = new window.Image();
+          const frameNum = i.toString().padStart(4, '0');
+          img.src = `/frames/${frameNum}.webp`;
+          images.push(img);
+        }
+
+        const render = () => {
+          const img = images[imageSeq.frame - 1];
+          if (img && img.complete && img.naturalWidth !== 0) {
+            // object-fit: cover calculation
+            const hRatio = canvas.width / img.width;
+            const vRatio = canvas.height / img.height;
+            const ratio = Math.max(hRatio, vRatio);
+            const centerShift_x = (canvas.width - img.width * ratio) / 2;
+            const centerShift_y = (canvas.height - img.height * ratio) / 2;
+            
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            context.globalAlpha = 0.5; // Dim the video heavily so text pops
+            context.drawImage(img, 0, 0, img.width, img.height,
+                              centerShift_x, centerShift_y, img.width * ratio, img.height * ratio);
+          }
+        };
+
+        images[0].onload = render;
+
+        const resizeCanvas = () => {
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+          render();
+        };
+        window.addEventListener("resize", resizeCanvas);
+        resizeCanvas();
+
         ScrollTrigger.create({
           trigger: containerRef.current,
           start: "top top",
           end: "bottom bottom",
-          scrub: 1, // Smooth 1-second catchup to hide video decode lag
+          scrub: 0, // 0 scrub for INSTANT 60fps canvas sync
           onUpdate: (self) => {
-            if (videoRef.current && videoRef.current.duration) {
-              videoRef.current.currentTime = self.progress * videoRef.current.duration;
-            }
+            imageSeq.frame = Math.max(1, Math.min(frameCount, Math.ceil(self.progress * frameCount)));
+            requestAnimationFrame(render);
           }
         });
 
@@ -45,20 +81,15 @@ export default function Home() {
           scrollTrigger: {
             trigger: containerRef.current,
             start: "top top",
-            end: "+=80%", // Keep text visible for 80% of the scroll track
+            end: "+=80%",
             scrub: true
           },
           opacity: 0,
           y: -50
         });
-      };
 
-      if (videoRef.current) {
-        if (videoRef.current.readyState >= 1) {
-          initScroll();
-        } else {
-          videoRef.current.addEventListener('loadedmetadata', initScroll);
-        }
+        // Cleanup listener on unmount
+        return () => window.removeEventListener("resize", resizeCanvas);
       }
 
       // Smart Video Pausing (Performance Optimization)
@@ -189,14 +220,10 @@ export default function Home() {
           {/* Sticky Video Container */}
           <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
             
-            {/* The Scrubbable Video */}
-            <video 
-              ref={videoRef}
-              className="absolute inset-0 w-full h-full object-cover opacity-50"
-              src="/Products_montage_estrip.in_1080p_202607150148.mp4"
-              muted 
-              playsInline
-              preload="auto"
+            {/* Hardware-Accelerated Canvas Engine */}
+            <canvas 
+              ref={canvasRef}
+              className="absolute inset-0 w-full h-full"
             />
             
             {/* Foreground Overlay Text */}
