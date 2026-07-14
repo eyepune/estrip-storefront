@@ -379,7 +379,7 @@ export default function Home() {
               <Image src="https://estrip.in/cdn/shop/files/Primary-Logo_Blue-scaled_1.png?v=1777612281" alt="E-strip Logo" fill className="object-contain object-left" sizes="128px" />
             </div>
             <p className="text-gray-400 text-sm leading-relaxed">
-              High-quality performance and planetary responsibility shouldn't be a choice—they must go hand in hand.
+              High-quality performance and planetary responsibility shouldn&apos;t be a choice—they must go hand in hand.
             </p>
           </div>
           
@@ -478,7 +478,7 @@ export default function Home() {
           </div>
           <div className="p-4 h-64 overflow-y-auto bg-gray-50 flex flex-col gap-2">
             <div className="bg-white border p-3 rounded-xl max-w-[85%] self-start text-sm">
-              Hi there! I'm integrated directly into the new React platform. How can I help you today?
+              Hi there! I&apos;m integrated directly into the new React platform. How can I help you today?
             </div>
           </div>
           <div className="p-3 border-t bg-white flex gap-2">
