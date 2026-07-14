@@ -92,7 +92,22 @@ export default function Home() {
         return () => window.removeEventListener("resize", resizeCanvas);
       }
 
-      // Removed heavy GSAP video decoders for buttery scroll performance
+      // Smart Video Pausing for Compressed Background Videos
+      const autoVideos = document.querySelectorAll('.auto-pause');
+      autoVideos.forEach((vid) => {
+        ScrollTrigger.create({
+          trigger: vid,
+          start: "top 150%", // Load off-screen
+          end: "bottom -50%",
+          onEnter: () => {
+            if(vid.readyState === 0) vid.load();
+            vid.play().catch(()=>{});
+          },
+          onLeave: () => vid.pause(),
+          onEnterBack: () => vid.play().catch(()=>{}),
+          onLeaveBack: () => vid.pause(),
+        });
+      });
       // Connected Scroll Reveal Animations
       const fadeElements = document.querySelectorAll('.fade-up-element');
       fadeElements.forEach((el) => {
@@ -238,7 +253,15 @@ export default function Home() {
         </section>
 
         {/* Features / Benefits */}
-        <section className="py-24 relative overflow-hidden bg-gradient-to-b from-gray-900 to-black" id="features">
+        <section className="py-24 relative overflow-hidden bg-black" id="features">
+          <video 
+            muted 
+            playsInline 
+            loop
+            preload="none"
+            className="auto-pause absolute inset-0 w-full h-full object-cover opacity-30"
+            src="/bg-video-compressed.mp4"
+          />
           <div className="max-w-7xl mx-auto px-6 relative z-10">
             <h2 className="fade-up-element text-4xl font-bold text-center mb-16 text-white drop-shadow-lg">Why Switch to E-strip?</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -328,7 +351,15 @@ export default function Home() {
         </section>
 
         {/* Subscription Upsell Section */}
-        <section className="py-32 relative overflow-hidden bg-gradient-to-r from-blue-900 to-black text-white flex items-center justify-center">
+        <section className="py-32 relative overflow-hidden bg-black text-white flex items-center justify-center">
+          <video 
+            muted 
+            playsInline 
+            loop
+            preload="none"
+            className="auto-pause absolute inset-0 w-full h-full object-cover opacity-50"
+            src="/bg-video-compressed.mp4"
+          />
           <div className="fade-up-element relative z-10 max-w-4xl mx-auto px-6 text-center">
             <h2 className="text-5xl md:text-6xl font-bold mb-6 drop-shadow-2xl">Never run out of clean.</h2>
             <p className="text-xl md:text-2xl text-gray-200 mb-10 max-w-2xl mx-auto drop-shadow-md">
