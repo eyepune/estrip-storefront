@@ -290,7 +290,7 @@ export default function Home() {
                 </div>
                 <div className="creative-content relative z-10 p-6 bg-white m-4 rounded-xl shadow-lg border border-gray-100">
                   <h3 className="text-xl font-bold mb-2">Time to Strip</h3>
-                  <p className="text-sm">The power of regular brands compressed into a lightweight strip that gives your clothes a proper good wash. <strong>Strip for the planet.</strong></p>
+                  <p className="text-sm text-gray-600">The power of regular brands compressed into a lightweight strip that gives your clothes a proper good wash. <strong className="text-black">Strip for the planet.</strong></p>
                 </div>
               </div>
               <div className="creative-card group">
@@ -299,7 +299,7 @@ export default function Home() {
                 </div>
                 <div className="creative-content relative z-10 p-6 bg-white m-4 rounded-xl shadow-lg border border-gray-100">
                   <h3 className="text-xl font-bold mb-2">Easy to use</h3>
-                  <p className="text-sm">Pop the strip directly into the drum of your washing machine alongside clothes & start. Suitable for all types of machines.</p>
+                  <p className="text-sm text-gray-600">Pop the strip directly into the drum of your washing machine alongside clothes & start. Suitable for all types of machines.</p>
                 </div>
               </div>
               <div className="creative-card group">
@@ -307,8 +307,8 @@ export default function Home() {
                   <Image src="https://estrip.in/cdn/shop/files/pdp_s3.png?v=1783917395&width=480" alt="Micro-Enzyme" fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
                 </div>
                 <div className="creative-content relative z-10 p-6 bg-white m-4 rounded-xl shadow-lg border border-gray-100">
-                  <h3>Micro-Enzyme Tech</h3>
-                  <p>Watch as plant-based enzymes break down tough stains at the fiber level, leaving no residue behind.</p>
+                  <h3 className="text-xl font-bold mb-2">Micro-Enzyme Tech</h3>
+                  <p className="text-sm text-gray-600">Watch as plant-based enzymes break down tough stains at the fiber level, leaving no residue behind.</p>
                 </div>
               </div>
             </div>
