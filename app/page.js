@@ -1,522 +1,463 @@
 "use client";
 import { useState, useEffect, useRef } from 'react';
+import Link from 'next/link';
 import Image from 'next/image';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
+import { useCart } from '@/context/CartContext';
 
 export default function Home() {
-  const [cart, setCart] = useState([]);
-  const [isCartOpen, setIsCartOpen] = useState(false);
-  const [isAiFinderOpen, setIsAiFinderOpen] = useState(false);
-  const [isChatOpen, setIsChatOpen] = useState(false);
+  const { addItem } = useCart();
   
-  const toggleCart = () => setIsCartOpen(!isCartOpen);
-  const toggleAiFinder = () => setIsAiFinderOpen(!isAiFinderOpen);
-  const toggleChat = () => setIsChatOpen(!isChatOpen);
+  const pipVideoRef = useRef(null);
+  const heroSectionRef = useRef(null);
+  const [hasPlayedWithSound, setHasPlayedWithSound] = useState(false);
+  const [pipMuted, setPipMuted] = useState(false); // start unmuted
 
-  const canvasRef = useRef(null);
-  const containerRef = useRef(null);
-  const textRef = useRef(null);
+  const actionLaundryRef = useRef(null);
+  const actionFloorRef = useRef(null);
+  const actionDishRef = useRef(null);
+  const [playingVideos, setPlayingVideos] = useState({});
+
+  const handleActionVideoClick = (id, videoElement) => {
+    if (!videoElement) return;
+    if (videoElement.paused) {
+      // Pause all other action videos
+      [actionLaundryRef, actionFloorRef, actionDishRef].forEach(ref => {
+        if (ref.current && ref.current !== videoElement) {
+          ref.current.pause();
+        }
+      });
+      videoElement.play().catch(() => {});
+    } else {
+      videoElement.pause();
+    }
+  };
 
   useEffect(() => {
-    let ctx = gsap.context(() => {
-      // Apple-Style Canvas Scrubbing
-      const canvas = canvasRef.current;
-      if (canvas) {
-        const context = canvas.getContext("2d");
-        const frameCount = 385; // Fixed to exact number of extracted frames
-        const images = [];
-        const imageSeq = { frame: 1 };
-
-        for (let i = 1; i <= frameCount; i++) {
-          const img = new window.Image();
-          const frameNum = i.toString().padStart(4, '0');
-          img.src = `/frames/${frameNum}.webp`;
-          images.push(img);
+    const handleScroll = () => {
+      if (!pipVideoRef.current || !heroSectionRef.current) return;
+      const heroBottom = heroSectionRef.current.getBoundingClientRect().bottom;
+      
+      // If hero is out of view (scrolled past)
+      if (heroBottom < 100) {
+        pipVideoRef.current.muted = true;
+        setPipMuted(true);
+      } else {
+        // If hero is in view, and we haven't successfully played with sound yet
+        if (!hasPlayedWithSound) {
+          pipVideoRef.current.muted = false;
+          const playPromise = pipVideoRef.current.play();
+          if (playPromise !== undefined) {
+             playPromise.then(() => {
+                setHasPlayedWithSound(true);
+                setPipMuted(false);
+             }).catch(() => {
+                // Autoplay with sound blocked by browser. Fallback to muted
+                pipVideoRef.current.muted = true;
+                setPipMuted(true);
+                pipVideoRef.current.play().catch(() => {});
+             });
+          }
         }
-
-        const render = () => {
-          const img = images[imageSeq.frame - 1];
-          if (img && img.complete && img.naturalWidth !== 0) {
-            // object-fit: cover calculation
-            const hRatio = canvas.width / img.width;
-            const vRatio = canvas.height / img.height;
-            const ratio = Math.max(hRatio, vRatio);
-            const centerShift_x = (canvas.width - img.width * ratio) / 2;
-            const centerShift_y = (canvas.height - img.height * ratio) / 2;
-            
-            context.clearRect(0, 0, canvas.width, canvas.height);
-            context.globalAlpha = 0.5; // Dim the video heavily so text pops
-            context.drawImage(img, 0, 0, img.width, img.height,
-                              centerShift_x, centerShift_y, img.width * ratio, img.height * ratio);
-          }
-        };
-
-        images[0].onload = render;
-
-        const resizeCanvas = () => {
-          canvas.width = window.innerWidth;
-          canvas.height = window.innerHeight;
-          render();
-        };
-        window.addEventListener("resize", resizeCanvas);
-        resizeCanvas();
-
-        ScrollTrigger.create({
-          trigger: containerRef.current,
-          start: "top top",
-          end: "bottom bottom",
-          scrub: 0, // 0 scrub for INSTANT 60fps canvas sync
-          onUpdate: (self) => {
-            imageSeq.frame = Math.max(1, Math.min(frameCount, Math.ceil(self.progress * frameCount)));
-            requestAnimationFrame(render);
-          }
-        });
-
-        // Keep text visible for much longer while scrolling
-        gsap.to(textRef.current, {
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top top",
-            end: "+=80%",
-            scrub: true
-          },
-          opacity: 0,
-          y: -50
-        });
-
-        // Cleanup listener on unmount
-        return () => window.removeEventListener("resize", resizeCanvas);
       }
-
-      // Smart Video Pausing for Compressed Background Videos
-      const autoVideos = document.querySelectorAll('.auto-pause');
-      autoVideos.forEach((vid) => {
-        ScrollTrigger.create({
-          trigger: vid,
-          start: "top 150%", // Load off-screen
-          end: "bottom -50%",
-          onEnter: () => {
-            if(vid.readyState === 0) vid.load();
-            vid.play().catch(()=>{});
-          },
-          onLeave: () => vid.pause(),
-          onEnterBack: () => vid.play().catch(()=>{}),
-          onLeaveBack: () => vid.pause(),
-        });
-      });
-      // Connected Scroll Reveal Animations
-      const fadeElements = document.querySelectorAll('.fade-up-element');
-      fadeElements.forEach((el) => {
-        gsap.from(el, {
-          scrollTrigger: {
-            trigger: el,
-            start: "top 85%",
-            toggleActions: "play none none reverse"
-          },
-          y: 50,
-          opacity: 0,
-          duration: 0.8,
-          ease: "power2.out"
-        });
-      });
-
-      // How It Works GSAP Parallax (Replacing React State)
-      const creativeCards = document.querySelectorAll('.creative-card');
-      creativeCards.forEach((card, i) => {
-        const yOffset = i === 1 ? -50 : 100; // Middle card moves opposite
-        gsap.to(card, {
-          y: yOffset,
-          ease: "none",
-          scrollTrigger: {
-            trigger: "#how-it-works",
-            start: "top bottom",
-            end: "bottom top",
-            scrub: true
-          }
-        });
-      });
-
-    }, containerRef);
-    
-    return () => {
-      ctx.revert();
     };
-  }, []);
-
-  const addToCart = (product) => {
-    const existingItem = cart.find(item => item.name === product.name);
-    if (existingItem) {
-      setCart(cart.map(item => 
-        item.name === product.name ? { ...item, qty: item.qty + 1 } : item
-      ));
-    } else {
-      setCart([...cart, { ...product, qty: 1 }]);
+    
+    window.addEventListener('scroll', handleScroll);
+    // Trigger once on mount
+    handleScroll();
+    
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [hasPlayedWithSound]);
+  
+  const testimonials = [
+    {
+      quote: "I'll never go back to liquid jugs again!",
+      author: "Sarah J., Verified Eco-Warrior",
+      image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&q=80"
+    },
+    {
+      quote: "My laundry has never smelled fresher. So easy to use!",
+      author: "David M., Busy Parent",
+      image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&q=80"
+    },
+    {
+      quote: "Love how much space this saves in my small apartment.",
+      author: "Emily R., Minimalist",
+      image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&q=80"
     }
-    if (!isCartOpen) setIsCartOpen(true);
-  };
-
-  const removeFromCart = (name) => {
-    setCart(cart.filter(item => item.name !== name));
-  };
-
-  const cartTotal = cart.reduce((total, item) => total + (item.price * item.qty), 0);
-  const cartCount = cart.reduce((count, item) => count + item.qty, 0);
-
-  const products = [
-    { name: "SmartClean 3X", price: 353, image: "https://estrip.in/cdn/shop/files/pdp_s3.png?v=1783917395&width=480", desc: "Daily laundry detergent sheets for regular clothes." },
-    { name: "ProEnzyme 5X", price: 432, popular: true, badge: "Best for Tough Stains", image: "https://estrip.in/cdn/shop/files/pdp_s2.png?v=1783917324&width=480", desc: "Heavy-duty cleaning for sweat, oil, and tough stains." },
-    { name: "SoftTouch Baby", price: 393, image: "https://estrip.in/cdn/shop/files/pdp_s1_1.png?v=1783917607&width=480", desc: "Gentle detergent sheets specifically for baby clothes." },
-    { name: "Floor Cleaner Sheets", price: 399, image: "https://estrip.in/cdn/shop/files/pdp_s5.png?v=1783917728&width=480", desc: "Streak-free cleaning on every floor. 1 sheet per bucket." },
-    { name: "Dishwashing Sheets", price: 349, image: "https://estrip.in/cdn/shop/files/pdp_s4.png?v=1783917481&width=480", desc: "Tough on grease, gentle on hands. 1 sheet equals 1 wash." },
-    { name: "Stain Remover Spray", price: 299, image: "https://estrip.in/cdn/shop/files/pdp_s6.png?v=1783917213&width=480", desc: "New Launch! Lifts fresh stains in seconds before they set." }
   ];
 
-  const videos = [
-    "/Products_montage_estrip.in_1080p_202607150148.mp4",
-    "https://estrip.in/cdn/shop/videos/c/vp/d29b7ae031584e43b2b5a962c6fa3242/d29b7ae031584e43b2b5a962c6fa3242.HD-1080p-2.5Mbps-83923587.mp4?v=0",
-    "https://estrip.in/cdn/shop/videos/c/vp/cc477b58b27645de92cac0397a62efc1/cc477b58b27645de92cac0397a62efc1.HD-1080p-2.5Mbps-83923629.mp4?v=0",
-    "https://estrip.in/cdn/shop/videos/c/vp/5c65d194fefc4f55aec1a4ff48136fb0/5c65d194fefc4f55aec1a4ff48136fb0.HD-1080p-2.5Mbps-83923669.mp4?v=0",
-  ];
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+
+  useEffect(() => {
+    if (isHovered) return;
+    const interval = setInterval(() => {
+      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [isHovered, testimonials.length]);
 
   return (
-    <>
-      {/* Navbar */}
-      <nav className="glass-nav bg-white/95 shadow-sm border-b border-gray-100 sticky top-0 z-50 transition-all duration-300">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <a href="#" className="logo block relative w-24 h-10">
-            <Image src="https://estrip.in/cdn/shop/files/Primary-Logo_Blue-scaled_1.png?v=1777612281" alt="E-strip Logo" fill className="object-contain" sizes="96px" priority />
-          </a>
-          <div className="hidden md:flex gap-8">
-            <a href="#features" className="font-medium hover:text-[var(--primary-blue)] transition">Benefits</a>
-            <a href="#how-it-works" className="font-medium hover:text-[var(--primary-blue)] transition">How It Works</a>
-            <a href="#pricing" className="font-medium hover:text-[var(--primary-blue)] transition">Shop</a>
-            <a href="#faq" className="font-medium hover:text-[var(--primary-blue)] transition">FAQ</a>
-          </div>
-          <div className="flex items-center gap-6">
-            <button onClick={toggleAiFinder} className="bg-gradient-to-r from-purple-600 to-pink-500 text-white px-5 py-2 rounded-full font-semibold hover:scale-105 transition shadow-lg shadow-purple-500/30">
-              <i className="fa-solid fa-wand-magic-sparkles mr-2"></i> AI Strip Finder
-            </button>
-            <div className="relative cursor-pointer text-[var(--primary-blue)] text-xl" onClick={toggleCart}>
-              <i className="fa-solid fa-cart-shopping"></i>
-              {cartCount > 0 && (
-                <span className="absolute -top-2 -right-2 bg-gray-900 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">
-                  {cartCount}
-                </span>
-              )}
-            </div>
-          </div>
-        </div>
-      </nav>
-
-      <main>
-        {/* Cinematic Video Scrubbing Hero Section */}
-        <section ref={containerRef} className="relative h-[200vh] bg-black">
-          
-          {/* Sticky Video Container */}
-          <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
-            
-            {/* Hardware-Accelerated Canvas Engine */}
-            <canvas 
-              ref={canvasRef}
-              className="absolute inset-0 w-full h-full"
-            />
-            
-            {/* Foreground Overlay Text */}
-            <div ref={textRef} className="relative z-20 text-center max-w-4xl mx-auto px-6 mt-20">
-              <div className="inline-block px-4 py-2 bg-black/40 text-white rounded-full font-semibold text-sm mb-6 pointer-events-auto border border-white/30">
-                🍃 100% Plant-Based & Plastic-Free
-              </div>
-              <h1 className="text-5xl md:text-7xl font-bold leading-tight mb-6 text-white drop-shadow-2xl">
-                The Future of Clean is Here.
-              </h1>
-              <p className="text-xl text-gray-200 font-medium mb-8 max-w-2xl mx-auto drop-shadow-md">
-                Drop the heavy bottles and messy liquids. E-strip delivers 5X the cleaning power in one dissolvable, eco-friendly sheet.
-              </p>
-              
-              <div className="flex justify-center gap-4 mb-8 pointer-events-auto">
-                <a href="#pricing" className="bg-[var(--primary-blue)] text-white px-8 py-3 text-lg rounded-full hover:scale-105 transition">Shop Now</a>
-              </div>
-              
-              <div className="flex flex-col items-center justify-center gap-2 text-white/80 animate-pulse mt-12">
-                <span className="text-sm tracking-widest uppercase">Scroll to explore</span>
-                <i className="fa-solid fa-chevron-down text-2xl"></i>
-              </div>
-            </div>
-            
-            {/* Bottom Gradient for smooth transition to next section */}
-            <div className="absolute bottom-0 w-full h-32 bg-gradient-to-t from-white to-transparent"></div>
-          </div>
-        </section>
-
-        {/* Features / Benefits */}
-        <section className="py-24 relative overflow-hidden bg-black" id="features">
+    <div className="overflow-x-hidden text-[var(--color-on-background)]">
+      {/* Hero Section */}
+      <section ref={heroSectionRef} className="relative overflow-hidden min-h-[600px] lg:min-h-[700px] flex items-center justify-center">
+        {/* Video Background */}
+        <div className="absolute inset-0 z-0 bg-black">
           <video 
+            autoPlay 
+            loop 
             muted 
             playsInline 
-            loop
-            preload="none"
-            className="auto-pause absolute inset-0 w-full h-full object-cover opacity-30"
-            src="/bg-video-compressed.mp4"
-          />
-          <div className="max-w-7xl mx-auto px-6 relative z-10">
-            <h2 className="fade-up-element text-4xl font-bold text-center mb-16 text-white drop-shadow-lg">Why Switch to E-strip?</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {[
-                { icon: "fa-leaf", title: "Eco-Friendly", desc: "Zero plastic packaging. Completely biodegradable sheets that leave no trace." },
-                { icon: "fa-droplet-slash", title: "Pre-Measured", desc: "No more pouring, no more spills. Just drop a sheet in and you're good to go." },
-                { icon: "fa-bolt", title: "Powerful Clean", desc: "Micro-bubble technology and plant-based enzymes tackle the toughest Indian grease." },
-                { icon: "fa-pump-soap", title: "Hard Water Safe", desc: "Formulated to work brilliantly in hard water without leaving white chalky residues." }
-              ].map((feature, i) => (
-                <div key={i} className="fade-up-element bg-gray-50 p-8 rounded-2xl text-center hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
-                  <div className="text-4xl text-[var(--primary-blue)] mb-6"><i className={`fa-solid ${feature.icon}`}></i></div>
-                  <h3 className="text-xl font-bold mb-4">{feature.title}</h3>
-                  <p className="text-gray-600">{feature.desc}</p>
-                </div>
-              ))}
+            className="w-full h-full object-cover opacity-80 pointer-events-none"
+          >
+            <source src="/A_high-end_cinematic_product_showcase_202607201836.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          {/* Gradient overlay for better text readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60"></div>
+        </div>
+
+        <div className="container mx-auto px-8 relative z-10 py-24 text-center flex flex-col items-center">
+          <div className="flex flex-wrap justify-center gap-3 mb-6">
+            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 text-white px-4 py-2 rounded-full text-sm font-bold">
+              <span className="material-symbols-outlined text-[var(--color-primary-fixed)] text-lg" style={{ fontVariationSettings: "'FILL' 1" }}>stars</span>
+              5-Star Rated by 10k+ Customers
+            </div>
+            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 text-white px-4 py-2 rounded-full text-sm font-bold">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 225 150" width="24" height="16" className="inline-block rounded-sm shadow-sm">
+                <rect width="225" height="150" fill="#138808"/>
+                <rect width="225" height="100" fill="#ffffff"/>
+                <rect width="225" height="50" fill="#FF9933"/>
+                <circle cx="112.5" cy="75" r="20" fill="#000080"/>
+              </svg>
+              Made specially for Indians
             </div>
           </div>
-        </section>
+          
+          <h1 className="text-5xl sm:text-6xl md:text-8xl font-black leading-[1.1] mb-6 tracking-tight text-white drop-shadow-lg">
+            The Future of <br /><span className="text-[var(--color-primary-fixed)]">Clean is Here</span>
+          </h1>
+          <p className="text-lg sm:text-xl md:text-2xl mb-10 text-white/90 font-medium max-w-2xl mx-auto drop-shadow-md px-4">
+            Powerful, Eco-friendly, and Easy to Use Detergent Sheets. No plastic jugs, no mess, just joy.
+          </p>
+          <Link href="/shop" className="inline-flex bg-[var(--color-primary)] hover:bg-[var(--color-surface-tint)] text-white px-10 py-5 rounded-full font-black text-xl pill-shadow-primary bouncy-hover transition-all items-center gap-3">
+            SHOP NOW
+            <span className="material-symbols-outlined">arrow_forward</span>
+          </Link>
+        </div>
 
-        {/* How It Works - Creative Layout */}
-        <section className="py-24 bg-gray-50" id="how-it-works">
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="creative-card group">
-                <div className="creative-img transition-transform duration-500 group-hover:scale-[1.05] relative h-full">
-                  <Image src="https://estrip.in/cdn/shop/files/pdp_s1_1.png?v=1783917607&width=480" alt="Laundry strips" fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
-                </div>
-                <div className="creative-content relative z-10 p-6 bg-white m-4 rounded-xl shadow-lg border border-gray-100">
-                  <h3 className="text-xl font-bold mb-2">Time to Strip</h3>
-                  <p className="text-sm text-gray-600">The power of regular brands compressed into a lightweight strip that gives your clothes a proper good wash. <strong className="text-black">Strip for the planet.</strong></p>
-                </div>
-              </div>
-              <div className="creative-card group">
-                <div className="creative-img transition-transform duration-500 group-hover:scale-[1.05] relative h-full">
-                   <Image src="https://estrip.in/cdn/shop/files/2_25.png?v=1783498480" alt="Machine use" fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
-                </div>
-                <div className="creative-content relative z-10 p-6 bg-white m-4 rounded-xl shadow-lg border border-gray-100">
-                  <h3 className="text-xl font-bold mb-2">Easy to use</h3>
-                  <p className="text-sm text-gray-600">Pop the strip directly into the drum of your washing machine alongside clothes & start. Suitable for all types of machines.</p>
-                </div>
-              </div>
-              <div className="creative-card group">
-                <div className="creative-img transition-transform duration-500 group-hover:scale-[1.05] relative h-full">
-                  <Image src="https://estrip.in/cdn/shop/files/pdp_s3.png?v=1783917395&width=480" alt="Micro-Enzyme" fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
-                </div>
-                <div className="creative-content relative z-10 p-6 bg-white m-4 rounded-xl shadow-lg border border-gray-100">
-                  <h3 className="text-xl font-bold mb-2">Micro-Enzyme Tech</h3>
-                  <p className="text-sm text-gray-600">Watch as plant-based enzymes break down tough stains at the fiber level, leaving no residue behind.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Pricing / Shop */}
-        <section className="py-24 bg-white" id="pricing">
-          <div className="max-w-7xl mx-auto px-6">
-            <h2 className="fade-up-element text-4xl font-bold text-center mb-16">Choose Your Clean</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {products.map((product, i) => (
-                <div key={i} className={`fade-up-element flex flex-col bg-white border rounded-2xl overflow-hidden hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 relative ${product.popular ? 'border-[var(--primary-blue)] shadow-lg' : 'border-gray-200'}`}>
-                  {product.popular && (
-                    <div className="absolute top-4 -right-8 bg-[var(--primary-blue)] text-white px-8 py-1 text-sm font-bold rotate-45 z-10 shadow-md">
-                      {product.badge}
-                    </div>
-                  )}
-                  <div className="h-64 bg-gray-50 relative flex items-center justify-center">
-                    <Image src={product.image} alt={product.name} fill className="object-contain p-4" sizes="(max-width: 768px) 100vw, 33vw" />
-                  </div>
-                  <div className="p-8 flex flex-col flex-1">
-                    <h3 className="text-2xl font-bold mb-2">{product.name}</h3>
-                    <p className="text-gray-600 mb-6 flex-1">{product.desc}</p>
-                    <div className="text-3xl font-bold text-[var(--primary-blue)] mb-6">
-                      ₹ {product.price}.00
-                    </div>
-                    <button 
-                      onClick={() => addToCart(product)}
-                      className="btn btn-primary w-full"
-                    >
-                      Add to Cart
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Subscription Upsell Section */}
-        <section className="py-32 relative overflow-hidden bg-black text-white flex items-center justify-center">
+        {/* Mini PIP Video Box */}
+        <div className="absolute bottom-10 right-10 z-20 w-48 aspect-[9/16] rounded-2xl overflow-hidden border-2 border-white/30 shadow-[0_8px_32px_rgba(0,0,0,0.5)] hidden lg:block hover:scale-105 transition-transform duration-300 cursor-pointer group">
           <video 
-            muted 
+            ref={pipVideoRef}
+            autoPlay 
+            loop 
+            muted={pipMuted}
             playsInline 
-            loop
-            preload="none"
-            className="auto-pause absolute inset-0 w-full h-full object-cover opacity-50"
-            src="/bg-video-compressed.mp4"
-          />
-          <div className="fade-up-element relative z-10 max-w-4xl mx-auto px-6 text-center">
-            <h2 className="text-5xl md:text-6xl font-bold mb-6 drop-shadow-2xl">Never run out of clean.</h2>
-            <p className="text-xl md:text-2xl text-gray-200 mb-10 max-w-2xl mx-auto drop-shadow-md">
-              Subscribe and save 15% on every order. Modify, skip, or cancel your shipments at any time—no questions asked.
-            </p>
-            <a href="#pricing" className="bg-white text-black px-10 py-4 rounded-full font-bold text-lg hover:bg-[var(--primary-blue)] hover:text-white transition-colors duration-300 shadow-xl inline-block">
-              Setup Subscription
-            </a>
+            className="w-full h-full object-cover"
+            onClick={(e) => {
+              // Toggle mute manually on click if desired
+              e.currentTarget.muted = !e.currentTarget.muted;
+              setPipMuted(e.currentTarget.muted);
+            }}
+          >
+            <source src="/Indian_mother_dropping_detergent…_1080p_202607210209.mp4" type="video/mp4" />
+          </video>
+          {pipMuted && (
+            <div className="absolute top-4 right-4 bg-black/40 backdrop-blur-md p-1.5 rounded-full text-white pointer-events-none">
+              <span className="material-symbols-outlined text-[16px]">volume_off</span>
+            </div>
+          )}
+          <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors pointer-events-none"></div>
+          <div className="absolute bottom-4 left-4 bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-full text-xs font-bold text-white flex items-center gap-1.5 border border-white/20 shadow-lg pointer-events-none">
+            <span className="material-symbols-outlined text-[16px]" style={{ fontVariationSettings: "'FILL' 1" }}>play_circle</span>
+            See it work
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Video Gallery Section */}
-        <section className="py-24 bg-gray-50 overflow-hidden" id="videos">
-          <div className="max-w-7xl mx-auto px-6">
-            <h2 className="text-4xl font-bold text-center mb-4">Watch Estrip in Action</h2>
-            <p className="text-center text-gray-600 mb-16 max-w-2xl mx-auto">Real cleaning. Real transformations. Real people switching to smarter cleaning.</p>
-            
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {videos.map((vid, idx) => (
-                <div key={idx} className="fade-up-element relative rounded-2xl overflow-hidden shadow-lg group aspect-[9/16] bg-black">
-                  <video 
-                    src={vid} 
-                    className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-300 group-hover:scale-105"
-                    muted 
-                    loop 
-                    playsInline 
-                    preload="metadata"
-                    onMouseEnter={(e) => e.target.play()}
-                    onMouseLeave={(e) => e.target.pause()}
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                    <div className="w-12 h-12 bg-white/50 rounded-full flex items-center justify-center">
-                      <i className="fa-solid fa-play text-white text-xl"></i>
-                    </div>
-                  </div>
+      {/* Trust Marquee */}
+      <div className="w-full bg-[var(--color-surface-container-highest)] border-y border-[var(--color-outline-variant)] overflow-hidden py-3 flex items-center relative z-20">
+        <div className="flex whitespace-nowrap animate-marquee w-max">
+          {/* We duplicate the content twice to allow infinite side-scrolling without jumping */}
+          {[...Array(2)].map((_, i) => (
+            <div key={i} className="flex items-center justify-around gap-12 px-6">
+              {['Lab Tested & Certified', '100% Plastic Free', 'Safe for Sensitive Skin', 'Zero Waste Packaging', 'Biodegradable Formula', 'Cruelty Free', 'Lab Tested & Certified', '100% Plastic Free'].map((text, j) => (
+                <div key={`${i}-${j}`} className="flex items-center gap-3">
+                  <span className="material-symbols-outlined text-[var(--color-primary)] text-lg" style={{ fontVariationSettings: "'FILL' 1" }}>verified</span>
+                  <span className="text-sm font-bold text-[var(--color-on-surface-variant)] uppercase tracking-wider">{text}</span>
                 </div>
               ))}
             </div>
-          </div>
-        </section>
-      </main>
-
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-20 border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12">
-          <div className="col-span-1 md:col-span-1">
-            <div className="relative w-32 h-10 mb-6 brightness-0 invert">
-              <Image src="https://estrip.in/cdn/shop/files/Primary-Logo_Blue-scaled_1.png?v=1777612281" alt="E-strip Logo" fill className="object-contain object-left" sizes="128px" />
-            </div>
-            <p className="text-gray-400 text-sm leading-relaxed">
-              High-quality performance and planetary responsibility shouldn&apos;t be a choice—they must go hand in hand.
-            </p>
-          </div>
-          
-          <div>
-            <h4 className="font-mono text-sm mb-6 uppercase tracking-widest text-gray-500 font-bold">Shop</h4>
-            <ul className="space-y-4 text-sm text-gray-300">
-              <li><a href="#" className="hover:text-white transition-colors duration-300">Laundry Sheets</a></li>
-              <li><a href="#" className="hover:text-white transition-colors duration-300">Floor Cleaner</a></li>
-              <li><a href="#" className="hover:text-white transition-colors duration-300">Dishwashing Sheets</a></li>
-              <li><a href="#" className="hover:text-white transition-colors duration-300">Stain Remover Spray</a></li>
-            </ul>
-          </div>
-          
-          <div>
-            <h4 className="font-mono text-sm mb-6 uppercase tracking-widest text-gray-500 font-bold">Company</h4>
-            <ul className="space-y-4 text-sm text-gray-300">
-              <li><a href="#" className="hover:text-white transition-colors duration-300">About Us</a></li>
-              <li><a href="#" className="hover:text-white transition-colors duration-300">Sustainability</a></li>
-              <li><a href="#" className="hover:text-white transition-colors duration-300">Contact Support</a></li>
-              <li><a href="#" className="hover:text-white transition-colors duration-300">Wholesale</a></li>
-            </ul>
-          </div>
-          
-          <div>
-            <h4 className="font-mono text-sm mb-6 uppercase tracking-widest text-gray-500 font-bold">Newsletter</h4>
-            <p className="text-sm text-gray-400 mb-4">Subscribe for zero-waste tips and exclusive discounts.</p>
-            <div className="flex">
-              <input type="email" placeholder="Your email address" className="bg-white/10 px-4 py-3 rounded-l-lg w-full focus:outline-none focus:bg-white/20 text-sm text-white transition-colors duration-300 border border-transparent focus:border-gray-500" />
-              <button className="bg-[var(--primary-blue)] px-6 py-3 rounded-r-lg text-sm font-bold hover:bg-blue-600 transition-colors duration-300">Join</button>
-            </div>
-          </div>
+          ))}
         </div>
-        
-        <div className="max-w-7xl mx-auto px-6 mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500">
-          <p>© {new Date().getFullYear()} E-strip India. All rights reserved.</p>
-          <div className="flex gap-4 mt-4 md:mt-0">
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-            <a href="#" className="hover:text-white transition-colors">Refund Policy</a>
-          </div>
-        </div>
-      </footer>
-
-      {/* Cart Sidebar */}
-      {isCartOpen && (
-        <>
-          <div className="fixed inset-0 bg-black/50 z-[100] backdrop-blur-sm" onClick={toggleCart}></div>
-          <div className="fixed top-0 right-0 h-full w-full md:w-96 bg-white z-[101] shadow-2xl flex flex-col transform transition-transform">
-            <div className="p-6 border-b flex justify-between items-center">
-              <h2 className="text-2xl font-bold">Your Cart</h2>
-              <button onClick={toggleCart} className="text-2xl text-gray-500 hover:text-black">&times;</button>
-            </div>
-            <div className="flex-1 overflow-y-auto p-6">
-              {cart.length === 0 ? (
-                <p className="text-gray-500 text-center mt-10">Your cart is empty.</p>
-              ) : (
-                <div className="flex flex-col gap-4">
-                  {cart.map((item, i) => (
-                    <div key={i} className="flex justify-between items-center border-b pb-4">
-                      <div>
-                        <h4 className="font-bold">{item.name}</h4>
-                        <p className="text-gray-500 text-sm">₹{item.price} x {item.qty}</p>
-                      </div>
-                      <div className="flex items-center gap-4">
-                        <span className="font-bold text-[var(--primary-blue)]">₹{item.price * item.qty}</span>
-                        <button onClick={() => removeFromCart(item.name)} className="text-red-500 hover:text-red-700">
-                          <i className="fa-solid fa-trash"></i>
-                        </button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-            <div className="p-6 border-t bg-gray-50">
-              <div className="flex justify-between items-center mb-6 text-xl font-bold">
-                <span>Total:</span>
-                <span className="text-[var(--primary-blue)]">₹{cartTotal.toFixed(2)}</span>
-              </div>
-              <button className="btn btn-primary w-full text-lg py-4">Checkout via Shopify</button>
-            </div>
-          </div>
-        </>
-      )}
-
-      {/* AI Chat Bubbles */}
-      <div className="floating-chat-btn" onClick={toggleChat}>
-        <i className="fa-solid fa-message"></i>
       </div>
 
-      {isChatOpen && (
-        <div className="floating-chat-window">
-          <div className="bg-[var(--primary-blue)] text-white p-4 flex justify-between items-center">
-            <span className="font-bold">E-strip AI Assistant</span>
-            <button onClick={toggleChat} className="hover:text-gray-300"><i className="fa-solid fa-xmark"></i></button>
+      {/* Shop by Category */}
+      <section className="py-24 px-8 max-w-7xl mx-auto">
+        <div className="flex justify-between items-end mb-16">
+          <div>
+            <h2 className="text-4xl md:text-5xl font-black text-[var(--color-on-surface)] mb-4">Shop by Category</h2>
+            <p className="text-[var(--color-on-surface-variant)] text-lg">Solutions for every corner of your home.</p>
           </div>
-          <div className="p-4 h-64 overflow-y-auto bg-gray-50 flex flex-col gap-2">
-            <div className="bg-white border p-3 rounded-xl max-w-[85%] self-start text-sm">
-              Hi there! I&apos;m integrated directly into the new React platform. How can I help you today?
-            </div>
-          </div>
-          <div className="p-3 border-t bg-white flex gap-2">
-            <input type="text" placeholder="Ask me anything..." className="flex-1 border rounded-full px-4 py-2 outline-none text-sm" />
-            <button className="bg-[var(--primary-blue)] text-white w-10 h-10 rounded-full flex items-center justify-center"><i className="fa-solid fa-paper-plane"></i></button>
+          <div className="hidden md:block">
+            <Link href="/shop" className="flex items-center gap-2 text-[var(--color-primary)] font-bold text-lg hover:underline">
+              View all Categories <span className="material-symbols-outlined">chevron_right</span>
+            </Link>
           </div>
         </div>
-      )}
-    </>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {/* Laundry */}
+          <Link href="/shop?category=laundry" className="block bg-white p-6 rounded-xl shadow-sm border-2 border-[var(--color-primary-container)] group bouncy-hover cursor-pointer">
+            <div className="aspect-square mb-6 overflow-hidden rounded-lg bg-[var(--color-surface-container)] relative">
+              <video 
+                autoPlay loop muted playsInline 
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              >
+                <source src="/Hand_places_sheet_washing_machine_202607201936.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <div className="text-center">
+              <h3 className="text-xl font-black text-[var(--color-primary)] mb-2">Laundry Sheets</h3>
+              <p className="text-[var(--color-on-surface-variant)] text-sm mb-6">Powerful & Eco-friendly cleaning for all fabrics.</p>
+              <button className="w-full bg-[var(--color-primary)] py-3 rounded-full text-white font-bold pill-shadow-primary text-sm tracking-wide">SHOP LAUNDRY</button>
+            </div>
+          </Link>
+          {/* Baby */}
+          <Link href="/shop?category=baby" className="block bg-white p-6 rounded-xl shadow-sm border-2 border-[var(--color-tertiary-container)] group bouncy-hover cursor-pointer">
+            <div className="aspect-square mb-6 overflow-hidden rounded-lg bg-[var(--color-surface-container)] relative">
+              <video 
+                autoPlay loop muted playsInline 
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              >
+                <source src="/Baby_laundry_detergent_sheets_use_202607201947.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <div className="text-center">
+              <h3 className="text-xl font-black text-[var(--color-tertiary)] mb-2">Baby Laundry</h3>
+              <p className="text-[var(--color-on-surface-variant)] text-sm mb-6">Gentle & Safe formula for delicate newborn skin.</p>
+              <button className="w-full bg-[var(--color-tertiary)] py-3 rounded-full text-white font-bold pill-shadow-tertiary text-sm tracking-wide">SHOP BABY</button>
+            </div>
+          </Link>
+          {/* Dish */}
+          <Link href="/shop?category=dish" className="block bg-white p-6 rounded-xl shadow-sm border-2 border-[var(--color-secondary-container)] group bouncy-hover cursor-pointer">
+            <div className="aspect-square mb-6 overflow-hidden rounded-lg bg-[var(--color-surface-container)] relative">
+              <video 
+                autoPlay loop muted playsInline 
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              >
+                <source src="/Dishwashing_sheets_in_dishwasher_202607202000.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <div className="text-center">
+              <h3 className="text-xl font-black text-[var(--color-secondary)] mb-2">Dishwashing Sheets</h3>
+              <p className="text-[var(--color-on-surface-variant)] text-sm mb-6">Grease-Cutting & Clean finish for every plate.</p>
+              <button className="w-full bg-[var(--color-secondary)] py-3 rounded-full text-white font-bold text-sm tracking-wide shadow-[0_4px_16px_rgba(124,82,170,0.2)]">SHOP DISH</button>
+            </div>
+          </Link>
+          {/* Floor */}
+          <Link href="/shop?category=floor" className="block bg-white p-6 rounded-xl shadow-sm border-2 border-[var(--color-primary-fixed)] group bouncy-hover cursor-pointer">
+            <div className="aspect-square mb-6 overflow-hidden rounded-lg bg-[var(--color-surface-container)] relative">
+              <video 
+                autoPlay loop muted playsInline 
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              >
+                <source src="/Floor_cleaner_sheet_dissolves_202607201951.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <div className="text-center">
+              <h3 className="text-xl font-black text-[var(--color-primary-container)] mb-2">Floor Cleaner</h3>
+              <p className="text-[var(--color-on-surface-variant)] text-sm mb-6">Streak-Free & Disinfects all hard floor surfaces.</p>
+              <button className="w-full bg-[var(--color-primary-container)] py-3 rounded-full text-[var(--color-on-primary-container)] font-bold text-sm tracking-wide shadow-[0_4px_16px_rgba(240,128,192,0.2)]">SHOP FLOOR</button>
+            </div>
+          </Link>
+        </div>
+      </section>
+
+      {/* Why e-strip? Section */}
+      <section className="bg-[var(--color-secondary-container)] py-24 relative overflow-hidden">
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <video 
+            autoPlay 
+            loop 
+            muted 
+            playsInline 
+            className="w-full h-full object-cover mix-blend-multiply opacity-60"
+          >
+            <source src="/Soap_bubbles_floating_on_white_202607202024.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div className="container mx-auto px-8 relative z-10 text-center max-w-7xl">
+          <h2 className="text-4xl md:text-5xl font-black text-[var(--color-on-secondary-container)] mb-16">Why e-strip?</h2>
+          <div className="grid md:grid-cols-3 gap-12">
+            <div className="bg-white p-12 rounded-xl shadow-xl flex flex-col items-center bouncy-hover">
+              <div className="w-24 h-24 bg-[var(--color-tertiary-fixed)] rounded-full flex items-center justify-center mb-8">
+                <span className="material-symbols-outlined text-[var(--color-tertiary)] text-5xl" style={{ fontVariationSettings: "'FILL' 1" }}>water_drop</span>
+              </div>
+              <h4 className="text-2xl font-black text-[var(--color-on-surface)] mb-4">20x Super Concentrated</h4>
+              <p className="text-[var(--color-on-surface-variant)] leading-relaxed">A single sheet packs more cleaning power than heavy liquid detergents, minus the water and weight.</p>
+            </div>
+            <div className="bg-white p-12 rounded-xl shadow-xl flex flex-col items-center bouncy-hover">
+              <div className="w-24 h-24 bg-[var(--color-primary-fixed)] rounded-full flex items-center justify-center mb-8">
+                <span className="material-symbols-outlined text-[var(--color-primary)] text-5xl" style={{ fontVariationSettings: "'FILL' 1" }}>favorite</span>
+              </div>
+              <h4 className="text-2xl font-black text-[var(--color-on-surface)] mb-4">Hypoallergenic & Safe</h4>
+              <p className="text-[var(--color-on-surface-variant)] leading-relaxed">No harsh chemicals, paraben-free, and phosphate-free. Safe for your most sensitive family members.</p>
+            </div>
+            <div className="bg-white p-12 rounded-xl shadow-xl flex flex-col items-center bouncy-hover">
+              <div className="w-24 h-24 bg-[var(--color-secondary-fixed)] rounded-full flex items-center justify-center mb-8">
+                <span className="material-symbols-outlined text-[var(--color-secondary)] text-5xl" style={{ fontVariationSettings: "'FILL' 1" }}>cruelty_free</span>
+              </div>
+              <h4 className="text-2xl font-black text-[var(--color-on-surface)] mb-4">100% Vegan & Cruelty-Free</h4>
+              <p className="text-[var(--color-on-surface-variant)] leading-relaxed">Never tested on animals. Plant-based ingredients that are kind to the earth and its inhabitants.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* See us in Action */}
+      <section className="py-24 px-8 max-w-7xl mx-auto">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-black text-[var(--color-on-surface)] mb-4">See us in Action</h2>
+          <p className="text-[var(--color-on-surface-variant)] text-lg">Watch how e-strip transforms your cleaning routine.</p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div 
+            className="md:col-span-2 aspect-video bg-[var(--color-surface-container)] rounded-xl overflow-hidden relative group cursor-pointer"
+            onClick={() => handleActionVideoClick('laundry', actionLaundryRef.current)}
+          >
+              <video 
+                ref={actionLaundryRef}
+                preload="none"
+                src="/Indian_woman_using_laundry_sheet_202607202058.mp4" 
+                className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-700"
+                loop
+                playsInline
+                onPlay={() => setPlayingVideos(prev => ({ ...prev, laundry: true }))}
+                onPause={() => setPlayingVideos(prev => ({ ...prev, laundry: false }))}
+              />
+            <div className={`absolute inset-0 flex items-center justify-center bg-black/20 transition-all ${playingVideos['laundry'] ? 'bg-black/0 opacity-0 group-hover:opacity-100' : 'opacity-100'}`}>
+              <div className="w-20 h-20 bg-[var(--color-primary)] text-white rounded-full flex items-center justify-center pill-shadow-primary transition-all">
+                <span className="material-symbols-outlined text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>
+                  {playingVideos['laundry'] ? 'pause' : 'play_arrow'}
+                </span>
+              </div>
+            </div>
+            <div className="absolute bottom-6 left-6 text-white pointer-events-none">
+              <h4 className="text-2xl font-black drop-shadow-md">The e-strip Revolution</h4>
+            </div>
+          </div>
+          <div className="flex flex-col gap-6">
+            <div 
+              className="flex-1 aspect-video bg-[var(--color-surface-container)] rounded-xl overflow-hidden relative group cursor-pointer"
+              onClick={() => handleActionVideoClick('floor', actionFloorRef.current)}
+            >
+                <video 
+                  ref={actionFloorRef}
+                  preload="none"
+                  src="/Indian_person_mopping_floor_202607202105.mp4" 
+                  className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-700"
+                  loop
+                  playsInline
+                  onPlay={() => setPlayingVideos(prev => ({ ...prev, floor: true }))}
+                  onPause={() => setPlayingVideos(prev => ({ ...prev, floor: false }))}
+                />
+              <div className={`absolute inset-0 flex items-center justify-center bg-black/20 transition-all ${playingVideos['floor'] ? 'bg-black/0 opacity-0 group-hover:opacity-100' : 'opacity-100'}`}>
+                <div className="w-12 h-12 bg-[var(--color-tertiary)] text-white rounded-full flex items-center justify-center pill-shadow-tertiary transition-all">
+                  <span className="material-symbols-outlined text-2xl" style={{ fontVariationSettings: "'FILL' 1" }}>
+                    {playingVideos['floor'] ? 'pause' : 'play_arrow'}
+                  </span>
+                </div>
+              </div>
+              <div className="absolute bottom-4 left-4 text-white pointer-events-none">
+                <p className="font-bold text-sm drop-shadow-md">Spotless Floors</p>
+              </div>
+            </div>
+            <div 
+              className="flex-1 aspect-video bg-[var(--color-surface-container)] rounded-xl overflow-hidden relative group cursor-pointer"
+              onClick={() => handleActionVideoClick('dish', actionDishRef.current)}
+            >
+                <video 
+                  ref={actionDishRef}
+                  preload="none"
+                  src="/Indian_man_using_dishwashing_sheet_202607202106.mp4" 
+                  className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-700"
+                  loop
+                  playsInline
+                  onPlay={() => setPlayingVideos(prev => ({ ...prev, dish: true }))}
+                  onPause={() => setPlayingVideos(prev => ({ ...prev, dish: false }))}
+                />
+              <div className={`absolute inset-0 flex items-center justify-center bg-black/20 transition-all ${playingVideos['dish'] ? 'bg-black/0 opacity-0 group-hover:opacity-100' : 'opacity-100'}`}>
+                <div className="w-12 h-12 bg-[var(--color-secondary)] text-white rounded-full flex items-center justify-center shadow-[0_4px_16px_rgba(124,82,170,0.2)] transition-all">
+                  <span className="material-symbols-outlined text-2xl" style={{ fontVariationSettings: "'FILL' 1" }}>
+                    {playingVideos['dish'] ? 'pause' : 'play_arrow'}
+                  </span>
+                </div>
+              </div>
+              <div className="absolute bottom-4 left-4 text-white pointer-events-none">
+                <p className="font-bold text-sm drop-shadow-md">Sparkling Dishes</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Bento Promo Section */}
+      <section className="py-24 px-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[300px]">
+          <div className="md:col-span-2 bg-[var(--color-primary)] rounded-xl p-10 flex flex-col justify-end text-white relative overflow-hidden group">
+            <Image fill src="/Whole_Home_Cleaning_Kit_arranged_202607210117.jpeg" alt="Zero Waste Packaging" className="object-cover opacity-80 mix-blend-multiply group-hover:scale-105 transition-transform duration-700 z-0" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-0 pointer-events-none"></div>
+            <div className="relative z-10 drop-shadow-md">
+              <h3 className="text-4xl font-black mb-4">Zero Waste Packaging</h3>
+              <p className="text-lg opacity-100 max-w-md font-medium">Our envelopes are 100% compostable. No plastic jugs ending up in landfills or oceans.</p>
+            </div>
+          </div>
+          <div className="bg-[var(--color-tertiary)] rounded-xl p-10 flex flex-col justify-between text-white bouncy-hover relative overflow-hidden group">
+            <Image fill src="/Baby_blankets_and_teddy_bear_202607210121.jpeg" alt="Travel Friendly" className="object-cover opacity-80 mix-blend-multiply group-hover:scale-105 transition-transform duration-700 z-0" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-0 pointer-events-none"></div>
+            <span className="material-symbols-outlined text-5xl relative z-10 drop-shadow-md">travel_explore</span>
+            <div className="relative z-10 drop-shadow-md">
+              <h3 className="text-2xl font-black mb-2">Travel Friendly</h3>
+              <p className="text-sm opacity-100 font-medium">Lightweight sheets that fit anywhere. Perfect for trips and laundry on the go.</p>
+            </div>
+          </div>
+          <div className="bg-[var(--color-secondary)] rounded-xl p-10 flex items-center justify-center text-center text-white relative overflow-hidden bouncy-hover group">
+            <Image fill src="/Kitchen_sink_and_laundry_basket_202607210119.jpeg" alt="Save 20%" className="object-cover opacity-80 mix-blend-multiply group-hover:scale-105 transition-transform duration-700 z-0" />
+            <div className="absolute inset-0 bg-black/20 z-0 pointer-events-none"></div>
+            <div className="relative z-10 drop-shadow-md">
+              <div className="text-5xl font-black mb-2">Save 20%</div>
+              <p className="font-bold opacity-100">On your first subscription box.</p>
+              <Link href="/shop" className="mt-6 inline-block bg-white text-[var(--color-secondary)] px-6 py-3 rounded-full font-black text-sm hover:scale-105 transition-transform shadow-lg drop-shadow-none">JOIN THE CLUB</Link>
+            </div>
+          </div>
+          <div 
+            className="md:col-span-2 bg-[var(--color-surface-container-highest)] rounded-xl relative overflow-hidden group cursor-default min-h-[300px]"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            {testimonials.map((t, idx) => (
+              <div 
+                key={idx}
+                className={`absolute inset-0 p-10 flex items-center gap-8 transition-opacity duration-1000 ${currentTestimonial === idx ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
+              >
+                <div className="flex-1">
+                  <h3 className="text-3xl font-black text-[var(--color-on-surface)] mb-4 italic">"{t.quote}"</h3>
+                  <div className="flex items-center gap-2 mb-2">
+                    {[1,2,3,4,5].map(i => (
+                      <span key={i} className="material-symbols-outlined text-[var(--color-primary)]" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
+                    ))}
+                  </div>
+                  <p className="text-[var(--color-on-surface-variant)] font-bold">— {t.author}</p>
+                </div>
+                <div className="w-32 h-32 rounded-full bg-[var(--color-primary-fixed)] overflow-hidden hidden md:block relative shadow-inner shrink-0">
+                  <Image unoptimized fill alt={t.author} src={t.image} className="object-cover" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }
