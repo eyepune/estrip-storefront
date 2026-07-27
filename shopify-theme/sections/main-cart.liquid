@@ -1,0 +1,96 @@
+<div class="bg-gray-50 min-h-screen py-16 px-4">
+  <div class="max-w-4xl mx-auto">
+    <div class="mb-10 flex items-center justify-between">
+      <h1 class="text-4xl font-black text-gray-900 tracking-tight">Your Cart</h1>
+      <a href="/collections/all" class="text-sm font-bold text-[#E30613] hover:underline">Continue Shopping</a>
+    </div>
+
+    {% if cart.item_count > 0 %}
+      <form action="/cart" method="post" id="cart" class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+        
+        <div class="p-6 md:p-10 space-y-8">
+          {% for item in cart.items %}
+            <div class="flex items-center gap-6 pb-8 border-b border-gray-100 last:border-0 last:pb-0">
+              <!-- Item Image -->
+              <a href="{{ item.url }}" class="w-24 h-24 shrink-0 bg-gray-50 rounded-xl overflow-hidden flex items-center justify-center p-2 border border-gray-100">
+                <img src="{{ item.image | img_url: '200x' }}" alt="{{ item.title | escape }}" class="w-full h-full object-contain mix-blend-multiply">
+              </a>
+              
+              <!-- Item Details -->
+              <div class="flex-grow flex flex-col justify-between">
+                <div class="flex justify-between items-start mb-2">
+                  <a href="{{ item.url }}" class="text-lg font-black text-gray-900 hover:text-[#E30613] transition-colors leading-tight">{{ item.product.title }}</a>
+                  <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0" class="text-gray-400 hover:text-red-500 transition-colors ml-4">
+                    <span class="material-symbols-outlined text-[20px]">delete</span>
+                  </a>
+                </div>
+                
+                {% if item.variant.title != 'Default Title' %}
+                  <p class="text-sm font-medium text-gray-500 mb-4">{{ item.variant.title }}</p>
+                {% endif %}
+                
+                <div class="flex items-center justify-between mt-auto">
+                  <!-- Quantity -->
+                  <div class="flex items-center border border-gray-200 rounded-[4px] overflow-hidden w-24 h-10 bg-white">
+                    <button type="submit" name="update" class="flex-1 h-full text-gray-500 hover:bg-gray-50 font-bold" onclick="this.parentNode.querySelector('input').stepDown()">−</button>
+                    <input type="number" name="updates[]" id="updates_{{ item.key }}" value="{{ item.quantity }}" min="0" class="w-10 text-center font-bold text-gray-900 text-sm border-none p-0 focus:ring-0 appearance-none h-full bg-transparent">
+                    <button type="submit" name="update" class="flex-1 h-full text-gray-500 hover:bg-gray-50 font-bold" onclick="this.parentNode.querySelector('input').stepUp()">+</button>
+                  </div>
+                  
+                  <!-- Price -->
+                  <div class="text-right">
+                    {% if item.original_line_price != item.line_price %}
+                      <span class="text-sm text-gray-400 line-through mr-2 font-bold">{{ item.original_line_price | money }}</span>
+                    {% endif %}
+                    <span class="text-xl font-black text-gray-900">{{ item.line_price | money }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+        
+        <!-- Cart Footer -->
+        <div class="bg-gray-50 p-6 md:p-10 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center gap-6">
+          <div class="w-full md:w-1/2">
+            <p class="text-sm font-medium text-gray-500">Shipping, taxes, and discounts calculated at checkout.</p>
+          </div>
+          <div class="w-full md:w-1/2 flex flex-col items-end">
+            <div class="flex items-baseline gap-4 mb-6">
+              <span class="text-lg font-bold text-gray-600 uppercase tracking-widest text-xs">Subtotal</span>
+              <span class="text-4xl font-black text-gray-900">{{ cart.total_price | money }}</span>
+            </div>
+            
+            <button type="submit" name="checkout" class="btn w-full sm:w-auto bg-gray-900 text-white hover:bg-[#E30613] px-12 py-5 rounded-[9999px] font-black text-sm uppercase tracking-widest shadow-lg transition-all hover:-translate-y-1">
+              Secure Checkout
+            </button>
+          </div>
+        </div>
+        
+      </form>
+    {% else %}
+      <div class="bg-white rounded-3xl shadow-sm border border-gray-100 p-16 text-center">
+        <span class="material-symbols-outlined text-[64px] text-gray-300 mb-6">shopping_bag</span>
+        <h2 class="text-3xl font-black text-gray-900 mb-4">Your cart is empty</h2>
+        <p class="text-gray-500 font-medium mb-8 text-lg">Looks like you haven't added any eco-friendly products yet.</p>
+        <a href="/collections/all" class="btn bg-gray-900 text-white hover:bg-[#E30613] px-10 py-4 rounded-[9999px] font-bold text-sm tracking-widest shadow-lg inline-block">
+          Start Shopping
+        </a>
+      </div>
+    {% endif %}
+    
+    <!-- Trust strip -->
+    <div class="mt-12 flex justify-center gap-8 opacity-50 grayscale">
+      <div class="flex items-center gap-2"><span class="material-symbols-outlined">lock</span><span class="font-bold text-sm tracking-widest uppercase">Secure Checkout</span></div>
+      <div class="flex items-center gap-2"><span class="material-symbols-outlined">verified</span><span class="font-bold text-sm tracking-widest uppercase">30-Day Guarantee</span></div>
+    </div>
+    
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Cart Page",
+  "settings": []
+}
+{% endschema %}

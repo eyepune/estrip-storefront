@@ -97,18 +97,7 @@ export default function PageComponent() {
 </div>
 </div>
 
-<div className="md:col-span-4 bg-primary-container rounded-xl p-8 flex flex-col items-center text-center candy-shadow-primary relative overflow-hidden">
 
-<div className="absolute -top-10 -right-10 w-32 h-32 bg-primary rounded-full blur-3xl opacity-20"></div>
-<span className="material-symbols-outlined text-4xl text-on-primary-container mb-4" style={{ 'fontVariationSettings': '\'FILL\' 1' }}>volunteer_activism</span>
-<h3 className="text-xl font-black text-on-primary-container mb-2">Give ₹100, Get ₹100</h3>
-<p className="text-sm text-on-primary-container/80 mb-6">Share the joy of eco-friendly laundry with your squad!</p>
-<button className="w-full bg-white text-primary font-black py-4 rounded-full bouncy-hover transition-transform candy-shadow-primary flex items-center justify-center gap-2 mb-4 active:scale-95">
-<span className="material-symbols-outlined">share</span>
-                    Share Referral Link
-                </button>
-<p className="text-[10px] text-on-primary-container/60 uppercase font-bold tracking-tighter">Your friends get ₹100 off their first order</p>
-</div>
 </div>
 
 <div className="mt-12 flex flex-col items-center gap-6">
@@ -214,17 +203,6 @@ export default function PageComponent() {
 </details>
 </section>
 
-<section className="bg-primary p-6 rounded-lg shadow-[0_12px_32px_rgba(224,64,160,0.3)] text-on-primary">
-<h3 className="font-display font-black text-2xl mb-2">Share the Love</h3>
-<p className="text-on-primary/90 text-sm mb-6">Refer a friend and you both get a free pack of e-strips!</p>
-<div className="relative">
-<input className="w-full bg-white/20 border-none rounded-full py-4 pl-6 pr-24 font-bold text-white placeholder-white/50 focus:ring-2 focus:ring-white/50" readonly="" type="text" value="estrip.io/ref/ALEX88" />
-<button className="absolute right-2 top-2 bottom-2 bg-white text-primary px-6 rounded-full font-bold text-sm active:scale-95 transition-transform" onclick="copyToClipboard()">
-                    Copy Link
-                </button>
-</div>
-<div className="hidden text-center text-xs mt-3 font-bold animate-pulse" id="copy-toast">Copied to clipboard! 🍬</div>
-</section>
 
 <div className="mt-12 flex flex-col gap-4">
 <button className="w-full bg-primary text-white font-black py-5 rounded-full text-xl shadow-[0_8px_20px_rgba(224,64,160,0.4)] bouncy-hover bouncy-active">

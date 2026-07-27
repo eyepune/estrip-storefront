@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="236mm" height="431mm" viewBox="0 0 236 431" font-family="Georgia, 'Times New Roman', serif">
+<rect x="0" y="0" width="236" height="431" fill="#FFFFFF"/>
+<rect x="0" y="0" width="136" height="431" fill="#F3EFE6"/>
+<g font-family="Helvetica, Arial, sans-serif">
+  <rect x="3" y="3" width="130" height="190" fill="#F3EFE6"/>
+  <line x1="19" y1="18" x2="117" y2="18" stroke="#C9A227" stroke-width="0.5"/>
+  <text x="68" y="30" text-anchor="middle" font-size="6" font-weight="700" fill="#0A2540" letter-spacing="1.5">HOW TO USE</text>
+  <line x1="19" y1="36" x2="117" y2="36" stroke="#C9A227" stroke-width="0.5"/>
+  <g transform="translate(20,46)"><circle cx="6.5" cy="6.5" r="6.5" fill="none" stroke="#C9A227" stroke-width="0.6"/><text x="6.5" y="9" text-anchor="middle" font-size="5.6" font-weight="700" fill="#0A2540">1</text></g>
+  <text x="33" y="49" font-size="4.6" font-weight="700" fill="#0A2540">Drop</text>
+  <text x="33" y="55" font-size="3.7" font-weight="400" fill="#5F5E5A">One sheet into the dishwasher</text>
+  <g transform="translate(20,62)"><circle cx="6.5" cy="6.5" r="6.5" fill="none" stroke="#C9A227" stroke-width="0.6"/><text x="6.5" y="9" text-anchor="middle" font-size="5.6" font-weight="700" fill="#0A2540">2</text></g>
+  <text x="33" y="65" font-size="4.6" font-weight="700" fill="#0A2540">Load</text>
+  <text x="33" y="71" font-size="3.7" font-weight="400" fill="#5F5E5A">Load your dirty dishes</text>
+  <g transform="translate(20,78)"><circle cx="6.5" cy="6.5" r="6.5" fill="none" stroke="#C9A227" stroke-width="0.6"/><text x="6.5" y="9" text-anchor="middle" font-size="5.6" font-weight="700" fill="#0A2540">3</text></g>
+  <text x="33" y="81" font-size="4.6" font-weight="700" fill="#0A2540">Wash</text>
+  <text x="33" y="87" font-size="3.7" font-weight="400" fill="#5F5E5A">Start your preferred cycle</text>
+  <text x="19" y="97" font-size="3.5" font-weight="400" fill="#888780" font-style="italic">1 sheet normal load &#8226; 2 sheets for baked-on grease</text>
+  <line x1="19" y1="106" x2="117" y2="106" stroke="#D3D1C7" stroke-width="0.3"/>
+  <text x="68" y="118" text-anchor="middle" font-size="5" font-weight="700" fill="#0A2540" letter-spacing="1">WHAT'S INSIDE</text>
+  <text x="27" y="127" font-size="3.9" fill="#2C2C2A">Plant-based surfactants</text>
+  <text x="27" y="134" font-size="3.9" fill="#2C2C2A">Grease-cutting enzymes</text>
+  <text x="27" y="141" font-size="3.9" fill="#2C2C2A">Water-soluble, biodegradable sheet</text>
+  <text x="27" y="148" font-size="3.9" fill="#2C2C2A">No harsh chemicals</text>
+  <circle cx="21" cy="125.4" r="0.9" fill="#C9A227"/>
+  <circle cx="21" cy="132.4" r="0.9" fill="#C9A227"/>
+  <circle cx="21" cy="139.4" r="0.9" fill="#C9A227"/>
+  <circle cx="21" cy="146.4" r="0.9" fill="#C9A227"/>
+  <line x1="19" y1="156" x2="117" y2="156" stroke="#D3D1C7" stroke-width="0.3"/>
+  <text x="68" y="166" text-anchor="middle" font-size="5" font-weight="700" fill="#0A2540" letter-spacing="1">STORAGE</text>
+  <text x="68" y="174" text-anchor="middle" font-size="3.8" fill="#5F5E5A">Cool, dry place. Reseal after opening.</text>
+</g>
+<g>
+  <rect x="3" y="193" width="130" height="190" fill="#0A2540"/>
+  <rect x="10" y="200" width="116" height="176" fill="none" stroke="#C9A227" stroke-width="0.4"/>
+  <rect x="34" y="211" width="68" height="26" fill="none" stroke="#C9A227" stroke-width="0.4" stroke-dasharray="1.4,1.2"/>
+  <text x="68" y="222" text-anchor="middle" font-size="3.2" font-family="Helvetica, Arial, sans-serif" fill="#7C93AC" letter-spacing="0.6">DROP IN ACTUAL LOGO FILE HERE</text>
+  <text x="68" y="232" text-anchor="middle" font-size="9" font-weight="700" fill="#F3EFE6" font-style="italic">eStrip</text>
+  <text x="68" y="247" text-anchor="middle" font-size="3.6" font-family="Helvetica, Arial, sans-serif" fill="#C9A227" letter-spacing="2.2">DISHWASHING CLEANING SHEETS</text>
+  <line x1="48" y1="253" x2="88" y2="253" stroke="#C9A227" stroke-width="0.4"/>
+  <g fill="none" stroke="#C9A227" stroke-width="0.5">
+    <rect x="46" y="265" width="36" height="25" rx="2" transform="rotate(-7 64 277)"/>
+    <rect x="52" y="269" width="36" height="25" rx="2" transform="rotate(5 70 281)"/>
+    <rect x="49" y="273" width="36" height="25" rx="2"/>
+  </g>
+  <text x="68" y="318" text-anchor="middle" font-size="16" font-weight="700" fill="#F3EFE6">15 Sheets</text>
+  <text x="68" y="330" text-anchor="middle" font-size="7" font-weight="400" fill="#C9A227" font-style="italic">30 Washes</text>
+  <text x="68" y="338" text-anchor="middle" font-size="3.3" font-family="Helvetica, Arial, sans-serif" fill="#7C93AC">Sparkling clean plates</text>
+  <line x1="48" y1="346" x2="88" y2="346" stroke="#C9A227" stroke-width="0.4"/>
+  <g font-family="Helvetica, Arial, sans-serif" fill="#C9A227">
+    <text x="30" y="360" text-anchor="middle" font-size="3.1">PLANT-BASED</text>
+    <text x="68" y="360" text-anchor="middle" font-size="3.1">ZERO PLASTIC</text>
+    <text x="106" y="360" text-anchor="middle" font-size="3.1">NO RESIDUE</text>
+  </g>
+</g>
+</svg>

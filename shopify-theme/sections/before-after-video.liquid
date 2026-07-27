@@ -1,0 +1,96 @@
+<section class="bg-gray-900 py-24 px-4 text-white">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-5xl font-black mb-4 tracking-tight text-white">
+        {{ section.settings.heading | default: "Seeing is Believing." }}
+      </h2>
+      <p class="text-gray-400 font-medium text-lg">
+        {{ section.settings.subheading | default: "Watch how our plant-based enzymes break down the toughest stains." }}
+      </p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {% for block in section.blocks %}
+        <div class="bg-gray-800 rounded-2xl overflow-hidden shadow-2xl aspect-[9/16] relative group cursor-pointer">
+          {% if block.settings.video_url != blank %}
+            <video src="{{ block.settings.video_url }}" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"></video>
+          {% elsif block.settings.image != blank %}
+            <img src="{{ block.settings.image | img_url: '600x' }}" alt="Proof" class="absolute inset-0 w-full h-full object-cover opacity-80 mix-blend-screen" />
+          {% else %}
+            <div class="absolute inset-0 bg-gray-700 flex items-center justify-center">Video Placeholder</div>
+          {% endif %}
+          
+          <div class="absolute inset-0 flex flex-col justify-between p-6 pointer-events-none">
+            <div class="self-end bg-black/50 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold tracking-widest border border-white/20">
+              {{ block.settings.stain_type | default: "Turmeric Stain" }}
+            </div>
+            <div>
+              <span class="material-symbols-outlined text-4xl mb-2 text-[#E30613] drop-shadow-md">play_circle</span>
+              <p class="font-bold text-lg drop-shadow-md">"{{ block.settings.quote | default: 'Completely vanished in cold water!' }}"</p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Before & After Video",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Seeing is Believing."
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Watch how our plant-based enzymes break down the toughest stains."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "video_block",
+      "name": "Video Proof",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Fallback Image"
+        },
+        {
+          "type": "url",
+          "id": "video_url",
+          "label": "MP4 Video URL"
+        },
+        {
+          "type": "text",
+          "id": "stain_type",
+          "label": "Stain Badge Text",
+          "default": "Turmeric Stain"
+        },
+        {
+          "type": "text",
+          "id": "quote",
+          "label": "Customer Quote",
+          "default": "Completely vanished in cold water!"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Before & After Video",
+      "category": "Social Proof",
+      "blocks": [
+        { "type": "video_block", "settings": { "stain_type": "Turmeric", "quote": "Completely vanished in cold water!" } },
+        { "type": "video_block", "settings": { "stain_type": "Red Wine", "quote": "Saved my favorite white shirt." } },
+        { "type": "video_block", "settings": { "stain_type": "Coffee", "quote": "Looks brand new." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

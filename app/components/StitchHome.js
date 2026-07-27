@@ -135,6 +135,41 @@ export default function StitchHome() {
                         </div>
                     </div>
                 </section>
+                
+                {/* How It Works Section (Good Flow) */}
+                <section className="py-24 px-8 max-w-7xl mx-auto border-t-2 border-surface-container">
+                    <div className="text-center mb-16">
+                        <h2 className="text-4xl md:text-5xl font-black text-on-surface mb-4">How It Works</h2>
+                        <p className="text-on-surface-variant text-lg max-w-2xl mx-auto">One powerful sheet, zero mess. Whether you are using a washing machine or doing a quick bucket wash for delicate kurtas, e-strip makes laundry effortless.</p>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+                        {/* Connecting Line for Desktop */}
+                        <div className="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-surface-container -z-10 -translate-y-1/2"></div>
+                        
+                        {/* Step 1 */}
+                        <div className="bg-white p-8 rounded-2xl shadow-sm border border-outline-variant flex flex-col items-center text-center relative z-10 bouncy-hover h-full">
+                            <div className="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center font-black text-2xl mb-6 shadow-lg">1</div>
+                            <h3 className="text-2xl font-black text-primary mb-3">Toss</h3>
+                            <p className="text-on-surface-variant leading-relaxed">Drop <strong>1 sheet</strong> into your top/front load machine drum, or just <strong>half a sheet</strong> into your standard bucket of water.</p>
+                        </div>
+                        
+                        {/* Step 2 */}
+                        <div className="bg-white p-8 rounded-2xl shadow-sm border border-outline-variant flex flex-col items-center text-center relative z-10 bouncy-hover h-full">
+                            <div className="w-16 h-16 bg-secondary text-white rounded-full flex items-center justify-center font-black text-2xl mb-6 shadow-lg">2</div>
+                            <h3 className="text-2xl font-black text-secondary mb-3">Add Clothes</h3>
+                            <p className="text-on-surface-variant leading-relaxed">Add your everyday wear, heavy bedsheets, colorful sarees, or delicate cotton kurtas. e-strip is gentle on all fabrics.</p>
+                        </div>
+                        
+                        {/* Step 3 */}
+                        <div className="bg-white p-8 rounded-2xl shadow-sm border border-outline-variant flex flex-col items-center text-center relative z-10 bouncy-hover h-full">
+                            <div className="w-16 h-16 bg-tertiary text-white rounded-full flex items-center justify-center font-black text-2xl mb-6 shadow-lg">3</div>
+                            <h3 className="text-2xl font-black text-tertiary mb-3">Clean</h3>
+                            <p className="text-on-surface-variant leading-relaxed">Watch it dissolve instantly in both hot and cold water. Lifts tough stains like turmeric (haldi) for a spotless, fresh-smelling clean.</p>
+                        </div>
+                    </div>
+                </section>
+
                 {/* Why e-strip? Section */}
                 <section className="bg-secondary-container py-24 relative overflow-hidden">
                     <div className="absolute top-0 right-0 p-20 opacity-10">

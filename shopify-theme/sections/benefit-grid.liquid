@@ -1,0 +1,91 @@
+<section class="py-24 px-4 bg-gray-50">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-5xl font-black text-gray-900 mb-4 tracking-tight">
+        {{ section.settings.heading | default: "Small Sheets. Massive Impact." }}
+      </h2>
+      {% if section.settings.subheading != blank %}
+        <p class="text-gray-500 font-medium text-lg">{{ section.settings.subheading }}</p>
+      {% endif %}
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+      {% for block in section.blocks %}
+        <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 group">
+          <div class="aspect-[4/3] bg-gray-100 relative overflow-hidden flex items-center justify-center">
+            {% if block.settings.image != blank %}
+              <img src="{{ block.settings.image | img_url: '600x' }}" alt="{{ block.settings.title }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 mix-blend-multiply" />
+            {% elsif block.settings.icon_name != blank %}
+              <span class="material-symbols-outlined text-[100px] text-gray-300">{{ block.settings.icon_name }}</span>
+            {% endif %}
+          </div>
+          <div class="p-8 text-center">
+            <h3 class="text-xl font-black text-gray-900 mb-3">{{ block.settings.title }}</h3>
+            <p class="text-gray-500 font-medium">{{ block.settings.text }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Benefit Grid",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Small Sheets. Massive Impact."
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit Block",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image (Overrides Icon)"
+        },
+        {
+          "type": "text",
+          "id": "icon_name",
+          "label": "Google Material Icon Name",
+          "default": "water_drop",
+          "info": "Used if no image is selected."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Benefit Title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description",
+          "default": "Describe the benefit here."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Benefit Grid",
+      "category": "Information",
+      "blocks": [
+        { "type": "benefit", "settings": { "title": "No Plastic Jugs", "icon_name": "delete" } },
+        { "type": "benefit", "settings": { "title": "No Artificial Dyes", "icon_name": "water_drop" } },
+        { "type": "benefit", "settings": { "title": "Pre-Measured", "icon_name": "scale" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

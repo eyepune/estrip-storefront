@@ -1,0 +1,76 @@
+<section class="py-24 px-4 bg-white relative overflow-hidden border-y border-gray-100">
+  <div class="absolute inset-0 opacity-5 bg-cover bg-center" style="background-image: url('{{ section.settings.background_image | img_url: 'master' }}');"></div>
+  <div class="max-w-7xl mx-auto relative z-10">
+    <h2 class="text-3xl md:text-5xl font-black text-center mb-16 tracking-tight text-gray-900">
+      {{ section.settings.heading | default: "Powered by Nature." }}
+    </h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+      {% for block in section.blocks %}
+        <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+          <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mb-4">
+            <span class="material-symbols-outlined">{{ block.settings.icon_name | default: 'psychiatry' }}</span>
+          </div>
+          <h4 class="font-black text-lg mb-2 text-gray-900">{{ block.settings.ingredient_name }}</h4>
+          <p class="text-gray-500 text-sm font-medium">{{ block.settings.ingredient_desc }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Ingredient Grid",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Powered by Nature."
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Pattern Image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "ingredient",
+      "name": "Ingredient",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon_name",
+          "label": "Google Material Icon Name",
+          "default": "psychiatry"
+        },
+        {
+          "type": "text",
+          "id": "ingredient_name",
+          "label": "Ingredient Name",
+          "default": "Coconut Surfactants"
+        },
+        {
+          "type": "textarea",
+          "id": "ingredient_desc",
+          "label": "Description",
+          "default": "Naturally lifts dirt and grease without stripping fabrics."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ingredient Grid",
+      "category": "Information",
+      "blocks": [
+        { "type": "ingredient", "settings": { "ingredient_name": "Coconut Surfactants", "icon_name": "psychiatry" } },
+        { "type": "ingredient", "settings": { "ingredient_name": "5-Enzyme Blend", "icon_name": "bubble_chart" } },
+        { "type": "ingredient", "settings": { "ingredient_name": "Essential Oils", "icon_name": "water_drop" } },
+        { "type": "ingredient", "settings": { "ingredient_name": "PVA Film", "icon_name": "layers" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

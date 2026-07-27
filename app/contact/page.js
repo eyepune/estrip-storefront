@@ -1,227 +1,123 @@
 'use client';
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 export default function ContactPage() {
-  const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
-  const [status, setStatus] = useState('idle'); // idle, loading, success
+  const [status, setStatus] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setStatus('loading');
-    setTimeout(() => {
-      setStatus('success');
-    }, 1500);
+    setStatus('Message sent! We will get back to you within 24 hours.');
+    e.target.reset();
   };
 
   return (
-    <div className="bg-background min-h-screen text-on-background selection:bg-primary-fixed selection:text-on-primary-fixed overflow-x-hidden">
+    <div className="bg-[#f6f6f6] min-h-screen pb-24">
       
-      {/* Hero Section */}
-      <section className="relative py-24 lg:py-32 overflow-hidden flex items-center justify-center text-center">
-        {/* Abstract shapes / Mesh gradient background */}
-        <div className="absolute inset-0 z-0">
-          <div className="absolute top-0 -left-1/4 w-[150%] h-full bg-surface-container-low"></div>
-          <div className="absolute -top-40 -right-40 w-96 h-96 bg-primary-fixed rounded-full blur-[100px] opacity-40 mix-blend-multiply"></div>
-          <div className="absolute top-40 -left-20 w-80 h-80 bg-tertiary-fixed rounded-full blur-[100px] opacity-40 mix-blend-multiply"></div>
-          <div className="absolute -bottom-40 right-1/4 w-96 h-96 bg-secondary-fixed rounded-full blur-[100px] opacity-30 mix-blend-multiply"></div>
-        </div>
-
-        <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6">
-          <motion.span 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="inline-block bg-white text-primary font-bold px-6 py-2 rounded-full mb-6 shadow-sm border border-primary/10 tracking-wide uppercase text-sm"
-          >
-            Get in touch
-          </motion.span>
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-4xl sm:text-5xl md:text-7xl font-black text-on-surface mb-6 tracking-tight leading-tight"
-          >
-            We'd love to hear <span className="text-tertiary">from you.</span>
-          </motion.h1>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-lg sm:text-xl text-on-surface-variant font-medium leading-relaxed"
-          >
-            Whether you have a question about our eco-friendly products, need help with a subscription, or just want to say hi, our team is ready to help!
-          </motion.p>
+      {/* Header */}
+      <section className="bg-gray-900 text-white py-20 text-center px-4 relative overflow-hidden">
+        <div className="relative z-10 max-w-3xl mx-auto">
+          <h1 className="text-4xl md:text-6xl font-black mb-4 tracking-tight">Let's talk.</h1>
+          <p className="text-gray-300 font-medium text-lg">We're here to help with orders, subscriptions, or general inquiries.</p>
         </div>
       </section>
- 
-      {/* Main Content */}
-      <section className="py-16 md:py-24 px-4 sm:px-6 max-w-7xl mx-auto relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+
+      {/* Main Split Content */}
+      <section className="max-w-7xl mx-auto px-4 -mt-10 relative z-20">
+        <div className="bg-white rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-gray-100 overflow-hidden flex flex-col md:flex-row">
           
-          {/* Left Column: Contact Info */}
-          <motion.div 
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="space-y-12"
-          >
+          {/* Left Column: Contact Details & Quick Links */}
+          <div className="w-full md:w-5/12 bg-gray-50 p-10 md:p-16 border-r border-gray-100 flex flex-col justify-between">
             <div>
-              <h2 className="text-2xl sm:text-3xl font-black text-on-surface mb-8">Contact Information</h2>
+              <h2 className="text-2xl font-black text-gray-900 mb-8 tracking-tight">Get in touch</h2>
               
               <div className="space-y-8">
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-primary-fixed/30 flex items-center justify-center shrink-0">
-                    <span className="material-symbols-outlined text-primary text-xl" style={{ fontVariationSettings: "'FILL' 1" }}>mail</span>
+                  <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm shrink-0 border border-gray-200">
+                    <span className="material-symbols-outlined text-gray-900 text-[20px]">email</span>
                   </div>
                   <div>
-                    <h3 className="font-bold text-on-surface text-lg mb-1">Email Us</h3>
-                    <p className="text-on-surface-variant mb-1 text-sm sm:text-base">We generally respond within 24 hours.</p>
-                    <a href="mailto:support@estrip.in" className="text-primary font-black hover:underline text-sm sm:text-base">support@estrip.in</a>
+                    <h4 className="font-bold text-gray-900 text-sm uppercase tracking-widest mb-1">Email Us</h4>
+                    <p className="text-gray-600 font-medium mb-1">hello@estrip.in</p>
+                    <p className="text-xs text-gray-400 font-bold">24-48 hr response time</p>
                   </div>
                 </div>
- 
+
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-tertiary-fixed/30 flex items-center justify-center shrink-0">
-                    <span className="material-symbols-outlined text-tertiary text-xl" style={{ fontVariationSettings: "'FILL' 1" }}>call</span>
+                  <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm shrink-0 border border-gray-200">
+                    <span className="material-symbols-outlined text-gray-900 text-[20px]">location_on</span>
                   </div>
                   <div>
-                    <h3 className="font-bold text-on-surface text-lg mb-1">Call Us</h3>
-                    <p className="text-on-surface-variant mb-1 text-sm sm:text-base">Mon-Fri from 9am to 6pm IST.</p>
-                    <a href="tel:+919876543210" className="text-tertiary font-black hover:underline text-sm sm:text-base">+91 98765 43210</a>
-                  </div>
-                </div>
- 
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-secondary-fixed/30 flex items-center justify-center shrink-0">
-                    <span className="material-symbols-outlined text-secondary text-xl" style={{ fontVariationSettings: "'FILL' 1" }}>location_on</span>
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-on-surface text-lg mb-1">HQ Address</h3>
-                    <p className="text-on-surface-variant leading-relaxed text-sm sm:text-base">
-                      E-Strip Technologies Pvt. Ltd.<br/>
-                      123 Green Earth Boulevard, Phase 2<br/>
-                      Pune, Maharashtra 411001, India
+                    <h4 className="font-bold text-gray-900 text-sm uppercase tracking-widest mb-1">HQ Address</h4>
+                    <p className="text-gray-600 font-medium leading-relaxed">
+                      E-strip Eco Solutions<br/>
+                      123 Green Valley Tech Park<br/>
+                      Pune, Maharashtra 411057
                     </p>
                   </div>
                 </div>
               </div>
             </div>
- 
-            <div className="bg-surface-container-low p-6 sm:p-8 rounded-2xl border-2 border-outline-variant/30 relative overflow-hidden group">
-              <div className="relative z-10">
-                <h3 className="text-lg sm:text-xl font-black text-on-surface mb-3">Need quick answers?</h3>
-                <p className="text-on-surface-variant font-medium mb-6 text-sm sm:text-base">Check out our comprehensive FAQ section for details on shipping, returns, and subscription management.</p>
-                <button className="bg-white text-on-surface border border-outline font-bold py-3 px-6 rounded-full hover:bg-surface-variant transition-colors shadow-sm text-sm sm:text-base">
-                  Visit Help Center
-                </button>
-              </div>
-              <div className="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform duration-500">
-                <span className="material-symbols-outlined text-[100px]" style={{ fontVariationSettings: "'FILL' 1" }}>help</span>
+
+            <div className="mt-16 pt-8 border-t border-gray-200">
+              <h4 className="font-black text-gray-900 text-xs uppercase tracking-widest mb-4">Quick Links</h4>
+              <div className="flex flex-col gap-3">
+                <Link href="/faq" className="font-bold text-sm text-[var(--color-primary)] hover:underline flex items-center gap-1">
+                  <span className="material-symbols-outlined text-[16px]">help</span> View FAQs
+                </Link>
+                <Link href="/account" className="font-bold text-sm text-[var(--color-primary)] hover:underline flex items-center gap-1">
+                  <span className="material-symbols-outlined text-[16px]">person</span> Manage Subscription
+                </Link>
               </div>
             </div>
-          </motion.div>
- 
+          </div>
+
           {/* Right Column: Contact Form */}
-          <motion.div 
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-          >
-            <div className="bg-white p-6 sm:p-10 rounded-3xl candy-shadow-primary border-2 border-primary/10 relative overflow-hidden">
-              {status === 'success' ? (
-                <motion.div 
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="py-12 text-center flex flex-col items-center"
-                >
-                  <div className="w-20 h-20 bg-primary-fixed/30 text-primary rounded-full flex items-center justify-center mb-6">
-                    <span className="material-symbols-outlined text-4xl">check_circle</span>
-                  </div>
-                  <h3 className="text-3xl font-black text-on-surface mb-4">Message Sent!</h3>
-                  <p className="text-on-surface-variant text-lg">Thank you for reaching out. A member of our eco-team will get back to you shortly.</p>
-                  <button 
-                    onClick={() => {
-                      setStatus('idle');
-                      setFormData({ name: '', email: '', subject: '', message: '' });
-                    }}
-                    className="mt-8 text-primary font-bold hover:underline"
-                  >
-                    Send another message
-                  </button>
-                </motion.div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
-                  <h3 className="text-2xl font-black text-on-surface mb-6">Send a Message</h3>
-                  
-                  <div>
-                    <label className="block text-sm font-bold text-on-surface mb-2">Full Name</label>
-                    <input 
-                      type="text" 
-                      required
-                      value={formData.name}
-                      onChange={(e) => setFormData({...formData, name: e.target.value})}
-                      className="w-full border-2 border-outline-variant bg-surface-container-lowest rounded-xl px-4 py-3 outline-none focus:border-primary focus:bg-white transition-colors"
-                      placeholder="Jane Doe"
-                    />
-                  </div>
-                  
-                  <div>
-                    <label className="block text-sm font-bold text-on-surface mb-2">Email Address</label>
-                    <input 
-                      type="email" 
-                      required
-                      value={formData.email}
-                      onChange={(e) => setFormData({...formData, email: e.target.value})}
-                      className="w-full border-2 border-outline-variant bg-surface-container-lowest rounded-xl px-4 py-3 outline-none focus:border-primary focus:bg-white transition-colors"
-                      placeholder="jane@example.com"
-                    />
-                  </div>
-                  
-                  <div>
-                    <label className="block text-sm font-bold text-on-surface mb-2">Subject</label>
-                    <input 
-                      type="text" 
-                      required
-                      value={formData.subject}
-                      onChange={(e) => setFormData({...formData, subject: e.target.value})}
-                      className="w-full border-2 border-outline-variant bg-surface-container-lowest rounded-xl px-4 py-3 outline-none focus:border-primary focus:bg-white transition-colors"
-                      placeholder="How can we help?"
-                    />
-                  </div>
-                  
-                  <div>
-                    <label className="block text-sm font-bold text-on-surface mb-2">Message</label>
-                    <textarea 
-                      required
-                      rows={4}
-                      value={formData.message}
-                      onChange={(e) => setFormData({...formData, message: e.target.value})}
-                      className="w-full border-2 border-outline-variant bg-surface-container-lowest rounded-xl px-4 py-3 outline-none focus:border-primary focus:bg-white transition-colors resize-none"
-                      placeholder="Write your message here..."
-                    ></textarea>
-                  </div>
-                  
-                  <button 
-                    type="submit" 
-                    disabled={status === 'loading'}
-                    className="w-full bg-primary hover:bg-primary-hover text-white font-black py-4 rounded-full text-lg transition-all bouncy-hover pill-shadow-primary disabled:opacity-70 flex items-center justify-center gap-2 mt-4"
-                  >
-                    {status === 'loading' ? (
-                      <span className="material-symbols-outlined animate-spin">refresh</span>
-                    ) : (
-                      <>
-                        Send Message
-                        <span className="material-symbols-outlined">send</span>
-                      </>
-                    )}
-                  </button>
-                </form>
+          <div className="w-full md:w-7/12 p-10 md:p-16">
+            <h2 className="text-2xl font-black text-gray-900 mb-8 tracking-tight">Send a message</h2>
+            
+            <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="flex flex-col gap-2">
+                  <label className="text-xs font-black tracking-widest uppercase text-gray-500">First Name</label>
+                  <input required type="text" className="border-2 border-gray-200 rounded-lg px-4 py-3 font-medium text-gray-900 focus:outline-none focus:border-gray-900 transition-colors" placeholder="Jane" />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <label className="text-xs font-black tracking-widest uppercase text-gray-500">Last Name</label>
+                  <input required type="text" className="border-2 border-gray-200 rounded-lg px-4 py-3 font-medium text-gray-900 focus:outline-none focus:border-gray-900 transition-colors" placeholder="Doe" />
+                </div>
+              </div>
+              
+              <div className="flex flex-col gap-2">
+                <label className="text-xs font-black tracking-widest uppercase text-gray-500">Email Address</label>
+                <input required type="email" className="border-2 border-gray-200 rounded-lg px-4 py-3 font-medium text-gray-900 focus:outline-none focus:border-gray-900 transition-colors" placeholder="jane@example.com" />
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <label className="text-xs font-black tracking-widest uppercase text-gray-500">Order Number (Optional)</label>
+                <input type="text" className="border-2 border-gray-200 rounded-lg px-4 py-3 font-medium text-gray-900 focus:outline-none focus:border-gray-900 transition-colors" placeholder="#ES10492" />
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <label className="text-xs font-black tracking-widest uppercase text-gray-500">How can we help?</label>
+                <textarea required rows="4" className="border-2 border-gray-200 rounded-lg px-4 py-3 font-medium text-gray-900 focus:outline-none focus:border-gray-900 transition-colors resize-none" placeholder="Write your message here..."></textarea>
+              </div>
+
+              <button type="submit" className="btn bg-gray-900 hover:bg-[var(--color-primary)] text-white h-[60px] rounded-[9999px] font-black text-sm tracking-widest uppercase shadow-lg transition-all hover:-translate-y-1 mt-2">
+                Send Message
+              </button>
+              
+              {status && (
+                <div className="bg-emerald-50 text-emerald-700 font-bold text-sm px-4 py-3 rounded-lg flex items-center gap-2 border border-emerald-100">
+                  <span className="material-symbols-outlined text-[18px]">check_circle</span>
+                  {status}
+                </div>
               )}
-            </div>
-          </motion.div>
+            </form>
+          </div>
+
         </div>
       </section>
-
     </div>
   );
 }

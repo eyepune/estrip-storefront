@@ -1,0 +1,120 @@
+<section class="py-24 px-4 bg-gray-50 border-t border-gray-100">
+  <div class="max-w-7xl mx-auto">
+    <div class="flex flex-col md:flex-row gap-12 lg:gap-24">
+      
+      <!-- Left: Review Summary -->
+      <div class="w-full md:w-1/3">
+        <h2 class="text-3xl md:text-5xl font-black text-gray-900 mb-6 tracking-tight">Real Reviews. Real Results.</h2>
+        
+        <div class="flex items-center gap-4 mb-8">
+          <div class="text-6xl font-black text-gray-900">4.8</div>
+          <div>
+            <div class="flex text-yellow-400 text-[24px] mb-1">★★★★★</div>
+            <p class="text-gray-500 font-medium text-sm">Based on 4,231 reviews</p>
+          </div>
+        </div>
+
+        <!-- AI Summary Block -->
+        <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-[0_10px_30px_rgba(0,0,0,0.03)] mb-8 relative overflow-hidden">
+          <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 via-emerald-400 to-blue-400"></div>
+          <div class="flex items-center gap-2 mb-3">
+            <span class="material-symbols-outlined text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-emerald-500 font-black">auto_awesome</span>
+            <span class="text-xs font-bold text-gray-900 uppercase tracking-widest">AI Review Summary</span>
+          </div>
+          <p class="text-gray-600 text-sm leading-relaxed font-medium">
+            Customers love how easily these sheets dissolve in cold water and the space they save in the laundry room. The most praised feature is its ability to lift tough organic stains (like wine and coffee) without harsh chemicals.
+          </p>
+        </div>
+        
+        <button class="btn w-full bg-white border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white px-8 py-4 rounded-[9999px] font-bold text-sm tracking-widest uppercase transition-colors">
+          Write a Review
+        </button>
+      </div>
+
+      <!-- Right: Individual Reviews -->
+      <div class="w-full md:w-2/3">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {% for block in section.blocks %}
+            <div class="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm">
+              <div class="flex items-center justify-between mb-4">
+                <div class="flex text-yellow-400 text-[16px]">★★★★★</div>
+                <span class="text-xs text-gray-400 font-bold uppercase tracking-wide">{{ block.settings.date }}</span>
+              </div>
+              <h4 class="font-black text-gray-900 text-lg mb-2">{{ block.settings.title }}</h4>
+              <p class="text-gray-600 text-sm leading-relaxed mb-6">"{{ block.settings.content }}"</p>
+              
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-400 font-black">
+                  {{ block.settings.author | slice: 0 }}
+                </div>
+                <div>
+                  <p class="text-sm font-bold text-gray-900">{{ block.settings.author }}</p>
+                  <div class="flex items-center gap-1">
+                    <span class="material-symbols-outlined text-[14px] text-green-500">verified</span>
+                    <span class="text-xs text-green-600 font-bold">Verified Buyer</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+        
+        <div class="mt-8 text-center">
+          <button class="text-sm font-bold text-gray-500 hover:text-gray-900 uppercase tracking-widest underline underline-offset-4 transition-colors">Load More Reviews</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Review Wall",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author Name",
+          "default": "Sarah M."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Review Title",
+          "default": "Never going back to liquid!"
+        },
+        {
+          "type": "textarea",
+          "id": "content",
+          "label": "Review Content",
+          "default": "I was skeptical, but these clean better than Tide and take up zero space."
+        },
+        {
+          "type": "text",
+          "id": "date",
+          "label": "Date",
+          "default": "2 days ago"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Review Wall",
+      "category": "Social Proof",
+      "blocks": [
+        { "type": "review" },
+        { "type": "review", "settings": { "author": "Michael T.", "title": "Great for travel", "content": "I took these on a 2-week trip to Europe. Life saver." } },
+        { "type": "review", "settings": { "author": "Emily R.", "title": "Smells amazing", "content": "The fresh linen scent is perfect. Not overpowering but very clean." } },
+        { "type": "review", "settings": { "author": "David K.", "title": "Got grease out", "content": "Washed my work clothes and the stains were completely gone." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

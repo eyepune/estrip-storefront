@@ -74,7 +74,7 @@ export default function PageComponent() {
 </div>
 <div className="space-y-4">
 <label className="block relative p-6 rounded-lg border-2 border-primary bg-primary-fixed cursor-pointer transition-all hover:bg-primary-fixed-dim">
-<input checked="" className="absolute right-6 top-1/2 -translate-y-1/2 w-6 h-6 text-primary focus:ring-primary" name="delivery" type="radio" />
+<input defaultChecked className="absolute right-6 top-1/2 -translate-y-1/2 w-6 h-6 text-primary focus:ring-primary" name="delivery" type="radio" />
 <div className="pr-12">
 <span className="block font-bold text-lg text-on-primary-fixed">Eco-Standard Shipping</span>
 <span className="block text-sm text-on-primary-fixed-variant">3-5 business days • Carbon Neutral</span>
@@ -257,7 +257,7 @@ export default function PageComponent() {
 </div>
 <div className="space-y-3">
 <label className="relative flex items-center p-4 bg-surface-container-lowest border-2 border-primary rounded-lg candy-shadow cursor-pointer bouncy-btn">
-<input checked="" className="hidden" name="delivery" type="radio" />
+<input defaultChecked className="hidden" name="delivery" type="radio" />
 <div className="flex-grow">
 <p className="font-bold text-on-surface">Standard Shipping</p>
 <p className="text-sm text-on-surface-variant">3-5 Business Days</p>

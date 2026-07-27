@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useCart } from '@/context/CartContext';
@@ -7,15 +8,19 @@ import CartSidebar from './CartSidebar';
 
 const navLinks = [
   { label: 'Shop All', href: '/shop' },
-  { label: 'Our Mission', href: '/mission' },
   { label: 'Bundles', href: '/bundles' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'About Us', href: '/about' },
+  { label: 'FAQ', href: '/faq' },
+  { label: 'Reviews', href: '/reviews' },
+  { label: 'How it Works', href: '/how-it-works' },
 ];
 
 export default function Navbar() {
   const { totalItems, setIsOpen } = useCart();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const pathname = usePathname();
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 20);
@@ -25,6 +30,14 @@ export default function Navbar() {
 
   return (
     <>
+      {/* Fraud Warning Banner (Only on Home Page) */}
+      {pathname === '/' && (
+        <div className="w-full bg-[#E30613] text-white text-[11px] sm:text-[13px] py-1.5 px-4 text-center z-40 relative flex items-center justify-center gap-1.5 tracking-wide">
+          <span className="text-[#FFC107] text-[14px]">⚠️</span> 
+          <span>We never ask for extra payment on prepaid orders. Any such calls are fraud. Do not share personal or payment details. Report to 1930 or cybercrime.gov.in</span>
+        </div>
+      )}
+
       {/* Sticky Header Container */}
       <div className="sticky top-0 z-50 w-full flex flex-col items-center">
         
@@ -42,25 +55,51 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Floating Pill Main Header */}
+        {/* Category Scroll Pills Bar (Lucent Globe Style - Mobile & Desktop) */}
+        <div className="w-full bg-gray-50/90 backdrop-blur-sm border-b border-gray-200/80 py-2 px-4 overflow-x-auto hide-scrollbar flex items-center justify-start sm:justify-center gap-2 text-xs font-black tracking-wide uppercase">
+          {[
+            { label: 'Laundry', href: '/shop?category=laundry' },
+            { label: 'Dishwashing', href: '/shop?category=dish' },
+            { label: 'Floor Care', href: '/shop?category=floor' },
+            { label: 'Bundles (Save 50%)', href: '/bundles', highlight: true },
+            { label: 'Refills', href: '/shop?category=refill' },
+          ].map((cat, idx) => (
+            <Link
+              key={idx}
+              href={cat.href}
+              className={`shrink-0 px-3.5 py-1.5 rounded-full transition-all duration-200 ${
+                cat.highlight
+                  ? 'bg-[#E30613] text-white shadow-sm hover:bg-red-700'
+                  : 'bg-white text-gray-700 hover:text-[var(--color-primary)] hover:bg-blue-50 border border-gray-200/60'
+              }`}
+            >
+              {cat.label}
+            </Link>
+          ))}
+        </div>
+
+        {/* Floating / Fixed Main Header */}
         <header className={`w-full transition-all duration-500 flex justify-center ${scrolled ? 'px-4 sm:px-6 mt-3' : 'px-0 mt-0'}`}>
-          <nav className={`w-full max-w-7xl mx-auto h-[64px] flex items-center justify-between transition-all duration-700 ${scrolled ? 'bg-white/80 backdrop-blur-2xl shadow-[0_8px_32px_rgba(35,0,255,0.08)] border border-white/60 rounded-full px-6 sm:px-8' : 'bg-transparent px-4 sm:px-6 lg:px-8'}`}>
+          <nav className={`w-full max-w-7xl mx-auto h-[60px] sm:h-[64px] flex items-center justify-between transition-all duration-700 ${
+            scrolled 
+              ? 'bg-white/90 backdrop-blur-2xl shadow-[0_8px_32px_rgba(35,0,255,0.08)] border border-white/60 rounded-full px-5 sm:px-8' 
+              : 'bg-white/95 md:bg-transparent backdrop-blur-md md:backdrop-blur-none border-b border-gray-100 md:border-none px-4 sm:px-6 lg:px-8 shadow-xs md:shadow-none'
+          }`}>
             
             {/* Logo */}
-            <Link href="/" className="flex-shrink-0 relative w-28 h-10 hover:scale-105 transition-transform duration-300">
-              <Image
-                src="https://estrip.in/cdn/shop/files/Primary-Logo_Blue-scaled_1.png?v=1777612281"
-                alt="E-strip Logo"
-                fill
-                className="object-contain"
-                sizes="112px"
-                priority
-                unoptimized
+            <Link href="/" className="flex-shrink-0 relative w-28 sm:w-32 h-10 sm:h-12 hover:scale-105 transition-transform duration-300 flex items-center justify-center">
+              <img 
+                src="https://estrip.in/cdn/shop/files/Primary-Logo_Blue-scaled_1.png?v=1777612281" 
+                alt="E-strip Logo" 
+                className="w-full h-full object-contain"
               />
             </Link>
 
             {/* Desktop Nav */}
-            <div className="hidden md:flex items-center gap-10">
+            <div className="hidden md:flex items-center gap-8">
+              <Link href="/bundles" className="bg-[#E30613] hover:bg-red-700 text-white px-5 py-2 rounded-md font-black text-xs uppercase tracking-widest shadow-md hover:shadow-lg transition-all animate-pulse duration-2000">
+                50% OFF BUNDLE
+              </Link>
               {navLinks.map(l => (
                 <Link key={l.href} href={l.href} className={`relative text-sm font-black transition-colors group text-gray-800 hover:text-[var(--color-primary)]`}>
                   {l.label}
@@ -103,8 +142,8 @@ export default function Navbar() {
             </div>
           </nav>
 
-          {/* Mobile Menu - Absolute positioned below the pill */}
-          <div className={`md:hidden absolute top-full left-0 right-0 overflow-hidden transition-all duration-500 ease-in-out px-4 sm:px-6 ${mobileOpen ? 'max-h-80 opacity-100 mt-2' : 'max-h-0 opacity-0 mt-0 pointer-events-none'}`}>
+          {/* Mobile Menu - Absolute positioned below the header */}
+          <div className={`md:hidden absolute top-full left-0 right-0 overflow-hidden transition-all duration-500 ease-in-out px-4 sm:px-6 ${mobileOpen ? 'max-h-[600px] opacity-100 mt-2' : 'max-h-0 opacity-0 mt-0 pointer-events-none'}`}>
             <div className="px-6 py-6 flex flex-col gap-2 bg-white/95 backdrop-blur-2xl rounded-3xl shadow-[0_12px_40px_rgba(0,0,0,0.15)] border border-white/50">
               {navLinks.map(l => (
                 <Link

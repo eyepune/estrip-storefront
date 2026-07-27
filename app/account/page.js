@@ -133,25 +133,7 @@ export default function PageComponent() {
 </div>
 </section>
 
-<section className="bg-gradient-to-r from-secondary to-primary p-1 rounded-lg candy-shadow-secondary overflow-hidden">
-<div className="bg-surface-container-lowest rounded-[calc(1rem-4px)] p-8 flex flex-col md:flex-row items-center gap-8">
-<div className="flex-1">
-<h3 className="text-3xl font-black text-secondary mb-3">Refer a friend, get $10!</h3>
-<p className="text-on-surface-variant mb-6 text-lg">Help us grow our community. For every friend who makes their first purchase, we'll add 1,000 points to your account.</p>
-<div className="flex flex-wrap gap-4">
-<div className="bg-surface-container px-6 py-3 rounded-full font-mono text-primary font-bold border-2 border-dashed border-primary">
-                                    ARJUN-GREEN-24
-                                </div>
-<button className="bg-secondary text-white font-black py-3 px-8 rounded-full hover:scale-105 transition-transform active:scale-95">
-                                    Copy Link
-                                </button>
-</div>
-</div>
-<div className="w-48 h-48 hidden md:flex items-center justify-center bg-secondary-container rounded-full shrink-0">
-<span className="material-symbols-outlined text-secondary text-8xl" data-icon="celebration" style={{ 'fontVariationSettings': '\'FILL\' 1' }}>celebration</span>
-</div>
-</div>
-</section>
+
 </div>
 </div>
 </main>

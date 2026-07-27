@@ -1,0 +1,207 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="236mm" height="431mm" viewBox="0 0 236 431" font-family="Georgia, 'Times New Roman', serif">
+ 
+<rect x="0" y="0" width="236" height="431" fill="#FFFFFF"/>
+<rect x="0" y="0" width="136" height="431" fill="#F3EFE6"/>
+ 
+<!-- ===================================================== -->
+<!-- BACK PANEL  (trim y 3-193)                             -->
+<!-- ===================================================== -->
+<g font-family="Helvetica, Arial, sans-serif">
+  <rect x="3" y="3" width="130" height="190" fill="#F3EFE6"/>
+ 
+  <line x1="19" y1="18" x2="117" y2="18" stroke="#C9A227" stroke-width="0.5"/>
+  <text x="68" y="30" text-anchor="middle" font-size="6" font-weight="700" fill="#0A2540" letter-spacing="1.5">HOW TO USE</text>
+  <line x1="19" y1="36" x2="117" y2="36" stroke="#C9A227" stroke-width="0.5"/>
+ 
+  <g transform="translate(20,46)">
+    <circle cx="6.5" cy="6.5" r="6.5" fill="none" stroke="#C9A227" stroke-width="0.6"/>
+    <text x="6.5" y="9" text-anchor="middle" font-size="5.6" font-weight="700" fill="#0A2540">1</text>
+  </g>
+  <text x="33" y="49" font-size="4.6" font-weight="700" fill="#0A2540">Drop</text>
+  <text x="33" y="55" font-size="3.7" font-weight="400" fill="#5F5E5A">One sheet, straight into the empty drum</text>
+ 
+  <g transform="translate(20,62)">
+    <circle cx="6.5" cy="6.5" r="6.5" fill="none" stroke="#C9A227" stroke-width="0.6"/>
+    <text x="6.5" y="9" text-anchor="middle" font-size="5.6" font-weight="700" fill="#0A2540">2</text>
+  </g>
+  <text x="33" y="65" font-size="4.6" font-weight="700" fill="#0A2540">Load</text>
+  <text x="33" y="71" font-size="3.7" font-weight="400" fill="#5F5E5A">Add your clothes on top</text>
+ 
+  <g transform="translate(20,78)">
+    <circle cx="6.5" cy="6.5" r="6.5" fill="none" stroke="#C9A227" stroke-width="0.6"/>
+    <text x="6.5" y="9" text-anchor="middle" font-size="5.6" font-weight="700" fill="#0A2540">3</text>
+  </g>
+  <text x="33" y="81" font-size="4.6" font-weight="700" fill="#0A2540">Wash</text>
+  <text x="33" y="87" font-size="3.7" font-weight="400" fill="#5F5E5A">Any cycle. Hot or cold water</text>
+ 
+  <text x="19" y="97" font-size="3.5" font-weight="400" fill="#888780" font-style="italic">&#189; sheet everyday &#8226; 1 sheet heavy soil &#8226; 2 sheets stubborn stains</text>
+ 
+  <line x1="19" y1="106" x2="117" y2="106" stroke="#D3D1C7" stroke-width="0.3"/>
+ 
+  <text x="68" y="118" text-anchor="middle" font-size="5" font-weight="700" fill="#0A2540" letter-spacing="1">WHAT'S INSIDE</text>
+  <text x="27" y="127" font-size="3.9" fill="#2C2C2A">Plant-based surfactants</text>
+  <text x="27" y="134" font-size="3.9" fill="#2C2C2A">Multi-enzyme cleaning blend</text>
+  <text x="27" y="141" font-size="3.9" fill="#2C2C2A">Water-soluble, biodegradable sheet</text>
+  <text x="27" y="148" font-size="3.9" fill="#2C2C2A">No sulphates &#183; no phosphates &#183; no dyes</text>
+  <circle cx="21" cy="125.4" r="0.9" fill="#C9A227"/>
+  <circle cx="21" cy="132.4" r="0.9" fill="#C9A227"/>
+  <circle cx="21" cy="139.4" r="0.9" fill="#C9A227"/>
+  <circle cx="21" cy="146.4" r="0.9" fill="#C9A227"/>
+ 
+  <line x1="19" y1="156" x2="117" y2="156" stroke="#D3D1C7" stroke-width="0.3"/>
+ 
+  <text x="68" y="166" text-anchor="middle" font-size="5" font-weight="700" fill="#0A2540" letter-spacing="1">STORAGE</text>
+  <text x="68" y="174" text-anchor="middle" font-size="3.8" fill="#5F5E5A">Cool, dry place. Reseal after opening.</text>
+ 
+  <g>
+    <rect x="48" y="180" width="1.1" height="9" fill="#0A2540"/><rect x="50.3" y="180" width="0.7" height="9" fill="#0A2540"/>
+    <rect x="52" y="180" width="1.6" height="9" fill="#0A2540"/><rect x="54.4" y="180" width="0.7" height="9" fill="#0A2540"/>
+    <rect x="56" y="180" width="1.1" height="9" fill="#0A2540"/><rect x="58" y="180" width="0.7" height="9" fill="#0A2540"/>
+    <rect x="60" y="180" width="1.6" height="9" fill="#0A2540"/><rect x="62.4" y="180" width="0.7" height="9" fill="#0A2540"/>
+    <rect x="64" y="180" width="1.1" height="9" fill="#0A2540"/><rect x="66" y="180" width="0.7" height="9" fill="#0A2540"/>
+    <rect x="68" y="180" width="1.6" height="9" fill="#0A2540"/><rect x="70.4" y="180" width="0.7" height="9" fill="#0A2540"/>
+    <rect x="72" y="180" width="1.1" height="9" fill="#0A2540"/><rect x="74" y="180" width="0.7" height="9" fill="#0A2540"/>
+    <rect x="76" y="180" width="1.6" height="9" fill="#0A2540"/><rect x="78.4" y="180" width="0.7" height="9" fill="#0A2540"/>
+    <rect x="80" y="180" width="1.1" height="9" fill="#0A2540"/>
+  </g>
+</g>
+ 
+<!-- ===================================================== -->
+<!-- FRONT PANEL — HERO  (trim y 193-383)                   -->
+<!-- ===================================================== -->
+<g>
+  <rect x="3" y="193" width="130" height="190" fill="#0A2540"/>
+ 
+  <!-- fine gold frame -->
+  <rect x="10" y="200" width="116" height="176" fill="none" stroke="#C9A227" stroke-width="0.4"/>
+ 
+  <!-- logo placeholder zone -->
+  <rect x="34" y="211" width="68" height="26" fill="none" stroke="#C9A227" stroke-width="0.4" stroke-dasharray="1.4,1.2"/>
+  <text x="68" y="222" text-anchor="middle" font-size="3.2" font-family="Helvetica, Arial, sans-serif" fill="#7C93AC" letter-spacing="0.6">DROP IN ACTUAL LOGO FILE HERE</text>
+  <text x="68" y="232" text-anchor="middle" font-size="9" font-weight="700" fill="#F3EFE6" font-style="italic">eStrip</text>
+ 
+  <text x="68" y="247" text-anchor="middle" font-size="3.6" font-family="Helvetica, Arial, sans-serif" fill="#C9A227" letter-spacing="2.2">LAUNDRY DETERGENT SHEETS</text>
+ 
+  <line x1="48" y1="253" x2="88" y2="253" stroke="#C9A227" stroke-width="0.4"/>
+ 
+  <!-- elegant single-line sheet illustration in gold -->
+  <g fill="none" stroke="#C9A227" stroke-width="0.5">
+    <rect x="46" y="265" width="36" height="25" rx="2" transform="rotate(-7 64 277)"/>
+    <rect x="52" y="269" width="36" height="25" rx="2" transform="rotate(5 70 281)"/>
+    <rect x="49" y="273" width="36" height="25" rx="2"/>
+  </g>
+  <circle cx="93" cy="266" r="1.6" fill="none" stroke="#C9A227" stroke-width="0.4"/>
+  <circle cx="98" cy="274" r="1" fill="none" stroke="#C9A227" stroke-width="0.4"/>
+  <circle cx="90" cy="280" r="0.8" fill="none" stroke="#C9A227" stroke-width="0.4"/>
+ 
+  <text x="68" y="318" text-anchor="middle" font-size="16" font-weight="700" fill="#F3EFE6">15 Sheets</text>
+  <text x="68" y="330" text-anchor="middle" font-size="7" font-weight="400" fill="#C9A227" font-style="italic">30 Washes</text>
+  <text x="68" y="338" text-anchor="middle" font-size="3.3" font-family="Helvetica, Arial, sans-serif" fill="#7C93AC">Two washes per sheet</text>
+ 
+  <line x1="48" y1="346" x2="88" y2="346" stroke="#C9A227" stroke-width="0.4"/>
+ 
+  <g font-family="Helvetica, Arial, sans-serif" fill="#C9A227">
+    <text x="30" y="360" text-anchor="middle" font-size="3.1">PLANT-BASED</text>
+    <text x="68" y="360" text-anchor="middle" font-size="3.1">ZERO PLASTIC</text>
+    <text x="106" y="360" text-anchor="middle" font-size="3.1">HOT &amp; COLD</text>
+  </g>
+ 
+  <text x="68" y="371" text-anchor="middle" font-size="3.2" font-family="Helvetica, Arial, sans-serif" fill="#7C93AC" letter-spacing="0.8">WWW.ESTRIP.IN</text>
+</g>
+ 
+<!-- ===================================================== -->
+<!-- CLOSING FLAP  (trim y 383-428)                         -->
+<!-- ===================================================== -->
+<g>
+  <rect x="3" y="383" width="130" height="45" fill="#0A2540"/>
+  <g stroke="#C9A227" stroke-width="0.35" opacity="0.55" fill="none">
+    <path d="M20,405 C20,401 24,399 24,396 C24,399 28,401 28,405"/>
+    <path d="M50,410 C50,406 54,404 54,401 C54,404 58,406 58,410"/>
+    <path d="M80,405 C80,401 84,399 84,396 C84,399 88,401 88,405"/>
+    <path d="M110,410 C110,406 114,404 114,401 C114,404 118,406 118,410"/>
+  </g>
+  <text x="68" y="420" text-anchor="middle" font-size="3.1" font-family="Helvetica, Arial, sans-serif" fill="#7C93AC" letter-spacing="1">ADHESIVE ZONE &#8226; TUCK TO SEAL</text>
+</g>
+ 
+<!-- ===================================================== -->
+<!-- DIELINE OVERLAY                                        -->
+<!-- ===================================================== -->
+<g>
+  <rect x="0.3" y="0.3" width="135.4" height="430.4" fill="none" stroke="#EC008C" stroke-width="0.3" stroke-dasharray="1.5,1"/>
+  <rect x="3" y="3" width="130" height="425" fill="none" stroke="#000000" stroke-width="0.4"/>
+  <line x1="3" y1="193" x2="133" y2="193" stroke="#185FA5" stroke-width="0.4" stroke-dasharray="2,1.4"/>
+  <line x1="3" y1="383" x2="133" y2="383" stroke="#185FA5" stroke-width="0.4" stroke-dasharray="2,1.4"/>
+  <g stroke="#000000" stroke-width="0.3">
+    <line x1="3" y1="-3" x2="3" y2="1" /><line x1="-3" y1="3" x2="1" y2="3" />
+    <line x1="133" y1="-3" x2="133" y2="1" /><line x1="135" y1="3" x2="139" y2="3" />
+    <line x1="3" y1="427" x2="3" y2="431" /><line x1="-3" y1="428" x2="1" y2="428" />
+    <line x1="133" y1="427" x2="133" y2="431" /><line x1="135" y1="428" x2="139" y2="428" />
+  </g>
+</g>
+ 
+<!-- ===================================================== -->
+<!-- PRODUCTION NOTES PANEL                                 -->
+<!-- ===================================================== -->
+<g font-family="Helvetica, Arial, sans-serif">
+  <text x="146" y="12" font-size="5.5" font-weight="700" fill="#2C2C2A">PRODUCTION NOTES</text>
+  <line x1="146" y1="16" x2="230" y2="16" stroke="#2C2C2A" stroke-width="0.3"/>
+ 
+  <text x="146" y="24" font-size="4" font-weight="700" fill="#2C2C2A">Concept</text>
+  <text x="146" y="30" font-size="3.6" fill="#5F5E5A">Premium ink-navy + gold foil</text>
+  <text x="146" y="35" font-size="3.6" fill="#5F5E5A">direction, replacing the earlier</text>
+  <text x="146" y="40" font-size="3.6" fill="#5F5E5A">flat brand-colour version</text>
+ 
+  <text x="146" y="50" font-size="4" font-weight="700" fill="#2C2C2A">Logo</text>
+  <text x="146" y="56" font-size="3.6" fill="#D85A30">Placeholder only — actual eStrip</text>
+  <text x="146" y="61" font-size="3.6" fill="#D85A30">logo file not yet available. Swap</text>
+  <text x="146" y="66" font-size="3.6" fill="#D85A30">the dashed box on the front panel</text>
+  <text x="146" y="71" font-size="3.6" fill="#D85A30">once the vector logo is supplied</text>
+ 
+  <text x="146" y="82" font-size="4" font-weight="700" fill="#2C2C2A">Finish &amp; substrate</text>
+  <text x="146" y="88" font-size="3.6" fill="#5F5E5A">Matte laminate, navy background</text>
+  <text x="146" y="93" font-size="3.6" fill="#5F5E5A">Gold hot-foil stamp on frame,</text>
+  <text x="146" y="98" font-size="3.6" fill="#5F5E5A">wordmark, icons and sheet motif</text>
+  <text x="146" y="103" font-size="3.6" fill="#5F5E5A">Spot UV optional on "15 Sheets"</text>
+ 
+  <text x="146" y="114" font-size="4" font-weight="700" fill="#2C2C2A">Bleed &amp; margins</text>
+  <text x="146" y="120" font-size="3.6" fill="#5F5E5A">Bleed: 3 mm all sides</text>
+  <text x="146" y="125" font-size="3.6" fill="#5F5E5A">Finished panel: 130 x 190 mm</text>
+ 
+  <text x="146" y="136" font-size="4" font-weight="700" fill="#2C2C2A">Colour build (CMYK)</text>
+  <rect x="146" y="140" width="8" height="8" fill="#0A2540"/>
+  <text x="157" y="144.5" font-size="3.4" fill="#2C2C2A">Ink navy &#8212; C95 M75 Y40 K45</text>
+  <rect x="146" y="151" width="8" height="8" fill="#C9A227"/>
+  <text x="157" y="155.5" font-size="3.4" fill="#2C2C2A">Foil gold &#8212; C20 M35 Y88 K5</text>
+  <rect x="146" y="162" width="8" height="8" fill="#F3EFE6"/>
+  <text x="157" y="166.5" font-size="3.4" fill="#2C2C2A">Paper cream &#8212; C3 M3 Y8 K0</text>
+ 
+  <text x="146" y="180" font-size="4" font-weight="700" fill="#2C2C2A">Typography</text>
+  <text x="146" y="186" font-size="3.6" fill="#5F5E5A">Headline: serif, refined</text>
+  <text x="146" y="191" font-size="3.6" fill="#5F5E5A">Labels/body: sans, wide tracking</text>
+ 
+  <text x="146" y="203" font-size="4" font-weight="700" fill="#2C2C2A">Legend</text>
+  <line x1="146" y1="209" x2="156" y2="209" stroke="#EC008C" stroke-width="0.4" stroke-dasharray="1.5,1"/>
+  <text x="159" y="210" font-size="3.4" fill="#5F5E5A">Bleed line</text>
+  <line x1="146" y1="215" x2="156" y2="215" stroke="#000000" stroke-width="0.5"/>
+  <text x="159" y="216" font-size="3.4" fill="#5F5E5A">Trim / cut line</text>
+  <line x1="146" y1="221" x2="156" y2="221" stroke="#185FA5" stroke-width="0.4" stroke-dasharray="2,1.4"/>
+  <text x="159" y="222" font-size="3.4" fill="#5F5E5A">Fold line</text>
+ 
+  <text x="146" y="236" font-size="4" font-weight="700" fill="#2C2C2A">Before this goes to print</text>
+  <text x="146" y="242" font-size="3.4" fill="#5F5E5A">1. Supply vector logo (AI/EPS/SVG)</text>
+  <text x="146" y="247" font-size="3.4" fill="#5F5E5A">2. Confirm foil vs. flat-print gold</text>
+  <text x="146" y="252" font-size="3.4" fill="#5F5E5A">   (foil raises unit cost)</text>
+  <text x="146" y="257" font-size="3.4" fill="#5F5E5A">3. Net weight + legal declarations</text>
+  <text x="146" y="262" font-size="3.4" fill="#5F5E5A">   (FSSAI, batch, MRP)</text>
+ 
+  <rect x="146" y="272" width="84" height="50" fill="none" stroke="#B4B2A9" stroke-width="0.25"/>
+  <text x="150" y="280" font-size="3.4" font-weight="700" fill="#2C2C2A">File info</text>
+  <text x="150" y="287" font-size="3.2" fill="#5F5E5A">Prepared by: EyE PunE</text>
+  <text x="150" y="293" font-size="3.2" fill="#5F5E5A">For: eStrip (www.estrip.in)</text>
+  <text x="150" y="299" font-size="3.2" fill="#5F5E5A">Deliverable: premium concept,</text>
+  <text x="150" y="305" font-size="3.2" fill="#5F5E5A">15-sheet envelope, v3</text>
+  <text x="150" y="311" font-size="3.2" fill="#5F5E5A">Colour mode: CMYK</text>
+  <text x="150" y="317" font-size="3.2" fill="#5F5E5A">Units: millimetres</text>
+</g>
+ 
+</svg>

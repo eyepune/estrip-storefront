@@ -1,0 +1,173 @@
+<div class="bg-white">
+  
+  <!-- 1. Hero Section -->
+  <section class="relative h-[80vh] min-h-[600px] flex items-center justify-center overflow-hidden">
+    <video 
+      autoplay loop muted playsinline 
+      class="absolute inset-0 w-full h-full object-cover"
+    >
+      <source src="https://estrip.in/cdn/shop/files/A_high-end_cinematic_product_showcase_202607201836.mp4" type="video/mp4" />
+    </video>
+    <div class="absolute inset-0 bg-black/40"></div>
+    <div class="relative z-10 text-center px-4 max-w-4xl mx-auto flex flex-col items-center">
+      <h1 class="text-4xl md:text-6xl lg:text-7xl font-black text-white leading-tight mb-6 tracking-tight">
+        The Future of Clean is Here.
+      </h1>
+      <p class="text-lg md:text-2xl text-white/90 font-medium mb-10 max-w-2xl">
+        Powerful, zero-waste detergent sheets delivered straight to your door.
+      </p>
+      <a href="/collections/all" class="bg-white text-gray-900 hover:bg-gray-100 px-12 py-4 text-sm font-bold tracking-widest uppercase rounded-[9999px]">
+        Shop Now
+      </a>
+    </div>
+  </section>
+
+  <!-- 2. As Seen In / Trust Bar -->
+  <section class="bg-[#f6f6f6] py-8 border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4">
+      <p class="text-center text-xs font-bold tracking-widest text-gray-400 uppercase mb-6">As Seen In</p>
+      <div class="flex flex-wrap justify-center gap-10 md:gap-20 opacity-60 grayscale">
+         <span class="text-2xl font-black font-serif">VOGUE</span>
+         <span class="text-2xl font-black">FORBES</span>
+         <span class="text-2xl font-black">EcoWatch</span>
+         <span class="text-2xl font-black italic">The New York Times</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Features Grid -->
+  <section class="py-20 px-4 max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-10 text-center">
+      <div class="flex flex-col items-center">
+        <span class="material-symbols-outlined text-4xl mb-4 text-[#e040a0]">eco</span>
+        <h3 class="font-bold text-lg text-gray-900 mb-2">100% Plastic Free</h3>
+        <p class="text-gray-500 text-sm">Compostable packaging</p>
+      </div>
+      <div class="flex flex-col items-center">
+        <span class="material-symbols-outlined text-4xl mb-4 text-[#e040a0]">local_laundry_service</span>
+        <h3 class="font-bold text-lg text-gray-900 mb-2">Powerful Clean</h3>
+        <p class="text-gray-500 text-sm">Tough on stains, gentle on clothes</p>
+      </div>
+      <div class="flex flex-col items-center">
+        <span class="material-symbols-outlined text-4xl mb-4 text-[#e040a0]">cruelty_free</span>
+        <h3 class="font-bold text-lg text-gray-900 mb-2">Cruelty Free</h3>
+        <p class="text-gray-500 text-sm">Never tested on animals</p>
+      </div>
+      <div class="flex flex-col items-center">
+        <span class="material-symbols-outlined text-4xl mb-4 text-[#e040a0]">airport_shuttle</span>
+        <h3 class="font-bold text-lg text-gray-900 mb-2">Free Shipping</h3>
+        <p class="text-gray-500 text-sm">On all subscriptions</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Shop Grid (Liquid iteration) -->
+  <section class="bg-white py-20 px-4 border-t border-gray-100">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-black text-center text-gray-900 mb-12">Our Bestsellers</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {% for product in collections['frontpage'].products limit: 4 %}
+          <div class="group relative flex flex-col bg-[#f6f6f6] rounded-[10px] overflow-hidden">
+            <div class="relative w-full aspect-square bg-[#f6f6f6] p-6">
+              <a href="{{ product.url }}">
+                <img src="{{ product.featured_image | img_url: '600x' }}" alt="{{ product.title }}" class="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-500" />
+              </a>
+            </div>
+            <div class="p-6 flex flex-col flex-grow bg-white border-t border-gray-100">
+              <h3 class="font-black text-gray-900 text-lg mb-1 leading-tight"><a href="{{ product.url }}">{{ product.title }}</a></h3>
+              <p class="text-gray-500 font-medium text-sm mb-4 flex-grow">{{ product.metafields.custom.subtitle }}</p>
+              <div class="flex items-center justify-between mt-auto">
+                <span class="font-black text-gray-900 text-xl">{{ product.price | money }}</span>
+                <form method="post" action="/cart/add" class="m-0 p-0">
+                  <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+                  <button type="submit" class="bg-gray-900 text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-[#e040a0] transition-colors">
+                    <span class="material-symbols-outlined text-[18px]">add_shopping_cart</span>
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. 3D Scroll Video Sequence -->
+  <section class="w-full relative bg-white py-20 border-t border-gray-100" id="scroll-sequence-container" style="height: 300vh;">
+    <div class="sticky top-0 w-full h-screen flex flex-col items-center justify-center overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-b from-white/80 via-transparent to-white/80 z-10 pointer-events-none"></div>
+      
+      <div class="relative z-20 text-center px-4 mb-8">
+        <h2 class="text-4xl md:text-6xl font-black text-gray-900 drop-shadow-md mb-2 tracking-tight">Experience the Clean</h2>
+        <p class="text-gray-600 font-medium text-lg max-w-xl mx-auto drop-shadow-sm">Scroll down to explore how our sheets dissolve instantly and power through stains.</p>
+      </div>
+
+      <div class="w-full max-w-5xl aspect-video relative z-0 mx-auto rounded-2xl overflow-hidden shadow-2xl border border-gray-100 bg-gray-50">
+        <canvas id="video-canvas" class="w-full h-full object-cover"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Split Media/Text Feature -->
+  <section class="py-24 px-4 max-w-7xl mx-auto">
+    <div class="flex flex-col md:flex-row items-center gap-16">
+      <div class="w-full md:w-1/2 aspect-square rounded-[10px] overflow-hidden">
+        <video 
+          autoplay loop muted playsinline 
+          class="w-full h-full object-cover"
+        >
+          <source src="https://estrip.in/cdn/shop/files/Indian_woman_using_laundry_sheet_202607202058.mp4" type="video/mp4" />
+        </video>
+      </div>
+      <div class="w-full md:w-1/2">
+        <h2 class="text-3xl md:text-5xl font-black text-gray-900 mb-6 leading-tight">Better for you. <br/>Better for the planet.</h2>
+        <div class="space-y-6 mb-10">
+          <div class="flex items-start gap-4">
+            <div class="w-8 h-8 rounded-full bg-pink-100 flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-[#e040a0] text-sm">check</span>
+            </div>
+            <div>
+              <h4 class="font-bold text-gray-900">Pre-measured Sheets</h4>
+              <p class="text-gray-500 text-sm mt-1">No more messy measuring cups or sticky liquid spills.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="w-8 h-8 rounded-full bg-pink-100 flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-[#e040a0] text-sm">check</span>
+            </div>
+            <div>
+              <h4 class="font-bold text-gray-900">Space Saving</h4>
+              <p class="text-gray-500 text-sm mt-1">Reclaims your laundry room shelves.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="w-8 h-8 rounded-full bg-pink-100 flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-[#e040a0] text-sm">check</span>
+            </div>
+            <div>
+              <h4 class="font-bold text-gray-900">Dissolves Instantly</h4>
+              <p class="text-gray-500 text-sm mt-1">Works perfectly in hot or cold water, all machine types.</p>
+            </div>
+          </div>
+        </div>
+        <a href="/pages/about-us" class="bg-[#e040a0] hover:bg-[#c0208a] text-white px-8 py-3 rounded-[9999px] font-bold text-sm tracking-wide">
+          Learn More
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Our Story Banner -->
+  <section class="w-full bg-[#1A202C] py-24 text-center px-4">
+    <div class="max-w-3xl mx-auto">
+      <h2 class="text-3xl md:text-5xl font-black text-[#e040a0] mb-6">More Than a Business</h2>
+      <p class="text-lg md:text-xl text-white font-medium mb-10 leading-relaxed">
+        We looked at the cleaning aisle and saw a problem: outdated formats that were heavy on the planet. We believe that high-quality performance and planetary responsibility shouldn't be a choice—they must go hand in hand.
+      </p>
+      <a href="/pages/about-us" class="bg-white text-[#1A202C] hover:bg-gray-100 px-8 py-3 rounded-[9999px] font-bold text-sm tracking-wide">
+        Read Our Story
+      </a>
+    </div>
+  </section>
+
+</div>

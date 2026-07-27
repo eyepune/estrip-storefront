@@ -1,0 +1,257 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Order Confirmed | e-strip</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        body { font-family: 'DM Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
+        .bouncy-hover { transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .bouncy-hover:hover { transform: scale(1.03); }
+        .bouncy-active:active { transform: scale(0.95); }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .confetti-pill { position: absolute; border-radius: 9999px; animation: float-around 4s ease-in-out infinite; }
+        @keyframes float-around {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(15deg); }
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed-dim": "#f0a0cc",
+                        "secondary-container": "#eedcff",
+                        "surface-tint": "#e040a0",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed": "#eedcff",
+                        "primary-container": "#f080c0",
+                        "on-secondary-container": "#2e2040",
+                        "surface": "#fef7ff",
+                        "surface-container-highest": "#ece2ec",
+                        "on-primary-container": "#2e1a28",
+                        "inverse-primary": "#f0a0cc",
+                        "on-background": "#2e1a28",
+                        "outline-variant": "#dcc8e0",
+                        "on-surface-variant": "#604868",
+                        "error-container": "#ffe8e8",
+                        "secondary-fixed-dim": "#c8a8e8",
+                        "on-tertiary-fixed": "#001a33",
+                        "surface-dim": "#e0d6e0",
+                        "outline": "#907898",
+                        "on-secondary-fixed": "#1a1030",
+                        "secondary": "#7c52aa",
+                        "on-surface": "#2e1a28",
+                        "on-primary-fixed-variant": "#a02070",
+                        "on-primary": "#ffffff",
+                        "primary": "#e040a0",
+                        "inverse-surface": "#2e1a28",
+                        "surface-container": "#f8eef8",
+                        "on-secondary": "#ffffff",
+                        "surface-container-high": "#f2e8f2",
+                        "tertiary-fixed": "#c8eaff",
+                        "surface-container-low": "#fbf2fb",
+                        "background": "#fef7ff",
+                        "error": "#e53e3e",
+                        "inverse-on-surface": "#fef7ff",
+                        "on-secondary-fixed-variant": "#4a3068",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed-variant": "#005580",
+                        "primary-fixed": "#ffd6ee",
+                        "on-primary-fixed": "#3d0028",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#9b1c1c",
+                        "surface-variant": "#f2e8f2",
+                        "on-tertiary-container": "#00334d",
+                        "tertiary-container": "#40c0ee",
+                        "tertiary": "#0096cc",
+                        "surface-bright": "#fef7ff",
+                        "tertiary-fixed-dim": "#80d0f0"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen pb-32">
+<!-- Top AppBar (JSON Derived) -->
+<header class="w-full top-0 sticky flex justify-between items-center px-4 py-3 bg-surface z-50 shadow-[0_4px_16px_rgba(224,64,160,0.15)]"><div class="flex items-center justify-between w-full max-w-7xl mx-auto">
+  <div class="flex items-center gap-4">
+    <button class="text-primary active:scale-95 transition-all">
+      <span class="material-symbols-outlined">menu</span>
+    </button>
+    <nav class="hidden md:flex items-center gap-6 ml-8">
+      <a href="#" class="font-label font-medium text-sm hover:text-primary transition-colors">Shop All</a>
+      <a href="#" class="font-label font-medium text-sm hover:text-primary transition-colors">Our Mission</a>
+      <a href="#" class="font-label font-medium text-sm hover:text-primary transition-colors">Sustainability</a>
+      <a href="#" class="font-label font-medium text-sm hover:text-primary transition-colors">Bundles</a>
+    </nav>
+  </div>
+  <div class="absolute left-1/2 -translate-x-1/2">
+    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBokPOmc7XPYs6QmhmCCe9zZmRRU2E9lmechg7A3dYRxf7_KPv52An50oF0FlUvMTJBPZfCr5MzJ7uUbnc8pZBUMT-b5hcmehgXZfcd8Fo6SM9PcH36IPCw5ssh2GR1nDI89arXNYzEQrYXy9n3EmUzHmT5iF6vGzkcVAGhnWONtX5F_kjhUBsvw4vq6PDJIr9jsSyIcFtw_hjFSa3q6HXu6Z8qB5ecNxddjKvaDbGgvI-sgwSTuVYYSI8Q2RH84jKLo3UZ-8xLP_ZK" alt="e-strip logo" class="h-8 md:h-10 w-auto">
+  </div>
+  <button class="text-primary active:scale-95 transition-all">
+    <span class="material-symbols-outlined">shopping_cart</span>
+  </button>
+</div></header>
+<main class="px-6 py-8 max-w-lg mx-auto">
+<!-- Celebration Hero -->
+<section class="relative text-center mb-12 py-10 overflow-hidden">
+<!-- Animated Background Pills -->
+<div class="absolute inset-0 -z-10 pointer-events-none">
+<div class="confetti-pill bg-primary/20 w-12 h-6 top-5 left-10 rotate-12"></div>
+<div class="confetti-pill bg-tertiary/20 w-8 h-4 bottom-10 left-5 -rotate-45" style="animation-delay: 1s"></div>
+<div class="confetti-pill bg-secondary/20 w-16 h-8 top-1/4 right-0 rotate-90" style="animation-delay: 0.5s"></div>
+<div class="confetti-pill bg-primary-container/30 w-10 h-5 bottom-0 right-10" style="animation-delay: 1.5s"></div>
+</div>
+<div class="inline-flex items-center justify-center bg-primary-container p-4 rounded-full mb-6 shadow-[0_8px_24px_rgba(224,64,160,0.2)] animate-bounce">
+<span class="material-symbols-outlined text-on-primary-container text-4xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<h1 class="font-display font-black text-4xl text-primary tracking-tight mb-2">Order Confirmed!</h1>
+<p class="font-medium text-on-surface-variant text-lg">Welcome to the clean revolution.</p>
+<div class="mt-8">
+<span class="text-xs font-label uppercase tracking-widest text-outline">Order Reference</span>
+<div class="text-2xl font-black text-secondary-fixed-dim bg-on-background px-6 py-2 inline-block rounded-full mt-2 shadow-lg">
+                    #ES-88210
+                </div>
+</div>
+</section>
+<!-- Sustainability Impact Card -->
+<section class="bg-surface-container-lowest p-6 rounded-lg shadow-[0_12px_24px_rgba(0,150,204,0.15)] border-2 border-tertiary/20 mb-8 bouncy-hover">
+<div class="flex items-center gap-4">
+<div class="w-16 h-16 bg-tertiary-container rounded-full flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-tertiary-container text-3xl">eco</span>
+</div>
+<div>
+<h3 class="font-display font-bold text-xl text-on-surface">Sustainability Impact</h3>
+<p class="text-tertiary font-black text-2xl">2 Plastic Jugs Saved</p>
+</div>
+</div>
+<p class="mt-4 text-sm text-on-surface-variant leading-relaxed italic">"By switching to e-strip, you've just kept roughly 0.5kg of plastic waste out of our oceans. High five!"</p>
+</section>
+<!-- Collapsible Details -->
+<section class="space-y-4 mb-8">
+<details class="group bg-surface-container-low rounded-lg transition-all duration-300">
+<summary class="list-none flex items-center justify-between p-5 cursor-pointer">
+<span class="font-display font-bold text-lg flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">inventory_2</span>
+                        Order Details
+                    </span>
+<span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<div class="px-5 pb-5 pt-2 border-t border-outline-variant/30">
+<div class="flex justify-between items-center py-2">
+<div class="flex gap-3 items-center">
+<div class="w-12 h-12 rounded bg-white shadow-sm overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A stylized vibrant product shot of eco-friendly laundry detergent strips in a colorful, modern pink and blue cardboard packaging, set against a bright minimal background in the Candy design system aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA34Ybl3jrCfPvVQ-yosOYHawf-Tu26UCWhtobC6nCjujIesFpGiL4XoAWy3OaobhVHdKXScX1iAzX1rg9P_M9vNgiXFpA5NTr6ZyUYhDB0t4CFF-H7JF3kNvBYLiWCIPZH8shZ4wqc46fHBkmtBeCxnERoN2Opxbb5HEbW9Ge-BVK8ZQDBagXvaWi2ISH9oZpIjR4tlfx41loG0Syv4kU4_yBAijkhkNGLYSTjIfYrWqvdYNgDko70_QuTg1Z1mrlnX1C7zdB44N94">
+</div>
+<span class="text-sm font-medium">Fresh Linen e-strips (60ct)</span>
+</div>
+<span class="font-bold">$18.00</span>
+</div>
+<div class="border-t border-outline-variant/20 mt-4 pt-4 text-sm space-y-2">
+<div class="flex justify-between">
+<span class="text-on-surface-variant">Subtotal</span>
+<span class="">$18.00</span>
+</div>
+<div class="flex justify-between text-tertiary">
+<span class="">Sustainability Credit</span>
+<span class="">-$2.00</span>
+</div>
+<div class="flex justify-between font-black text-lg pt-2 text-primary">
+<span class="">Total</span>
+<span class="">$16.00</span>
+</div>
+</div>
+</div>
+</details>
+<details class="group bg-surface-container-low rounded-lg transition-all duration-300">
+<summary class="list-none flex items-center justify-between p-5 cursor-pointer">
+<span class="font-display font-bold text-lg flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">local_shipping</span>
+                        Shipping Info
+                    </span>
+<span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<div class="px-5 pb-5 pt-2 border-t border-outline-variant/30 text-sm text-on-surface-variant leading-relaxed">
+<p class="font-bold text-on-surface">Alex Rivera</p>
+<p class="">123 Candy Cane Lane</p>
+<p class="">Apartment 4B</p>
+<p class="">Sweetwater, FL 33174</p>
+<p class="mt-2 text-secondary font-medium italic">Expected Arrival: Thursday, Oct 12th</p>
+</div>
+</details>
+</section>
+<!-- Referral Section -->
+<section class="bg-primary p-6 rounded-lg shadow-[0_12px_32px_rgba(224,64,160,0.3)] text-on-primary">
+<h3 class="font-display font-black text-2xl mb-2">Share the Love</h3>
+<p class="text-on-primary/90 text-sm mb-6">Refer a friend and you both get a free pack of e-strips!</p>
+<div class="relative">
+<input class="w-full bg-white/20 border-none rounded-full py-4 pl-6 pr-24 font-bold text-white placeholder-white/50 focus:ring-2 focus:ring-white/50" readonly="" type="text" value="estrip.io/ref/ALEX88">
+<button class="absolute right-2 top-2 bottom-2 bg-white text-primary px-6 rounded-full font-bold text-sm active:scale-95 transition-transform" onclick="copyToClipboard()">
+                    Copy Link
+                </button>
+</div>
+<div class="hidden text-center text-xs mt-3 font-bold animate-pulse" id="copy-toast">Copied to clipboard! 🍬</div>
+</section>
+<!-- Primary Action -->
+<div class="mt-12 flex flex-col gap-4">
+<button class="w-full bg-primary text-white font-black py-5 rounded-full text-xl shadow-[0_8px_20px_rgba(224,64,160,0.4)] bouncy-hover bouncy-active">
+                Keep Shopping
+            </button>
+<p class="text-center text-xs text-outline font-medium">Need help? <a class="underline text-tertiary" href="#">Chat with our support team.</a></p>
+</div>
+</main>
+<!-- Bottom Navigation (JSON Derived) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 pb-safe pt-2 bg-surface-container-lowest border-t border-outline-variant md:hidden shadow-[0_-4px_16px_rgba(224,64,160,0.1)] rounded-t-xl"><a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1.5 hover:text-primary transition-all" href="#">
+  <span class="material-symbols-outlined">shopping_bag</span>
+  <span class="font-label font-medium text-xs">Shop</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1.5 hover:text-primary transition-all" href="#">
+  <span class="material-symbols-outlined">package_2</span>
+  <span class="font-label font-medium text-xs">Bundles</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1.5 hover:text-primary transition-all" href="#">
+  <span class="material-symbols-outlined">inventory</span>
+  <span class="font-label font-medium text-xs">My Box</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1.5 transition-all" href="#">
+  <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+  <span class="font-label font-medium text-xs">Profile</span>
+</a></nav>
+<script>
+        function copyToClipboard() {
+            const copyText = "estrip.io/ref/ALEX88";
+            navigator.clipboard.writeText(copyText).then(() => {
+                const toast = document.getElementById('copy-toast');
+                toast.classList.remove('hidden');
+                setTimeout(() => {
+                    toast.classList.add('hidden');
+                }, 2000);
+            });
+        }
+
+        // Simple floating pill generator for extra high energy
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.querySelector('.hero-animation-overlay');
+            // Additional interactions can be added here
+        });
+    </script>
+
+
+</body></html>

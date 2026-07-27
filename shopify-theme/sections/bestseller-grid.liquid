@@ -1,0 +1,74 @@
+<section class="py-20 px-4 max-w-7xl mx-auto bg-gray-50/50">
+  <div class="text-center mb-12">
+    <h2 class="text-3xl md:text-5xl font-black text-gray-900 mb-4 tracking-tight">
+      {{ section.settings.heading | default: "Our Best Sellers" }}
+    </h2>
+    <p class="text-gray-500 font-medium text-lg">
+      {{ section.settings.subheading | default: "Save up to 50% when you bundle." }}
+    </p>
+  </div>
+  
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    {% for block in section.blocks %}
+      {% assign product = all_products[block.settings.product] %}
+      {% if product != blank %}
+        <div class="bg-white border border-gray-200 rounded-xl p-4 text-center">
+          <a href="{{ product.url }}">
+            <img src="{{ product.featured_image | img_url: '400x' }}" alt="{{ product.title }}" class="w-full h-auto mb-4 rounded-lg mix-blend-multiply">
+            <h3 class="font-bold text-lg text-gray-900">{{ product.title }}</h3>
+            <p class="text-[#B01212] font-black mt-2">{{ product.price | money }}</p>
+          </a>
+        </div>
+      {% else %}
+        <div class="bg-white border border-gray-200 rounded-xl p-4 text-center">
+          <p class="text-gray-500">Select a product in the customizer.</p>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Bestseller Grid",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Our Best Sellers"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Save up to 50% when you bundle."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Select Product"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bestseller Grid",
+      "category": "Products",
+      "blocks": [
+        { "type": "product" },
+        { "type": "product" },
+        { "type": "product" },
+        { "type": "product" }
+      ]
+    }
+  ]
+}
+{% endschema %}

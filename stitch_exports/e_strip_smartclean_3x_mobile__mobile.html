@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>e-strip | SmartClean 3X Laundry Sheets</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary": "#7c52aa",
+                    "surface-tint": "#e040a0",
+                    "inverse-primary": "#f0a0cc",
+                    "secondary-fixed-dim": "#c8a8e8",
+                    "on-error-container": "#9b1c1c",
+                    "inverse-on-surface": "#fef7ff",
+                    "on-primary-fixed": "#3d0028",
+                    "on-surface": "#2e1a28",
+                    "primary-container": "#f080c0",
+                    "on-primary-fixed-variant": "#a02070",
+                    "outline": "#907898",
+                    "surface-container": "#f8eef8",
+                    "surface-variant": "#f2e8f2",
+                    "surface-container-high": "#f2e8f2",
+                    "background": "#fef7ff",
+                    "primary-fixed": "#ffd6ee",
+                    "primary": "#e040a0",
+                    "inverse-surface": "#2e1a28",
+                    "on-secondary-fixed-variant": "#4a3068",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-fixed": "#001a33",
+                    "error-container": "#ffe8e8",
+                    "surface-container-highest": "#ece2ec",
+                    "on-tertiary": "#ffffff",
+                    "error": "#e53e3e",
+                    "surface-dim": "#e0d6e0",
+                    "secondary-fixed": "#eedcff",
+                    "on-error": "#ffffff",
+                    "on-surface-variant": "#604868",
+                    "on-secondary": "#ffffff",
+                    "surface-bright": "#fef7ff",
+                    "outline-variant": "#dcc8e0",
+                    "on-tertiary-fixed-variant": "#005580",
+                    "secondary-container": "#eedcff",
+                    "surface-container-low": "#fbf2fb",
+                    "on-primary": "#ffffff",
+                    "on-secondary-fixed": "#1a1030",
+                    "on-tertiary-container": "#00334d",
+                    "primary-fixed-dim": "#f0a0cc",
+                    "tertiary-container": "#40c0ee",
+                    "surface": "#fef7ff",
+                    "on-secondary-container": "#2e2040",
+                    "tertiary": "#0096cc",
+                    "on-background": "#2e1a28",
+                    "tertiary-fixed": "#c8eaff",
+                    "tertiary-fixed-dim": "#80d0f0",
+                    "on-primary-container": "#2e1a28"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["DM Sans"],
+                    "display": ["DM Sans"],
+                    "body": ["DM Sans"],
+                    "label": ["DM Sans"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'DM Sans', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .snap-x { scroll-snap-type: x mandatory; }
+        .snap-center { scroll-snap-align: center; }
+        .bouncy-hover:hover { transform: scale(1.03); transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        .pink-shadow { box-shadow: 0 4px 16px rgba(224, 64, 160, 0.2); }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased pb-32">
+<!-- TopNavBar -->
+<header class="docked full-width top-0 sticky z-50 bg-background dark:bg-background shadow-[0_4px_16px_rgba(0,150,204,0.15)] shadow-sm">
+<nav class="flex justify-between items-center px-4 md:px-8 py-4 max-w-7xl mx-auto">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary cursor-pointer md:hidden">arrow_back</span>
+<div class="text-2xl font-black tracking-tighter text-tertiary dark:text-tertiary-fixed-dim">e-strip</div>
+</div>
+<div class="hidden md:flex gap-8 items-center font-headline text-body-lg font-bold">
+<a class="text-on-surface-variant hover:text-secondary transition-colors cursor-pointer active:scale-95 transition-all" href="#">Shop All</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors cursor-pointer active:scale-95 transition-all" href="#">Our Mission</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors cursor-pointer active:scale-95 transition-all" href="#">Sustainability</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors cursor-pointer active:scale-95 transition-all" href="#">Bundles</a>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim cursor-pointer hover:scale-105 transition-transform duration-200 ease-out">search</span>
+<div class="relative group cursor-pointer active:scale-95 transition-all">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim hover:scale-105 transition-transform duration-200 ease-out">shopping_cart</span>
+<span class="absolute -top-1 -right-1 bg-primary text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full">2</span>
+</div>
+</div>
+</nav>
+</header>
+<main class="max-w-md mx-auto">
+<!-- Hero Product Gallery -->
+<section class="relative overflow-hidden">
+<div class="flex overflow-x-auto snap-x hide-scrollbar">
+<div class="flex-none w-full snap-center aspect-square">
+<img alt="SmartClean 3X Laundry Sheets Packaging" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4_7xb6D0h6kaWhRbdLqEx12I3Jm9uUiWqahZEM-aKVGELrZ8TspyV0P9pZOWpNcgcqIkWZzlO5rBrYJf6zXO4LwE4cCpMNpuVQOMgwLTwYRg3R4_1oKjWJbX8HPnPqafLuZHUc09NVFhdSHJr_zWqGAIjh0f5mveKxi0-z-ewUQGOQbVQJSZs6eBbPTtcLZekKY6Z11jeiruvLMiDtKllbUrVsBH7XnAWEV6FetVoGm-AhTeSNPxIlgDEecf_TuN7YT8QqKQ7IeXd"/>
+</div>
+<div class="flex-none w-full snap-center aspect-square">
+<img class="w-full h-full object-cover" data-alt="A clean, vibrant laundry room setup with a stack of fresh white towels and a single blue laundry sheet dissolving in a glass of water. The lighting is bright and cheerful, echoing the Candy design system with soft pink and blue highlights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3wz0KSjRIkMNSZ83eAv8WAwnHzDbdde6dht6Ofj4dTL7sAwSLduM8uN8DKbL2--mwSJN2HimLTMWBzLmJwXx4xlBiCbXNgf7g6VAVZdK5W2buUJuESij51acd-8-aHzK84oBHFT0Xfh3-OV4YB4BVhi0F9xyLy9NV-YRJlj-oO5SZY8SU0J5I2KJGFqQSGn-sGVI58oH9sDh2yuog6z_TQzUQUVamNZcNd5OnDUCUYNAk19Qv6MX3ROqb-9OjH_Y0fUXs7XQTcQiA"/>
+</div>
+<div class="flex-none w-full snap-center aspect-square">
+<img class="w-full h-full object-cover" data-alt="Close up high-detail shot of the SmartClean laundry sheet texture, showing the embossed pattern and fibrous eco-friendly material. The background is a playful wash of sky blue and hot pink gradients, creating a joyful and energetic feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzCRTaAGLQDhz7AQK5h_n_XSWI-NKbHWb9TGOv9p3jtZ994S1HTzE-FiR8-syYV2ZqXvJYakePpQsjB6t0SeYdYIKGQUDk4fgacNw-R6sFvBwVDtYJxhAL4PZDNULW57yYT_PFaFTLWPVrg-d_a37o8AKhYRYfk5ydO9V5IRSQuUAPqGhIcBqBkUjn1I_rnwjI6fBc_3VKu3hIUIsaxp1BmdHWpVicqDovrNv-BdrD9cfMJ_L470GM-iJ-9PQuSHnk6-3ASaQ-eYT0"/>
+</div>
+</div>
+<div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<div class="w-2 h-2 rounded-full bg-primary-fixed"></div>
+<div class="w-2 h-2 rounded-full bg-primary-fixed"></div>
+</div>
+<!-- Floating Badge -->
+<div class="absolute top-4 right-4 bg-tertiary text-white px-4 py-1 rounded-full font-bold text-sm pink-shadow animate-bounce">
+                Eco-Friendly
+            </div>
+</section>
+<!-- Product Details -->
+<section class="p-6 space-y-6">
+<div class="space-y-1">
+<div class="flex items-center gap-2">
+<span class="bg-primary-fixed text-on-primary-fixed-variant px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Top Rated</span>
+<div class="flex items-center text-secondary">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-xs font-bold ml-1">4.9 (1,240 Reviews)</span>
+</div>
+</div>
+<h1 class="text-3xl font-black text-on-surface leading-tight">SmartClean 3X Laundry Detergent Sheets</h1>
+<p class="text-tertiary font-bold text-lg">Fresh Linen Scent</p>
+</div>
+<div class="flex items-baseline gap-3">
+<span class="text-4xl font-black text-primary">$18.99</span>
+<span class="text-on-surface-variant line-through font-medium">$24.00</span>
+<span class="text-error font-bold bg-error-container px-2 py-0.5 rounded-lg text-sm">Save 20%</span>
+</div>
+<div class="p-4 bg-surface-container rounded-lg space-y-3">
+<h3 class="font-bold text-secondary uppercase text-xs tracking-widest">Why You'll Love It</h3>
+<ul class="space-y-2">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary">eco</span>
+<span class="text-sm font-medium">100% Plastic-Free &amp; Biodegradable Packaging</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary">bolt</span>
+<span class="text-sm font-medium">Dissolves Instantly in Hot or Cold Water</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary">sanitizer</span>
+<span class="text-sm font-medium">Hypoallergenic &amp; Dermatologically Tested</span>
+</li>
+</ul>
+</div>
+<!-- Pack Size Selection -->
+<div class="space-y-3">
+<h3 class="font-bold text-on-surface">Select Pack Size</h3>
+<div class="grid grid-cols-2 gap-3">
+<button class="flex flex-col items-center justify-center p-4 border-2 border-primary bg-primary-fixed rounded-2xl pink-shadow transition-all">
+<span class="font-black text-on-primary-fixed">60 Loads</span>
+<span class="text-xs text-on-primary-fixed-variant">Best Value</span>
+</button>
+<button class="flex flex-col items-center justify-center p-4 border-2 border-outline-variant bg-surface-container-low rounded-2xl hover:border-secondary transition-all">
+<span class="font-black text-on-surface">30 Loads</span>
+<span class="text-xs text-on-surface-variant">Trial Pack</span>
+</button>
+</div>
+</div>
+<!-- Tabs/Usage Section -->
+<div class="space-y-4">
+<div class="flex border-b border-outline-variant">
+<button class="pb-2 border-b-4 border-primary font-bold text-on-surface px-4">How to Use</button>
+<button class="pb-2 text-on-surface-variant px-4 hover:text-secondary">Ingredients</button>
+<button class="pb-2 text-on-surface-variant px-4 hover:text-secondary">FAQs</button>
+</div>
+<div class="grid grid-cols-3 gap-4 text-center py-4">
+<div class="space-y-2">
+<div class="w-12 h-12 bg-secondary-container text-secondary rounded-full flex items-center justify-center mx-auto">
+<span class="material-symbols-outlined">filter_1</span>
+</div>
+<p class="text-[10px] font-bold uppercase">Tear a sheet</p>
+</div>
+<div class="space-y-2">
+<div class="w-12 h-12 bg-secondary-container text-secondary rounded-full flex items-center justify-center mx-auto">
+<span class="material-symbols-outlined">filter_2</span>
+</div>
+<p class="text-[10px] font-bold uppercase">Place in drum</p>
+</div>
+<div class="space-y-2">
+<div class="w-12 h-12 bg-secondary-container text-secondary rounded-full flex items-center justify-center mx-auto">
+<span class="material-symbols-outlined">filter_3</span>
+</div>
+<p class="text-[10px] font-bold uppercase">Start wash</p>
+</div>
+</div>
+</div>
+<!-- Benefit Cards -->
+<div class="space-y-4 pt-4">
+<div class="flex gap-4 p-4 rounded-lg bg-surface-container-highest border-l-4 border-tertiary">
+<span class="material-symbols-outlined text-tertiary">water_drop</span>
+<div>
+<h4 class="font-bold text-on-surface">Zero Mess Formula</h4>
+<p class="text-xs text-on-surface-variant">No spills, no heavy jugs, no measuring. Just perfect laundry every time.</p>
+</div>
+</div>
+<div class="flex gap-4 p-4 rounded-lg bg-surface-container-highest border-l-4 border-secondary">
+<span class="material-symbols-outlined text-secondary">travel_explore</span>
+<div>
+<h4 class="font-bold text-on-surface">Travel Friendly</h4>
+<p class="text-xs text-on-surface-variant">Lightweight sheets fit in any suitcase for clean clothes on the go.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Product Comparison Mini Section -->
+<section class="bg-primary text-white p-8 mt-8 rounded-t-xl text-center space-y-4">
+<h2 class="text-2xl font-black italic">Small Sheet. Big Power.</h2>
+<div class="flex justify-around items-center">
+<div class="flex flex-col items-center">
+<span class="material-symbols-outlined text-4xl mb-2">delete_forever</span>
+<p class="text-xs font-bold">No Waste</p>
+</div>
+<div class="h-12 w-[1px] bg-primary-container"></div>
+<div class="flex flex-col items-center">
+<span class="material-symbols-outlined text-4xl mb-2">savings</span>
+<p class="text-xs font-bold">Saves $</p>
+</div>
+<div class="h-12 w-[1px] bg-primary-container"></div>
+<div class="flex flex-col items-center">
+<span class="material-symbols-outlined text-4xl mb-2">public</span>
+<p class="text-xs font-bold">Earth First</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container dark:bg-surface-container-high full-width rounded-t-xl mt-12">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 px-8 md:px-12 py-16 w-full max-w-7xl mx-auto">
+<div class="space-y-4">
+<div class="text-xl font-black text-tertiary">e-strip</div>
+<p class="text-on-surface-variant font-body text-body-md leading-relaxed">
+                    Revolutionizing laundry for a cleaner future. Our sheets are tough on stains but kind to the planet.
+                </p>
+</div>
+<div class="space-y-2">
+<h4 class="font-bold text-secondary mb-4">Quick Links</h4>
+<ul class="space-y-2 text-on-surface-variant font-body text-body-md">
+<li class="hover:text-primary transition-colors cursor-pointer">Shop All</li>
+<li class="hover:text-primary transition-colors cursor-pointer">Our Mission</li>
+<li class="hover:text-primary transition-colors cursor-pointer">Bundles</li>
+<li class="hover:text-primary transition-colors cursor-pointer">Refer a Friend</li>
+</ul>
+</div>
+<div class="space-y-2">
+<h4 class="font-bold text-secondary mb-4">Support</h4>
+<ul class="space-y-2 text-on-surface-variant font-body text-body-md">
+<li class="hover:text-primary transition-colors cursor-pointer">Privacy Policy</li>
+<li class="hover:text-primary transition-colors cursor-pointer">Terms of Service</li>
+<li class="hover:text-primary transition-colors cursor-pointer">Shipping Info</li>
+<li class="hover:text-primary transition-colors cursor-pointer">Contact Us</li>
+</ul>
+</div>
+<div class="space-y-4">
+<h4 class="font-bold text-secondary">Join the Wash!</h4>
+<div class="flex gap-2">
+<input class="bg-background border-none rounded-full px-4 py-2 w-full focus:ring-2 focus:ring-primary" placeholder="Email address" type="email"/>
+<button class="bg-primary text-white p-2 rounded-full bouncy-hover">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+</div>
+<div class="text-center py-6 border-t border-outline-variant text-on-surface-variant font-body text-body-md">
+            © 2024 e-strip. Clean Clothes, Greener Planet.
+        </div>
+</footer>
+<!-- Sticky Add to Cart -->
+<div class="fixed bottom-0 left-0 right-0 p-4 bg-background/80 backdrop-blur-lg border-t border-outline-variant z-40">
+<div class="max-w-md mx-auto flex gap-4 items-center">
+<div class="flex items-center bg-surface-container rounded-full px-4 py-3 gap-4">
+<button class="text-primary font-black">-</button>
+<span class="font-bold w-4 text-center">1</span>
+<button class="text-primary font-black">+</button>
+</div>
+<button class="flex-1 bg-primary text-white font-black py-4 rounded-full text-lg pink-shadow hover:scale-105 active:scale-95 transition-all shadow-[0_4px_16px_rgba(224,64,160,0.4)]">
+                Add to Cart — $18.99
+            </button>
+</div>
+</div>
+<script>
+        // Simple scroll interaction for gallery dots
+        const gallery = document.querySelector('.snap-x');
+        const dots = document.querySelectorAll('.rounded-full.bg-primary, .rounded-full.bg-primary-fixed');
+        
+        gallery.addEventListener('scroll', () => {
+            const index = Math.round(gallery.scrollLeft / gallery.clientWidth);
+            dots.forEach((dot, i) => {
+                if(i === index) {
+                    dot.classList.remove('bg-primary-fixed');
+                    dot.classList.add('bg-primary');
+                } else {
+                    dot.classList.add('bg-primary-fixed');
+                    dot.classList.remove('bg-primary');
+                }
+            });
+        });
+
+        // Add to cart click animation
+        const cartBtn = document.querySelector('button.bg-primary');
+        cartBtn.addEventListener('click', () => {
+            cartBtn.innerHTML = "Added! 🎉";
+            setTimeout(() => {
+                cartBtn.innerHTML = "Add to Cart — $18.99";
+            }, 2000);
+        });
+    </script>
+</body></html>

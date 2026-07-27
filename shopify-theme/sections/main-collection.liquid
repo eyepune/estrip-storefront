@@ -1,0 +1,56 @@
+<div class="bg-[#f6f6f6] min-h-screen py-24 px-4">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16">
+      <span class="text-[#E30613] font-black tracking-widest uppercase text-xs mb-4 block">Shop All</span>
+      <h1 class="text-4xl md:text-6xl font-black text-gray-900 mb-6 tracking-tight">{{ collection.title | default: 'All Products' }}</h1>
+      {% if collection.description != blank %}
+        <p class="text-gray-500 font-medium text-lg max-w-2xl mx-auto">{{ collection.description }}</p>
+      {% endif %}
+    </div>
+
+    <!-- Product Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {% for product in collection.products %}
+        <a href="{{ product.url }}" class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col h-full relative">
+          
+          {% if product.compare_at_price > product.price %}
+            <div class="absolute top-4 left-4 z-10 bg-[#E30613] text-white text-[10px] font-black px-3 py-1 rounded-[4px] uppercase tracking-widest">
+              Sale
+            </div>
+          {% endif %}
+          
+          <div class="aspect-square bg-gray-50 relative overflow-hidden flex items-center justify-center p-6">
+            <img src="{{ product.featured_image | img_url: '600x' }}" alt="{{ product.title | escape }}" class="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-500" />
+          </div>
+          
+          <div class="p-6 flex flex-col flex-grow text-center">
+            <h3 class="font-black text-gray-900 text-lg mb-2">{{ product.title }}</h3>
+            
+            <div class="mt-auto pt-4 flex flex-col items-center justify-between">
+              <div class="flex items-center gap-2 mb-4">
+                <span class="text-xl font-black text-gray-900">{{ product.price | money }}</span>
+                {% if product.compare_at_price > product.price %}
+                  <span class="text-sm font-bold text-gray-400 line-through">{{ product.compare_at_price | money }}</span>
+                {% endif %}
+              </div>
+              <span class="btn w-full bg-gray-900 text-white group-hover:bg-[#E30613] py-3 rounded-full font-bold text-xs tracking-widest uppercase transition-colors">
+                Shop Now
+              </span>
+            </div>
+          </div>
+        </a>
+      {% else %}
+        <div class="col-span-full text-center py-12">
+          <p class="text-gray-500 font-medium">No products found in this collection.</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Collection Page",
+  "settings": []
+}
+{% endschema %}

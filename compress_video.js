@@ -11,11 +11,11 @@ console.log('Compressing background video... This will generate a lightweight 48
 
 ffmpeg(inputVideo)
     .outputOptions([
-        '-vf scale=-1:480', // Scale to 480p
-        '-c:v libx264',     // Use H.264 codec for wide compatibility
-        '-pix_fmt yuv420p', // CRITICAL: Required for HTML5 video players to decode colors
-        '-crf 28',          // High compression (lower quality, much smaller file)
-        '-preset fast',
+        '-vf', 'scale=-2:480', // Scale to 480p with dynamic even-number width
+        '-c:v', 'libx264',     // Use H.264 codec for wide compatibility
+        '-pix_fmt', 'yuv420p', // CRITICAL: Required for HTML5 video players to decode colors
+        '-crf', '28',          // High compression (lower quality, much smaller file)
+        '-preset', 'fast',
         '-an'               // Remove audio entirely
     ])
     .output(outputVideo)

@@ -116,6 +116,7 @@ body { font-family: var(--font-dm-sans), sans-serif; }
   --color-tertiary-fixed-dim: #80d0f0;
   --color-on-primary-container: #2e1a28;
 
+
   /* Fonts */
   --font-headline: "DM Sans", sans-serif;
   --font-display: "DM Sans", sans-serif;
@@ -138,12 +139,12 @@ html {
 }
 
 body {
-  background-color: var(--bg-light);
+  background-color: var(--bg-page);
   color: var(--text-dark);
   font-family: var(--font-dm-sans), system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
-  line-height: 1.7;
-  letter-spacing: -0.01em;
+  line-height: 1.6;
+  letter-spacing: normal;
 }
 
 /* ── Custom Scrollbar ── */
@@ -172,8 +173,8 @@ body {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 14px 28px;
-  border-radius: 100px;
+  padding: 12px 24px;
+  border-radius: 9999px;
   font-weight: 600;
   font-size: 0.95rem;
   cursor: pointer;
@@ -182,7 +183,8 @@ body {
   text-align: center;
   position: relative;
   overflow: hidden;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 .btn::after {
@@ -192,7 +194,7 @@ body {
   border-radius: inherit;
   opacity: 0;
   transition: opacity 0.3s;
-  background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
+  background: rgba(0, 0, 0, 0.05);
 }
 
 .btn:hover::after {

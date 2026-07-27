@@ -1,0 +1,72 @@
+<section class="py-20 px-4 max-w-7xl mx-auto">
+  <h2 class="text-3xl md:text-4xl font-black text-center text-gray-900 mb-12 tracking-tight">
+    {{ section.settings.heading | default: "Shop By Category" }}
+  </h2>
+  
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+    {% for block in section.blocks %}
+      <a href="{{ block.settings.link | default: '#' }}" class="group flex flex-col items-center">
+        <div class="w-full aspect-square bg-[#f6f6f6] rounded-2xl overflow-hidden mb-4 relative p-6 border border-gray-100 group-hover:border-gray-300 transition-colors">
+          {% if block.settings.image != blank %}
+            <img src="{{ block.settings.image | img_url: '400x' }}" alt="{{ block.settings.title }}" class="object-contain mix-blend-multiply p-4 group-hover:scale-110 transition-transform duration-500 w-full h-full" />
+          {% else %}
+            <div class="w-full h-full bg-gray-200 flex items-center justify-center rounded-xl">Image</div>
+          {% endif %}
+        </div>
+        <span class="btn bg-[#2B3F50] text-white w-full py-3 rounded-full text-center text-xs font-bold tracking-widest group-hover:bg-[#1f2d39] transition-colors">
+          {{ block.settings.title | default: "Category" }}
+        </span>
+      </a>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Category Grid",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Shop By Category"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Category Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Category Title",
+          "default": "Laundry"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Category Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Category Grid",
+      "category": "Collections",
+      "blocks": [
+        { "type": "category", "settings": { "title": "Laundry" } },
+        { "type": "category", "settings": { "title": "Kitchen" } },
+        { "type": "category", "settings": { "title": "Bathroom" } },
+        { "type": "category", "settings": { "title": "Baby Care" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -23,9 +23,9 @@ export default function ProductCard({ product, view = 'desktop' }) {
       <motion.div 
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
-        className={`bg-white/70 backdrop-blur-xl p-4 rounded-3xl shadow-xl border border-white/50 flex flex-col group cursor-pointer`}
+        className={`bg-surface-container p-4 rounded-[10px] shadow-sm flex flex-col group cursor-pointer border border-outline-variant/20`}
       >
-        <Link href="/products/smartclean-3x" className="relative w-full aspect-square bg-surface-container-low rounded-lg overflow-hidden mb-4 block">
+        <Link href={`/products/${product.slug}`} className="relative w-full aspect-square bg-surface-container-low rounded-lg overflow-hidden mb-4 block">
           <img className="w-full h-full object-cover" alt={product.name} src={product.image} />
           {product.badge && (
             <div className="absolute top-2 right-2 flex gap-1">
@@ -42,10 +42,10 @@ export default function ProductCard({ product, view = 'desktop' }) {
           </div>
           <span className="text-on-surface-variant text-sm font-medium">{product.reviews} Reviews</span>
         </div>
-        <Link href="/products/smartclean-3x">
+        <Link href={`/products/${product.slug}`}>
           <h2 className="text-lg font-black text-on-surface leading-tight mb-1 hover:text-primary transition-colors">{product.name}</h2>
         </Link>
-        <p className="text-sm text-on-surface-variant mb-2 flex-grow">{product.description}</p>
+        <p className="text-sm text-on-surface-variant mb-2 flex-grow">{product.subtitle}</p>
         {product.loads && <div className="text-xs font-bold text-tertiary mb-3">{product.loads}</div>}
         <div className="flex bg-surface-container-low rounded-lg p-1 mb-2 gap-1">
           <button 
@@ -80,7 +80,7 @@ export default function ProductCard({ product, view = 'desktop' }) {
           <motion.button 
             whileTap={{ scale: 0.9 }}
             onClick={handleAddToCart}
-            className={`whitespace-nowrap flex-shrink-0 bg-primary hover:bg-surface-tint text-white px-6 py-2 rounded-full font-bold text-sm pill-shadow-primary transition-colors flex items-center gap-2`}
+            className={`btn bg-${product.color || 'primary'} hover:bg-surface-tint text-white px-6 py-2 rounded-full font-bold text-sm tracking-wide transition-colors flex items-center gap-2`}
           >
             <span className="material-symbols-outlined text-sm">add_shopping_cart</span>
             Add to Cart
@@ -94,9 +94,9 @@ export default function ProductCard({ product, view = 'desktop' }) {
   return (
     <motion.div 
       whileHover={{ scale: 1.02 }}
-      className={`bg-white/70 backdrop-blur-xl rounded-3xl p-6 flex flex-col gap-6 shadow-xl transition-all h-full border border-white/50 hover:shadow-[0_12px_40px_rgba(0,0,0,0.15)] group`}
+      className={`bg-surface-container rounded-[10px] p-6 flex flex-col gap-6 shadow-sm transition-all h-full border border-outline-variant/20 hover:shadow-md group`}
     >
-      <Link href="/products/smartclean-3x" className="w-full aspect-square rounded-lg overflow-hidden shrink-0 bg-surface-container cursor-pointer block">
+      <Link href={`/products/${product.slug}`} className="w-full aspect-square rounded-[10px] overflow-hidden shrink-0 bg-surface-container-low cursor-pointer block">
         <img alt={product.name} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" src={product.image} />
       </Link>
       <div className="flex flex-col justify-between flex-grow">
@@ -112,10 +112,10 @@ export default function ProductCard({ product, view = 'desktop' }) {
               <span className="text-sm font-bold">{product.rating}</span>
             </div>
           </div>
-          <Link href="/products/smartclean-3x">
+          <Link href={`/products/${product.slug}`}>
             <h2 className="text-xl font-black text-on-surface mb-2 hover:text-primary transition-colors">{product.name}</h2>
           </Link>
-          <p className="text-on-surface-variant text-sm font-medium mb-2">{product.description}</p>
+          <p className="text-on-surface-variant text-sm font-medium mb-2">{product.subtitle}</p>
           {product.loads && <div className="text-xs font-bold text-tertiary mb-3">{product.loads}</div>}
         </div>
         <div className="flex bg-surface-container-low rounded-lg p-1 mb-2 gap-1">
@@ -151,7 +151,7 @@ export default function ProductCard({ product, view = 'desktop' }) {
           <motion.button 
             whileTap={{ scale: 0.9 }}
             onClick={handleAddToCart}
-            className={`whitespace-nowrap flex-shrink-0 bg-${product.color || 'tertiary'} text-white px-6 py-2 rounded-full font-black hover:bg-${product.color || 'tertiary'}-container hover:text-on-${product.color || 'tertiary'}-container transition-colors shadow-md hover:shadow-lg`}
+            className={`btn whitespace-nowrap flex-shrink-0 bg-${product.color || 'tertiary'} text-white px-8 py-3 rounded-full font-bold tracking-wide hover:bg-${product.color || 'tertiary'}-container hover:text-on-${product.color || 'tertiary'}-container transition-colors`}
           >
             Quick Add
           </motion.button>

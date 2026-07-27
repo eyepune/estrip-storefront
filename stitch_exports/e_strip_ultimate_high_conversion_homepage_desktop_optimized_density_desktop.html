@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>e-strip | The Future of Clean</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#005580",
+                        "surface-container-high": "#f2e8f2",
+                        "on-surface-variant": "#604868",
+                        "secondary-fixed-dim": "#c8a8e8",
+                        "surface-bright": "#fef7ff",
+                        "on-tertiary-container": "#00334d",
+                        "tertiary": "#0096cc",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed-dim": "#f0a0cc",
+                        "outline-variant": "#dcc8e0",
+                        "error": "#e53e3e",
+                        "primary-fixed": "#ffd6ee",
+                        "on-surface": "#2e1a28",
+                        "tertiary-container": "#40c0ee",
+                        "primary-container": "#f080c0",
+                        "inverse-on-surface": "#fef7ff",
+                        "surface-container-highest": "#ece2ec",
+                        "on-secondary-fixed": "#1a1030",
+                        "on-secondary-container": "#2e2040",
+                        "on-primary": "#ffffff",
+                        "inverse-primary": "#f0a0cc",
+                        "on-primary-fixed-variant": "#a02070",
+                        "on-background": "#2e1a28",
+                        "on-secondary-fixed-variant": "#4a3068",
+                        "surface-tint": "#e040a0",
+                        "secondary-fixed": "#eedcff",
+                        "secondary": "#7c52aa",
+                        "error-container": "#ffe8e8",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed": "#c8eaff",
+                        "on-tertiary-fixed": "#001a33",
+                        "on-error": "#ffffff",
+                        "inverse-surface": "#2e1a28",
+                        "on-primary-fixed": "#3d0028",
+                        "surface-container": "#f8eef8",
+                        "on-error-container": "#9b1c1c",
+                        "tertiary-fixed-dim": "#80d0f0",
+                        "secondary-container": "#eedcff",
+                        "on-primary-container": "#2e1a28",
+                        "background": "#fef7ff",
+                        "surface-variant": "#f2e8f2",
+                        "surface": "#fef7ff",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#e0d6e0",
+                        "surface-container-low": "#fbf2fb",
+                        "primary": "#e040a0",
+                        "outline": "#907898"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["DM Sans"],
+                        "display": ["DM Sans"],
+                        "body": ["DM Sans"],
+                        "label": ["DM Sans"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'DM Sans', sans-serif; background-color: #fef7ff; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .pill-shadow-primary { box-shadow: 0 4px 16px rgba(224, 64, 160, 0.2); }
+        .pill-shadow-tertiary { box-shadow: 0 4px 16px rgba(0, 150, 204, 0.2); }
+        .bouncy-hover { transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        .bouncy-hover:hover { transform: scale(1.05); }
+        .utility-table tr:nth-child(even) { background-color: #fbf2fb; }
+        
+        .bubble-pattern {
+            background-image: radial-gradient(circle at 10px 10px, rgba(224, 64, 160, 0.05) 2px, transparent 0);
+            background-size: 32px 32px;
+        }
+        .wave-pattern {
+            background: linear-gradient(135deg, rgba(0, 150, 204, 0.03) 25%, transparent 25%) -10px 0,
+                        linear-gradient(225deg, rgba(0, 150, 204, 0.03) 25%, transparent 25%) -10px 0,
+                        linear-gradient(315deg, rgba(0, 150, 204, 0.03) 25%, transparent 25%),
+                        linear-gradient(45deg, rgba(0, 150, 204, 0.03) 25%, transparent 25%);
+            background-size: 20px 20px;
+        }
+    </style>
+</head>
+<body class="text-on-background selection:bg-primary selection:text-white">
+<!-- TopNavBar -->
+<header class="bg-background/80 backdrop-blur-md shadow-[0_2px_10px_rgba(0,150,204,0.1)] sticky top-0 z-50">
+<nav class="flex justify-between items-center px-8 py-3 max-w-7xl mx-auto">
+<div class="text-2xl font-black tracking-tighter text-tertiary flex items-center gap-2">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">eco</span>
+                e-strip
+            </div>
+<div class="hidden md:flex gap-8 items-center font-headline text-base font-bold">
+<a class="text-primary font-bold border-b-2 border-primary pb-0.5 cursor-pointer active:scale-95 transition-all" href="#">Shop All</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors cursor-pointer active:scale-95" href="#">Our Mission</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors cursor-pointer active:scale-95" href="#">Sustainability</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors cursor-pointer active:scale-95" href="#">Bundles</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-primary hover:scale-105 transition-transform p-2">search</button>
+<div class="relative cursor-pointer hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-primary">shopping_cart</span>
+<span class="absolute -top-1 -right-1 bg-tertiary text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">0</span>
+</div>
+</div>
+</nav>
+</header>
+<main>
+<!-- Hero Section -->
+<section class="relative overflow-hidden bg-tertiary min-h-[550px] flex items-center py-12">
+<div class="absolute inset-0 opacity-20 pointer-events-none">
+<div class="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-primary rounded-full blur-[120px]"></div>
+<div class="absolute bottom-[-10%] left-[-10%] w-[400px] h-[400px] bg-secondary rounded-full blur-[100px]"></div>
+</div>
+<div class="container mx-auto px-8 grid md:grid-cols-2 gap-8 items-center relative z-10">
+<div class="text-white">
+<div class="inline-flex items-center gap-2 px-4 py-1.5 bg-white/20 backdrop-blur-md rounded-full text-[10px] font-black uppercase tracking-widest mb-4">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">verified</span>
+                        High-Performance Detergent Tech
+                    </div>
+<h1 class="text-5xl md:text-6xl font-black leading-[1.1] mb-4 tracking-tight">
+                        The Future of <br/><span class="text-primary-fixed">Clean is Here</span>
+</h1>
+<p class="text-lg md:text-xl mb-8 opacity-90 font-medium max-w-lg">
+                        Smarter. Cleaner. Zero Waste. <span class="font-black text-primary-fixed">20x Concentrated</span> detergent sheets that dissolve in &lt;15 seconds.
+                    </p>
+<div class="flex gap-4">
+<button class="bg-primary hover:bg-surface-tint text-white px-8 py-4 rounded-full font-black text-lg pill-shadow-primary bouncy-hover transition-all flex items-center gap-3">
+                            SHOP NOW
+                            <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="flex justify-center items-center">
+<div class="relative w-full max-w-md bouncy-hover">
+<img alt="e-strip laundry sheets" class="w-full h-auto drop-shadow-2xl rounded-lg" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4_7xb6D0h6kaWhRbdLqEx12I3Jm9uUiWqahZEM-aKVGELrZ8TspyV0P9pZOWpNcgcqIkWZzlO5rBrYJf6zXO4LwE4cCpMNpuVQOMgwLTwYRg3R4_1oKjWJbX8HPnPqafLuZHUc09NVFhdSHJr_zWqGAIjh0f5mveKxi0-z-ewUQGOQbVQJSZs6eBbPTtcLZekKY6Z11jeiruvLMiDtKllbUrVsBH7XnAWEV6FetVoGm-AhTeSNPxIlgDEecf_TuN7YT8QqKQ7IeXd"/>
+<div class="absolute -bottom-4 -right-4 bg-white p-4 rounded-2xl shadow-xl border border-outline-variant max-w-[160px] rotate-3">
+<div class="text-primary font-black text-2xl">20x</div>
+<div class="text-[9px] font-black text-on-surface-variant uppercase tracking-widest leading-tight">Concentrated Strength vs Liquid</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Trust Strip -->
+<div class="bg-surface-container-high py-6 border-y border-outline-variant/30">
+<div class="container mx-auto px-8">
+<div class="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-50 grayscale hover:grayscale-0 transition-all">
+<div class="text-sm font-black tracking-widest uppercase text-on-surface-variant">AS SEEN IN:</div>
+<div class="font-black text-xl tracking-tighter">VOGUE</div>
+<div class="font-black text-xl tracking-tighter">WIRED</div>
+<div class="font-black text-xl tracking-tighter">Forbes</div>
+<div class="font-black text-xl tracking-tighter">TechCrunch</div>
+<div class="font-black text-xl tracking-tighter">ELLE</div>
+</div>
+</div>
+</div>
+<!-- Performance Proof Section -->
+<section class="py-16 bg-white bubble-pattern">
+<div class="container mx-auto px-8 max-w-5xl">
+<div class="text-center mb-10">
+<h2 class="text-3xl font-black text-on-surface mb-2 uppercase tracking-tighter">Technical Comparison</h2>
+<p class="text-on-surface-variant text-base">Data-driven performance metrics vs. industry standards.</p>
+</div>
+<div class="bg-white/80 backdrop-blur-sm rounded-xl p-6 border-2 border-outline-variant overflow-hidden shadow-xl">
+<table class="w-full text-left utility-table">
+<thead>
+<tr class="bg-surface-container-highest/50 border-b border-outline-variant">
+<th class="p-4 font-black text-on-surface-variant uppercase tracking-widest text-xs">Feature</th>
+<th class="p-4 font-black text-on-surface-variant uppercase tracking-widest text-xs">Liquid Jugs</th>
+<th class="p-4 font-black text-primary uppercase tracking-widest text-xs">e-strip</th>
+</tr>
+</thead>
+<tbody class="text-on-surface text-sm font-medium">
+<tr class="border-b border-outline-variant/50">
+<td class="p-4 font-black">Residue</td>
+<td class="p-4 text-on-surface-variant">Potential Gunk</td>
+<td class="p-4 font-black text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-base" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                    0% Leftover
+                                </td>
+</tr>
+<tr class="border-b border-outline-variant/50">
+<td class="p-4 font-black">Water Content</td>
+<td class="p-4 text-on-surface-variant">Up to 90%</td>
+<td class="p-4 font-black text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-base" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                    0% (Dry)
+                                </td>
+</tr>
+<tr class="border-b border-outline-variant/50">
+<td class="p-4 font-black">Plastic Waste</td>
+<td class="p-4 text-on-surface-variant">High Impact</td>
+<td class="p-4 font-black text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-base" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                    Zero Waste
+                                </td>
+</tr>
+<tr>
+<td class="p-4 font-black">Dissolve Time</td>
+<td class="p-4 text-on-surface-variant">Immediate</td>
+<td class="p-4 font-black text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-base" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                    &lt;15 Seconds
+                                </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<!-- Social Proof Strip -->
+<div class="bg-primary text-white py-4 overflow-hidden whitespace-nowrap">
+<div class="flex gap-12 animate-marquee items-center font-black uppercase tracking-tighter text-sm italic">
+<span>Join 50k+ Happy Cleaners</span>
+<span class="material-symbols-outlined text-xs">star</span>
+<span>Zero-Waste Revolution</span>
+<span class="material-symbols-outlined text-xs">star</span>
+<span>Save 40lbs of Plastic per Year</span>
+<span class="material-symbols-outlined text-xs">star</span>
+<span>Join 50k+ Happy Cleaners</span>
+<span class="material-symbols-outlined text-xs">star</span>
+<span>Zero-Waste Revolution</span>
+<span class="material-symbols-outlined text-xs">star</span>
+<span>Save 40lbs of Plastic per Year</span>
+</div>
+</div>
+<!-- Visual Action Section -->
+<section class="py-16 px-8 max-w-7xl mx-auto wave-pattern">
+<div class="text-center mb-10">
+<h2 class="text-3xl md:text-4xl font-black text-on-surface mb-2">See us in Action</h2>
+<p class="text-on-surface-variant text-base">Watch how e-strip transforms your cleaning routine.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="md:col-span-2 aspect-video bg-surface-container rounded-xl overflow-hidden relative group cursor-pointer shadow-lg border border-outline-variant/20">
+<img alt="Wait, where'd it go?" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzYnOYbsx6deHf-zZNI8oCYNLgt0Gg9cBR_pVfvsTHULRD3Dlabv5IFdfTI6okcdnKAJbWJzE3eNs_VSatL7v32stfXLq_9-DXHl-AnHOe7Y3lrBWvbdPMVOETpR9yZwihCZolXlL9j0t9VH_W07pCPMxngD6-PVyZK6BVkFb24dMdb52zeTIi2v55IX5QeK9MCvVEAbCLNB4LaH7EfSSzjPFq86uEx4NhI_5GYLRf0BCrJhjgpl17gZl-Qm-ZAcqtqgTZj5dFH8pX"/>
+<div class="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/5 transition-colors">
+<div class="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center pill-shadow-primary scale-90 group-hover:scale-100 transition-transform">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<div class="absolute bottom-4 left-6 text-white">
+<h4 class="text-xl font-black">Wait, where'd it go?</h4>
+<p class="text-[10px] font-bold opacity-80 uppercase tracking-widest">Instant Dissolve Tech: Hot or Cold Water.</p>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<div class="flex-1 aspect-video bg-surface-container rounded-xl overflow-hidden relative group cursor-pointer shadow-md border border-outline-variant/20">
+<img alt="Instant Dissolve" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3coWdHbi5qdKGeenqSwI-C1qvL7tGf3Em2wf1QUTPAQOWnjNCD8wzvMVlaZ136JdrN70bG9kRANpmZv6GbmPBi8DqzkMxJexO95nKy-47UcsSjF86QxAXOsRiMKvYetlZpzRZPnbwr2XMUmuZYTwygz550W-tN_UjoeUNWKAA9r7_fZJ-E5nJlVV4tP79CHBRzcnOp18BWfeWyJNDbAR1ZV0eTFDxxAz9MXg0wuXoZ2lke8aCMTDHND6keQwA7-ikY55uxaNSaYO-"/>
+<div class="absolute inset-0 flex items-center justify-center bg-black/10">
+<div class="w-10 h-10 bg-tertiary text-white rounded-full flex items-center justify-center pill-shadow-tertiary">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<div class="absolute bottom-3 left-3 text-white">
+<p class="font-black text-xs uppercase tracking-tight">Instant Dissolve</p>
+</div>
+</div>
+<div class="flex-1 aspect-video bg-surface-container rounded-xl overflow-hidden relative group cursor-pointer shadow-md border border-outline-variant/20">
+<img alt="Sparkling Dishes" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvoBn6Q6gzHWanNfpvIFsSSr8KjO4SLLtfhtT-WDPDgwibW3fvekp_Chh6t-liKQtRuwLRzJ0Blt-dNwA1w797Dw_9nPQX-_VTlZFWrOnHoPP7XE6sLcgMxsYGofYEO0ky-mb1fqbH6OOYcokZncdJpMNI2M_cbOkmF_VnV9v_Vrg7h1IRQp6fMrpfuVP3IjNWF4_NHX3S8uu9NQ_hRe1zCeJ6xvxFfuI0LabSKClTLy4VthiwW78eEWtXitKIBeundD3LjHF8YUyE"/>
+<div class="absolute inset-0 flex items-center justify-center bg-black/10">
+<div class="w-10 h-10 bg-secondary text-white rounded-full flex items-center justify-center shadow-[0_4px_16px_rgba(124,82,170,0.2)]">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<div class="absolute bottom-3 left-3 text-white">
+<p class="font-black text-xs uppercase tracking-tight">Sparkling Dishes</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Why e-strip? Section -->
+<section class="bg-secondary-container/50 py-16 relative overflow-hidden">
+<div class="absolute top-0 right-0 p-10 opacity-5">
+<span class="material-symbols-outlined text-[200px]" style="font-variation-settings: 'FILL' 1;">eco</span>
+</div>
+<div class="container mx-auto px-8 relative z-10 text-center">
+<h2 class="text-3xl md:text-4xl font-black text-on-secondary-container mb-12 tracking-tighter uppercase">Why e-strip?</h2>
+<div class="grid md:grid-cols-3 gap-6">
+<div class="bg-white p-8 rounded-xl shadow-lg flex flex-col items-center bouncy-hover border border-outline-variant/30">
+<div class="w-16 h-16 bg-tertiary-fixed rounded-full flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-tertiary text-3xl" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</div>
+<h4 class="text-xl font-black text-on-surface mb-3">20x Super Concentrated</h4>
+<p class="text-on-surface-variant text-sm leading-relaxed">Cleaning power without the heavy water weight.</p>
+</div>
+<div class="bg-white p-8 rounded-xl shadow-lg flex flex-col items-center bouncy-hover border border-outline-variant/30">
+<div class="w-16 h-16 bg-primary-fixed rounded-full flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">health_and_safety</span>
+</div>
+<h4 class="text-xl font-black text-on-surface mb-3">Hypoallergenic &amp; Safe</h4>
+<p class="text-on-surface-variant text-sm leading-relaxed">No harsh chemicals. Safe for sensitive skin.</p>
+</div>
+<div class="bg-white p-8 rounded-xl shadow-lg flex flex-col items-center bouncy-hover border border-outline-variant/30">
+<div class="w-16 h-16 bg-secondary-fixed rounded-full flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-secondary text-3xl" style="font-variation-settings: 'FILL' 1;">cruelty_free</span>
+</div>
+<h4 class="text-xl font-black text-on-surface mb-3">100% Vegan</h4>
+<p class="text-on-surface-variant text-sm leading-relaxed">Kind to the earth and all its inhabitants.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Product Selection Section -->
+<section class="py-16 px-8 max-w-7xl mx-auto bubble-pattern">
+<div class="flex flex-col md:flex-row justify-between items-center md:items-end mb-10 text-center md:text-left">
+<div>
+<h2 class="text-3xl md:text-4xl font-black text-on-surface mb-2 uppercase tracking-tighter">Shop by Category</h2>
+<p class="text-on-surface-variant text-base">Solutions for every corner of your home.</p>
+</div>
+<div class="mt-4 md:mt-0">
+<button class="flex items-center gap-2 text-primary font-bold text-sm hover:underline uppercase tracking-widest">
+                        View all <span class="material-symbols-outlined text-lg">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Laundry -->
+<div class="bg-white p-4 rounded-xl shadow-sm border-2 border-primary-container group bouncy-hover cursor-pointer flex flex-col h-full">
+<div class="flex-grow overflow-hidden rounded-lg bg-surface-container mb-4">
+<img alt="Laundry Sheets" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 min-h-[280px]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4_7xb6D0h6kaWhRbdLqEx12I3Jm9uUiWqahZEM-aKVGELrZ8TspyV0P9pZOWpNcgcqIkWZzlO5rBrYJf6zXO4LwE4cCpMNpuVQOMgwLTwYRg3R4_1oKjWJbX8HPnPqafLuZHUc09NVFhdSHJr_zWqGAIjh0f5mveKxi0-z-ewUQGOQbVQJSZs6eBbPTtcLZekKY6Z11jeiruvLMiDtKllbUrVsBH7XnAWEV6FetVoGm-AhTeSNPxIlgDEecf_TuN7YT8QqKQ7IeXd"/>
+</div>
+<div class="text-center px-2">
+<h3 class="text-lg font-black text-primary mb-1">Laundry Sheets</h3>
+<p class="text-on-surface-variant text-xs mb-4">Powerful eco-cleaning.</p>
+<button class="w-full bg-primary py-2.5 rounded-full text-white font-black pill-shadow-primary text-[10px] uppercase tracking-widest">SHOP LAUNDRY</button>
+</div>
+</div>
+<!-- Baby -->
+<div class="bg-white p-4 rounded-xl shadow-sm border-2 border-tertiary-container group bouncy-hover cursor-pointer flex flex-col h-full">
+<div class="flex-grow overflow-hidden rounded-lg bg-surface-container mb-4">
+<img alt="Baby Detergent Sheets" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 min-h-[280px]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFSPn6HtCae4MOYwuGsHSvYLe2_KmIt4ojrwaSI3hCCrBLsoE89f-k_aflBN5s8Cy6mAkCp7fYQOxJZppClGS2BVfRIEAEppYAiqwcksiaCYYPIqyfudjOmUZdRakaMN1n8MM6j11Oagp8x5J_yJ8W3sD-Sq7priRHzAagLtLniiGvVrmvxxFJXOxIbXcELAAmHp26OTf0VSrIAZcbSym5wpK2-dbtjhRGnB14plt2poVVh_DbNLDtqGx8ZqSKYG_iN6ClqKqu6Ozs"/>
+</div>
+<div class="text-center px-2">
+<h3 class="text-lg font-black text-tertiary mb-1">Baby Laundry</h3>
+<p class="text-on-surface-variant text-xs mb-4">Gentle for newborn skin.</p>
+<button class="w-full bg-tertiary py-2.5 rounded-full text-white font-black pill-shadow-tertiary text-[10px] uppercase tracking-widest">SHOP BABY</button>
+</div>
+</div>
+<!-- Dish -->
+<div class="bg-white p-4 rounded-xl shadow-sm border-2 border-secondary-container group bouncy-hover cursor-pointer flex flex-col h-full">
+<div class="flex-grow overflow-hidden rounded-lg bg-surface-container mb-4">
+<img alt="Dishwashing Sheets" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 min-h-[280px]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmcNmjoXRLGscG3Oktx0wj4CJL1XBXxGLfOlH_YTH_3bj1XcmAoHAzpPqE7l5kOOTD7QVr8CX-ypd8TxjHYrJBe8Rdxzy6F8n1n-rHt2v2Sx6n2luIxxwryaoTZzgOeJOWr10fUpij4fphmx4n12EIy5x59-LZvQoUrb_cXYZEjL-MXnIy7sI2tbA3kRQMqIknb9cfU0kqgzaeY2UxqJ1fh_4E1H1wrJDSPmwLBwKl89yvooRayFlhgsNhKOFaW25kdrx1TLgJ7WOo"/>
+</div>
+<div class="text-center px-2">
+<h3 class="text-lg font-black text-secondary mb-1">Dishwashing</h3>
+<p class="text-on-surface-variant text-xs mb-4">Grease-cutting finish.</p>
+<button class="w-full bg-secondary py-2.5 rounded-full text-white font-black text-[10px] uppercase tracking-widest shadow-[0_4px_16px_rgba(124,82,170,0.2)]">SHOP DISH</button>
+</div>
+</div>
+<!-- Floor -->
+<div class="bg-white p-4 rounded-xl shadow-sm border-2 border-primary-fixed group bouncy-hover cursor-pointer flex flex-col h-full">
+<div class="flex-grow overflow-hidden rounded-lg bg-surface-container mb-4">
+<img alt="Floor Cleaner Sheets" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 min-h-[280px]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJmY6zMhW74VoclvS4xYbRtmGw0n42DWneUKaeLq-bYb9UaU170q_IP2rc8UwLdpbkVsFZytfwSTws15g_rKFq2-RTjwr2j5DxhbytJaykbwDgE3lrrmXisyXYK48rIrGsR9gUoKC71y493kbBQMTHWFDUDhl5TNIQ2-i6cQcAqJKgCmv9ki9aI5EqYBq134iZPTBY_8qbxrtfwr22BHccEF_Pql3vHHn8uZ269PI5VvvBjF13dy4qNzALxPuRFoFLDWvHmgQX5HUp"/>
+</div>
+<div class="text-center px-2">
+<h3 class="text-lg font-black text-primary-container mb-1">Floor Cleaner</h3>
+<p class="text-on-surface-variant text-xs mb-4">Streak-free hard floors.</p>
+<button class="w-full bg-primary-container py-2.5 rounded-full text-on-primary-container font-black text-[10px] uppercase tracking-widest shadow-[0_4px_16px_rgba(240,128,192,0.2)]">SHOP FLOOR</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Social Proof & Founder Module -->
+<section class="py-16 px-8 max-w-7xl mx-auto bg-surface-container-low rounded-3xl mb-12">
+<div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-stretch">
+<!-- Testimonial Section -->
+<div class="lg:col-span-2 bg-primary/5 rounded-2xl p-8 flex flex-col justify-center relative border border-primary/10">
+<div class="absolute top-6 right-6 opacity-5">
+<span class="material-symbols-outlined text-[80px]" style="font-variation-settings: 'FILL' 1;">format_quote</span>
+</div>
+<h3 class="text-2xl font-black text-on-surface mb-4 italic leading-tight">"I'll never go back to liquid jugs again! My laundry has never been cleaner."</h3>
+<div class="flex items-center gap-1 mb-4">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-fixed overflow-hidden ring-2 ring-primary/20">
+<div class="w-full h-full bg-cover" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuChXqzxpqWUXPyPrj_YsYqbuxH1piq2LOIUyaGGOzeGt2ZH2r1ESj8g5vN2q-IyOFAM1lmW2I_zkeEZiquPq8RLPobR1Z2CwefeHRXLdOWo7eekcZcwD1N4fm05q6U6vOONyuwP2r6HxQ4ylTXLSsYNd0MZIYG3ixxY3amrTa27E7RN1leCP7j9hsMqC76gnd8veiam0043WG9rzGzSb5t7cY6sQNW0YknawfUduvfp1p_KfwSmGMGjvhLfcjIpwDOhjsgL215VbMX4')"></div>
+</div>
+<p class="text-on-surface-variant text-sm font-black">Sarah J., Verified Buyer</p>
+</div>
+</div>
+<!-- Founder Trust Module -->
+<div class="lg:col-span-3 bg-white border border-outline-variant/30 rounded-2xl p-8 shadow-md">
+<div class="flex flex-col md:flex-row gap-6 items-center">
+<div class="relative w-full md:w-1/2 aspect-[4/3] md:aspect-square rounded-xl overflow-hidden border border-outline-variant/20 shadow-inner">
+<img alt="Sarah Johnson" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAm5UufujEgGrvBG0t9BUm7LwqWPnZ5s1DFKdseAJzEDrR9zbmX8U_qMw9syR9G4SJcC2shuu9liK1s1zDwrQE5bjCVP4cjrcd_VUwf6I6riqOAaBOBUBVrHJd2RcaWNK3QHMPUjWtLBfEnrIN6t9ZOaT5wwFQlBMp2fNJhZqwvq_npEez2mP-QuS33E54A1L-9nBH243Bxwk5IYj8n4Hlm799kSRdFEtg2y_EAgi1gQplo8ZAT8WEo9TBfpseS83hQk3jnv2Fq5gWm"/>
+<div class="absolute bottom-3 right-3 bg-primary text-white text-[8px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full">Our Founder</div>
+</div>
+<div class="md:w-1/2">
+<h3 class="text-xl font-black text-on-surface mb-3 uppercase tracking-tight">"Water shouldn't be shipped in plastic."</h3>
+<p class="text-on-surface-variant text-[13px] leading-relaxed mb-6">
+                                We spent three years perfecting a formula that doesn't compromise. It's tough on stains, but gentle on the planet. No more heavy jugs.
+                            </p>
+<div class="border-l-4 border-primary pl-4">
+<div class="text-lg font-black text-on-surface">Sarah Johnson</div>
+<div class="text-[9px] font-bold text-on-surface-variant uppercase tracking-widest">Founder, e-strip</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-highest rounded-t-3xl mt-0">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 px-12 py-12 w-full max-w-7xl mx-auto">
+<div class="flex flex-col gap-4">
+<div class="text-2xl font-black text-tertiary flex items-center gap-2">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">eco</span>
+                    e-strip
+                </div>
+<p class="text-on-surface-variant font-body text-xs leading-relaxed">The future of clean is sheet-shaped. Making clothes easier for you and better for the planet.</p>
+<div class="flex gap-3 mt-2">
+<a class="text-secondary hover:text-primary transition-all p-2 border border-outline-variant rounded-full" href="#"><span class="material-symbols-outlined text-lg">public</span></a>
+<a class="text-secondary hover:text-primary transition-all p-2 border border-outline-variant rounded-full" href="#"><span class="material-symbols-outlined text-lg">alternate_email</span></a>
+</div>
+</div>
+<div>
+<h5 class="text-secondary font-black mb-4 uppercase tracking-widest text-[10px]">Shop</h5>
+<ul class="flex flex-col gap-2 text-on-surface-variant font-bold text-xs">
+<li><a class="hover:text-primary transition-colors" href="#">All Products</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Laundry</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Dishwasher</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-secondary font-black mb-4 uppercase tracking-widest text-[10px]">Community</h5>
+<ul class="flex flex-col gap-2 text-on-surface-variant font-bold text-xs">
+<li><a class="hover:text-primary transition-colors" href="#">Our Mission</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Sustainability</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">FAQ</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-secondary font-black mb-4 uppercase tracking-widest text-[10px]">Newsletter</h5>
+<form class="flex gap-2">
+<input class="bg-white border-2 border-outline-variant rounded-full px-4 py-2 text-xs w-full focus:ring-2 focus:ring-primary focus:border-primary transition-all" placeholder="Email" type="email"/>
+<button class="bg-primary text-white p-2.5 rounded-full flex items-center justify-center hover:scale-105 transition-transform" type="submit">
+<span class="material-symbols-outlined text-sm font-black">send</span>
+</button>
+</form>
+</div>
+</div>
+<div class="border-t border-outline-variant py-6 px-12 flex flex-col md:flex-row justify-between items-center text-on-surface-variant text-[9px] font-black uppercase tracking-widest gap-4">
+<p>© 2024 e-strip. Advanced Household Cleaning.</p>
+<div class="flex gap-6">
+<a class="hover:text-primary transition-colors" href="#">Privacy</a>
+<a class="hover:text-primary transition-colors" href="#">Terms</a>
+</div>
+</div>
+</footer>
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const elements = document.querySelectorAll('.bouncy-hover');
+            elements.forEach((el, index) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(15px)';
+                el.style.transition = 'all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                setTimeout(() => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, 80 * index);
+            });
+        });
+    </script>
+<style>
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+            display: flex;
+            width: fit-content;
+            animation: marquee 30s linear infinite;
+        }
+    </style>
+</body></html>

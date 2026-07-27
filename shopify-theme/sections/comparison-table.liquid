@@ -1,0 +1,114 @@
+<section class="py-24 px-4 bg-white relative overflow-hidden">
+  <div class="max-w-5xl mx-auto relative z-10">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-5xl font-black text-gray-900 mb-4 tracking-tight">
+        {{ section.settings.heading | default: "The Smart Choice." }}
+      </h2>
+      <p class="text-gray-500 font-medium text-lg">
+        {{ section.settings.subheading | default: "See how E-Strip stacks up against traditional liquid detergent." }}
+      </p>
+    </div>
+    
+    <div class="bg-white rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-gray-100 overflow-hidden">
+      <!-- Headers -->
+      <div class="grid grid-cols-3 bg-gray-50 border-b border-gray-100 p-6 md:p-8">
+        <div class="col-span-1"></div>
+        <div class="col-span-1 text-center border-r border-gray-200">
+          <div class="inline-block bg-[#E30613] text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest mb-3">Our Sheets</div>
+          <h3 class="text-xl md:text-2xl font-black text-gray-900">E-Strip</h3>
+        </div>
+        <div class="col-span-1 text-center">
+          <div class="inline-block bg-gray-200 text-gray-600 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest mb-3">The Old Way</div>
+          <h3 class="text-xl md:text-2xl font-black text-gray-400">Liquid Jugs</h3>
+        </div>
+      </div>
+      
+      <!-- Rows -->
+      {% for block in section.blocks %}
+        <div class="grid grid-cols-3 border-b border-gray-100 p-6 md:p-8 items-center hover:bg-gray-50 transition-colors">
+          <div class="col-span-1">
+            <h4 class="font-bold text-gray-900 text-sm md:text-base">{{ block.settings.feature_name }}</h4>
+            <p class="text-xs text-gray-400 mt-1 hidden md:block">{{ block.settings.feature_desc }}</p>
+          </div>
+          <div class="col-span-1 text-center border-r border-gray-100 flex justify-center">
+            {% if block.settings.us_check %}
+              <span class="material-symbols-outlined text-green-500 text-3xl">check_circle</span>
+            {% else %}
+              <span class="material-symbols-outlined text-gray-300 text-3xl">cancel</span>
+            {% endif %}
+          </div>
+          <div class="col-span-1 text-center flex justify-center">
+            {% if block.settings.them_check %}
+              <span class="material-symbols-outlined text-green-500 text-3xl">check_circle</span>
+            {% else %}
+              <span class="material-symbols-outlined text-red-400 text-3xl">cancel</span>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Comparison Table",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The Smart Choice."
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "See how E-Strip stacks up against traditional liquid detergent."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature Row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "feature_name",
+          "label": "Feature Name",
+          "default": "Zero Plastic Packaging"
+        },
+        {
+          "type": "text",
+          "id": "feature_desc",
+          "label": "Feature Description (Desktop only)"
+        },
+        {
+          "type": "checkbox",
+          "id": "us_check",
+          "label": "E-Strip Has This",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "them_check",
+          "label": "Competitor Has This",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Comparison Table",
+      "category": "Information",
+      "blocks": [
+        { "type": "feature", "settings": { "feature_name": "Zero Plastic Packaging", "us_check": true, "them_check": false } },
+        { "type": "feature", "settings": { "feature_name": "Pre-Measured Doses", "us_check": true, "them_check": false } },
+        { "type": "feature", "settings": { "feature_name": "No Mess or Spills", "us_check": true, "them_check": false } },
+        { "type": "feature", "settings": { "feature_name": "Travel Friendly", "us_check": true, "them_check": false } }
+      ]
+    }
+  ]
+}
+{% endschema %}

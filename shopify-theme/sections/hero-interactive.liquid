@@ -1,0 +1,59 @@
+<div id="hero-scroll-container" class="relative w-full" style="height: 300vh;">
+  <div class="sticky top-0 w-full h-screen overflow-hidden bg-black flex items-center justify-center">
+    <div id="hero-loader" class="absolute inset-0 flex items-center justify-center bg-black z-10 text-white font-bold transition-opacity duration-500">
+      Loading Animation... <span id="hero-loader-text">0%</span>
+    </div>
+    <canvas id="hero-canvas" width="1920" height="1080" class="w-full h-full object-cover"></canvas>
+    
+    <div class="absolute inset-0 z-10 bg-gradient-to-b from-black/40 via-black/10 to-transparent pointer-events-none"></div>
+
+    <div id="hero-text-container" class="absolute inset-0 z-20 flex flex-col items-center justify-center p-6 text-center pointer-events-none transition-transform duration-75">
+      <h2 class="text-5xl md:text-7xl lg:text-8xl font-black text-white drop-shadow-2xl mb-6 tracking-tight">
+        {{ section.settings.heading | default: "The Future of Clean." }}
+      </h2>
+      <p class="text-xl md:text-2xl text-white drop-shadow-xl font-medium max-w-2xl mb-10">
+        {{ section.settings.subheading | default: "Scroll to see how our plant-powered sheets dissolve instantly and power through stains." }}
+      </p>
+      <a href="{{ section.settings.button_link | default: '/collections/all' }}" class="pointer-events-auto btn bg-white text-gray-900 hover:bg-gray-200 px-12 py-4 text-sm font-bold tracking-widest uppercase rounded-[9999px] shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+        {{ section.settings.button_label | default: "Shop Now" }}
+      </a>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Hero Interactive",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The Future of Clean."
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Scroll to see how our plant-powered sheets dissolve instantly and power through stains."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Interactive",
+      "category": "Hero"
+    }
+  ]
+}
+{% endschema %}

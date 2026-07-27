@@ -17,7 +17,7 @@ export default function CartSidebar() {
       />
 
       {/* Drawer */}
-      <div className="fixed top-0 right-0 h-full w-full sm:w-[420px] bg-white z-[101] flex flex-col shadow-2xl">
+      <div className="fixed top-0 right-0 h-full w-full sm:w-[500px] bg-white z-[101] flex flex-col shadow-2xl">
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
           <div>
@@ -41,9 +41,9 @@ export default function CartSidebar() {
           ) : (
             <p className="text-xs font-bold text-emerald-600 mb-2">🎉 You've unlocked FREE shipping!</p>
           )}
-          <div className="h-1.5 bg-gray-200 rounded-full overflow-hidden">
+          <div className="h-[10px] bg-gray-200 rounded-[10px] overflow-hidden">
             <div
-              className="h-full bg-gradient-to-r from-[#e040a0] to-[#0096cc] rounded-full transition-all duration-500"
+              className="h-full bg-gradient-to-r from-[#e040a0] to-[#0096cc] rounded-[10px] transition-all duration-500"
               style={{ width: `${shippingProgress}%` }}
             />
           </div>
@@ -107,14 +107,14 @@ export default function CartSidebar() {
 
                             <div className="flex items-center justify-between mt-3">
                               {/* Qty stepper */}
-                              <div className="flex items-center border border-gray-200 rounded-full overflow-hidden">
+                              <div className="flex items-center border border-gray-200 rounded-none overflow-hidden h-[25px]">
                                 <button
-                                  className="w-8 h-8 flex items-center justify-center hover:bg-pink-50 text-gray-600 transition-colors text-lg font-bold"
+                                  className="w-7 h-full flex items-center justify-center hover:bg-pink-50 text-gray-600 transition-colors text-lg font-bold"
                                   onClick={() => updateQty(item.id, item.qty - 1, item.subscriptionMode)}
                                 >−</button>
                                 <span className="w-8 text-center text-sm font-bold text-gray-900">{item.qty}</span>
                                 <button
-                                  className="w-8 h-8 flex items-center justify-center hover:bg-pink-50 text-gray-600 transition-colors text-lg font-bold"
+                                  className="w-7 h-full flex items-center justify-center hover:bg-pink-50 text-gray-600 transition-colors text-lg font-bold"
                                   onClick={() => updateQty(item.id, item.qty + 1, item.subscriptionMode)}
                                 >+</button>
                               </div>
@@ -157,14 +157,14 @@ export default function CartSidebar() {
 
                             <div className="flex items-center justify-between mt-3">
                               {/* Qty stepper */}
-                              <div className="flex items-center border border-gray-200 rounded-full overflow-hidden">
+                              <div className="flex items-center border border-gray-200 rounded-none overflow-hidden h-[25px]">
                                 <button
-                                  className="w-8 h-8 flex items-center justify-center hover:bg-pink-50 text-gray-600 transition-colors text-lg font-bold"
+                                  className="w-7 h-full flex items-center justify-center hover:bg-pink-50 text-gray-600 transition-colors text-lg font-bold"
                                   onClick={() => updateQty(item.id, item.qty - 1, item.subscriptionMode)}
                                 >−</button>
                                 <span className="w-8 text-center text-sm font-bold text-gray-900">{item.qty}</span>
                                 <button
-                                  className="w-8 h-8 flex items-center justify-center hover:bg-pink-50 text-gray-600 transition-colors text-lg font-bold"
+                                  className="w-7 h-full flex items-center justify-center hover:bg-pink-50 text-gray-600 transition-colors text-lg font-bold"
                                   onClick={() => updateQty(item.id, item.qty + 1, item.subscriptionMode)}
                                 >+</button>
                               </div>
@@ -199,7 +199,7 @@ export default function CartSidebar() {
             <Link
               href="/checkout"
               onClick={() => setIsOpen(false)}
-              className="w-full bg-gradient-to-r from-[#e040a0] to-[#0096cc] text-white py-4 rounded-full font-black text-base flex items-center justify-center gap-2 hover:opacity-90 transition-opacity shadow-lg"
+              className="btn w-full bg-[var(--primary-deep)] text-white h-[42px] rounded-[30px] font-[600] text-base flex items-center justify-center gap-2 hover:opacity-90 transition-opacity tracking-wide uppercase"
             >
               <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>lock</span>
               Secure Checkout · ₹{subtotal.toLocaleString()}

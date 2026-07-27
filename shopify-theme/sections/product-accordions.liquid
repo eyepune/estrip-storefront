@@ -1,0 +1,74 @@
+<section class="py-12 md:py-24 px-4 bg-white">
+  <div class="max-w-3xl mx-auto">
+    <div class="text-center mb-10">
+      <h2 class="text-2xl md:text-4xl font-black text-gray-900 tracking-tight">
+        {{ section.settings.heading | default: "Product Details & FAQ" }}
+      </h2>
+    </div>
+    
+    <div class="border-t border-gray-200">
+      {% for block in section.blocks %}
+        <details class="group border-b border-gray-200">
+          <summary class="flex items-center justify-between py-6 cursor-pointer list-none hover:bg-gray-50 transition-colors px-4">
+            <span class="font-bold text-gray-900 text-lg">{{ block.settings.title }}</span>
+            <span class="material-symbols-outlined text-gray-400 group-open:rotate-180 transition-transform duration-300">expand_more</span>
+          </summary>
+          <div class="px-4 pb-6 text-gray-600 font-medium text-base leading-relaxed">
+            {{ block.settings.content }}
+          </div>
+        </details>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+  details > summary::-webkit-details-marker {
+    display: none;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Product Accordions",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Product Details & FAQ"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "accordion",
+      "name": "Accordion Row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "What are the ingredients?"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content",
+          "default": "<p>Our sheets are made with plant-derived enzymes and coconut surfactants. Free from parabens, phosphates, and artificial dyes.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Accordions",
+      "category": "Product",
+      "blocks": [
+        { "type": "accordion", "settings": { "title": "Full Ingredient List" } },
+        { "type": "accordion", "settings": { "title": "Shipping & Returns" } },
+        { "type": "accordion", "settings": { "title": "Are these safe for baby clothes?" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

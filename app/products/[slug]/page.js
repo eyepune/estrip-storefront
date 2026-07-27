@@ -1,247 +1,330 @@
 'use client';
-import { useState, use } from 'react';
-import { notFound } from 'next/navigation';
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { getProductBySlug, products } from '@/lib/products';
-import { useCart } from '@/context/CartContext';
-import ProductCard from '../../components/ProductCard';
+
+const products = {
+  'dishwashing-cleaning-sheets': { title: 'Dishwashing Cleaning Sheets', img: '/Dishwashing Cleaning Sheets.webp', price: 499 },
+  'floor-cleaner-sheets': { title: 'Floor Cleaner Sheets', img: '/Floor Cleaner Sheets.webp', price: 399 },
+  'proenzyme-5x-laundry-detergent-sheets': { title: 'ProEnzyme 5X Laundry Detergent Sheets', img: '/ProEnzyme 5X Laundry Detergent Sheets.webp', price: 999 },
+  'smartclean-3x-laundry-detergent-sheets': { title: 'SmartClean 3X Laundry Detergent Sheets', img: '/SmartClean 3X Laundry Detergent Sheets.webp', price: 899 },
+  'softtouch-baby-detergent-sheets': { title: 'SoftTouch Baby Detergent Sheets', img: '/SoftTouch Baby Detergent Sheets.webp', price: 949 },
+  'stain-remover-spray': { title: 'Stain Remover Spray', img: '/Stain Remover Spray.webp', price: 299 },
+};
 
 export default function ProductPage({ params }) {
-  const { slug } = use(params);
-  const product = getProductBySlug(slug);
-  if (!product) notFound();
-
-  const { addItem } = useCart();
-  const [selectedImage, setSelectedImage] = useState(0);
-  const [qty, setQty] = useState(1);
-  const [isSubscription, setIsSubscription] = useState(false);
-  const [activeTab, setActiveTab] = useState('description');
+  const [quantity, setQuantity] = useState(1);
+  const [activeVariant, setActiveVariant] = useState('Fresh Linen');
+  const [accordionOpen, setAccordionOpen] = useState('description');
   const [added, setAdded] = useState(false);
 
-  const price = isSubscription ? Math.round(product.price * 0.85) : product.price;
-  const related = products.filter(p => p.id !== product.id && p.category === product.category).slice(0, 3);
+  const slug = params.slug || 'smartclean-3x-laundry-detergent-sheets';
+  const product = products[slug] || products['smartclean-3x-laundry-detergent-sheets'];
 
   const handleAddToCart = () => {
-    for (let i = 0; i < qty; i++) addItem(product, isSubscription);
     setAdded(true);
     setTimeout(() => setAdded(false), 2000);
   };
 
-  const reviews = [
-    { name: 'Priya S.', rating: 5, date: '2 weeks ago', text: 'Absolutely love this! Dissolved instantly in cold water and my clothes came out perfectly clean.', verified: true },
-    { name: 'Rahul M.', rating: 5, date: '1 month ago', text: 'Got out a stubborn turmeric stain. Shocked at how well it worked. Highly recommend!', verified: true },
-    { name: 'Anjali K.', rating: 4, date: '3 weeks ago', text: 'Great product, eco-friendly packaging is a bonus. Will definitely reorder.', verified: true },
-  ];
-
   return (
-    <div className="min-h-screen bg-white">
-      {/* Breadcrumb */}
-      <div className="bg-gray-50 py-3 px-4 border-b border-gray-100">
-        <div className="max-w-7xl mx-auto flex items-center gap-2 text-sm text-gray-500">
-          <Link href="/" className="hover:text-[#e040a0] transition-colors">Home</Link>
-          <span>/</span>
-          <Link href="/shop" className="hover:text-[#e040a0] transition-colors">Shop</Link>
-          <span>/</span>
-          <span className="text-gray-900 font-semibold">{product.name}</span>
-        </div>
+    <div className="bg-white min-h-screen text-gray-900 pb-20 md:pb-0 font-sans selection:bg-[var(--color-primary)] selection:text-white">
+      
+      {/* 1. Trust Badges Bar */}
+      <div className="bg-gray-50 border-b border-gray-100 py-3 px-4 hidden md:flex justify-center gap-8 md:gap-16 text-xs font-bold text-gray-600 tracking-widest uppercase">
+        <span className="flex items-center gap-2"><span className="material-symbols-outlined text-sm">local_shipping</span> Free shipping above ₹999</span>
+        <span className="flex items-center gap-2"><span className="material-symbols-outlined text-sm">verified_user</span> 30-Day Money Back Guarantee</span>
+        <span className="flex items-center gap-2"><span className="material-symbols-outlined text-sm">eco</span> Climate Pledge Friendly</span>
+        <span className="flex items-center gap-2"><span className="material-symbols-outlined text-sm">public</span> Indian Brand</span>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        <div className="grid lg:grid-cols-2 gap-12 mb-16">
-          {/* Images */}
-          <div>
-            <div className="relative aspect-square bg-gray-50 rounded-3xl overflow-hidden mb-4 border border-gray-100">
-              <Image
-                src={product.images[selectedImage] || product.image}
-                alt={product.name}
-                fill
-                className="object-contain p-10"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                priority
+      <main className="max-w-7xl mx-auto md:px-6">
+        {/* 2. Hero / Buy Box Section */}
+        <section className="flex flex-col lg:flex-row gap-8 lg:gap-16 py-8 md:py-16 px-4 md:px-0">
+          
+          {/* LEFT: Visuals */}
+          <div className="w-full lg:w-[55%] flex flex-col gap-6">
+            {/* Gallery */}
+            <div className="relative aspect-[4/5] md:aspect-square bg-gray-50 rounded-3xl overflow-hidden shadow-sm group">
+              <div className="absolute top-6 left-6 z-10 bg-gray-900 text-white text-xs font-black uppercase tracking-widest px-4 py-2 rounded-full shadow-lg">Best Seller</div>
+              <Image 
+                src={product.img} 
+                alt={product.title} 
+                fill 
+                className="object-contain p-8 md:p-16 mix-blend-multiply transition-transform duration-700 group-hover:scale-105" 
                 unoptimized
               />
-              {product.badge && (
-                <div className="absolute top-4 left-4 bg-gradient-to-r from-[#e040a0] to-[#c0208a] text-white text-xs font-black px-3 py-1 rounded-full">
-                  {product.badge}
-                </div>
-              )}
             </div>
-            {product.images.length > 1 && (
-              <div className="flex gap-3">
-                {product.images.map((img, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setSelectedImage(i)}
-                    className={`relative w-20 h-20 rounded-xl bg-gray-50 border-2 overflow-hidden transition-all ${selectedImage === i ? 'border-[#e040a0]' : 'border-gray-200 hover:border-gray-300'}`}
+
+            {/* Scent Notes Block */}
+            <div className="bg-gray-50 p-6 md:p-8 rounded-3xl border border-gray-100 flex flex-col items-center text-center">
+              <h4 className="text-sm font-black uppercase tracking-widest text-gray-400 mb-6">Fragrance Profile</h4>
+              <div className="flex gap-8 md:gap-16 justify-center">
+                <div className="flex flex-col items-center gap-3">
+                  <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-sm border border-gray-100">
+                    <span className="material-symbols-outlined text-[var(--color-primary)]">local_florist</span>
+                  </div>
+                  <span className="text-xs font-bold uppercase tracking-wider text-gray-700">Magnolia</span>
+                </div>
+                <div className="flex flex-col items-center gap-3">
+                  <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-sm border border-gray-100">
+                    <span className="material-symbols-outlined text-[var(--color-primary)]">air</span>
+                  </div>
+                  <span className="text-xs font-bold uppercase tracking-wider text-gray-700">Fresh Breeze</span>
+                </div>
+                <div className="flex flex-col items-center gap-3">
+                  <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-sm border border-gray-100">
+                    <span className="material-symbols-outlined text-[var(--color-primary)]">spa</span>
+                  </div>
+                  <span className="text-xs font-bold uppercase tracking-wider text-gray-700">Aloe</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* RIGHT: Buy Box */}
+          <div className="w-full lg:w-[45%] flex flex-col">
+            <div className="mb-6 flex items-center gap-2 text-sm font-bold text-gray-600">
+              <div className="flex text-yellow-400 text-lg">★★★★★</div>
+              <span>Rated 4.8/5 by 2,134 purchasers</span>
+            </div>
+
+            <h1 className="text-4xl md:text-5xl font-black tracking-tight text-gray-900 mb-4 leading-none">{product.title}</h1>
+            
+            <div className="flex items-end gap-3 mb-8">
+              <span className="text-3xl font-black text-gray-900">₹{product.price}.00</span>
+              <span className="text-lg font-bold text-gray-400 line-through mb-1">₹{product.price + 300}.00</span>
+            </div>
+
+            <div className="w-full h-px bg-gray-100 mb-8"></div>
+
+            {/* Variant Selector */}
+            <div className="mb-8">
+              <label className="block text-sm font-black uppercase tracking-widest text-gray-900 mb-4">Scent: {activeVariant}</label>
+              <div className="flex flex-wrap gap-3">
+                {['Fresh Linen', 'Fragrance Free', 'Lavender'].map(v => (
+                  <button 
+                    key={v}
+                    onClick={() => setActiveVariant(v)}
+                    className={`px-6 py-3 rounded-full text-sm font-bold border transition-all ${activeVariant === v ? 'border-gray-900 bg-gray-900 text-white' : 'border-gray-200 bg-white text-gray-600 hover:border-gray-900'}`}
                   >
-                    <Image src={img} alt={`${product.name} view ${i + 1}`} fill className="object-contain p-2" sizes="80px" unoptimized />
+                    {v}
                   </button>
                 ))}
               </div>
-            )}
-          </div>
-
-          {/* Details */}
-          <div>
-            {/* Rating */}
-            <div className="flex items-center gap-3 mb-4">
-              <div className="flex gap-0.5">{[1,2,3,4,5].map(s => <span key={s} className="text-amber-400">★</span>)}</div>
-              <span className="text-sm text-gray-500 font-medium">{product.rating} ({product.reviews.toLocaleString()} reviews)</span>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl font-black text-gray-900 mb-1">{product.name}</h1>
-            <p className="text-gray-500 text-lg mb-6">{product.subtitle}</p>
-
-            {/* Subscription Toggle */}
-            {product.subscription && (
-              <div className="bg-gradient-to-r from-pink-50 to-blue-50 rounded-2xl p-4 mb-6 border border-pink-100">
-                <p className="text-xs font-black text-gray-600 uppercase tracking-widest mb-3">Purchase Option</p>
-                <div className="grid grid-cols-2 gap-3">
-                  <button
-                    onClick={() => setIsSubscription(false)}
-                    className={`py-3 px-4 rounded-xl font-bold text-sm transition-all border-2 ${!isSubscription ? 'border-[#e040a0] bg-white text-[#e040a0] shadow-md' : 'border-transparent bg-white/50 text-gray-500 hover:border-gray-300'}`}
-                  >
-                    One-time<br />
-                    <span className="font-black text-lg">{!isSubscription ? '' : ''}₹{product.price}</span>
-                  </button>
-                  <button
-                    onClick={() => setIsSubscription(true)}
-                    className={`py-3 px-4 rounded-xl font-bold text-sm transition-all border-2 relative ${isSubscription ? 'border-emerald-500 bg-white text-emerald-700 shadow-md' : 'border-transparent bg-white/50 text-gray-500 hover:border-gray-300'}`}
-                  >
-                    <span className="absolute -top-2 left-1/2 -translate-x-1/2 bg-emerald-500 text-white text-[10px] font-black px-2 py-0.5 rounded-full whitespace-nowrap">SAVE {product.subscriptionDiscount}%</span>
-                    Subscribe & Save<br />
-                    <span className="font-black text-lg text-emerald-700">₹{Math.round(product.price * 0.85)}</span>
-                  </button>
-                </div>
+            {/* Quantity & Add to Cart */}
+            <div className="flex flex-col sm:flex-row gap-4 mb-8">
+              <div className="flex items-center justify-between border border-gray-200 rounded-full px-6 h-14 sm:w-1/3 bg-gray-50">
+                <button onClick={() => setQuantity(Math.max(1, quantity - 1))} className="text-gray-400 hover:text-gray-900 text-xl font-bold px-2">-</button>
+                <span className="font-black text-lg">{quantity}</span>
+                <button onClick={() => setQuantity(quantity + 1)} className="text-gray-400 hover:text-gray-900 text-xl font-bold px-2">+</button>
               </div>
-            )}
-
-            {/* Price */}
-            <div className="flex items-baseline gap-3 mb-6">
-              <span className="text-4xl font-black text-[#e040a0]">₹{price}</span>
-              <span className="text-xl text-gray-400 line-through">₹{product.comparePrice}</span>
-              <span className="bg-emerald-100 text-emerald-700 text-sm font-black px-3 py-1 rounded-full">{product.discount}% OFF</span>
-            </div>
-
-            {/* Qty + ATC */}
-            <div className="flex gap-4 mb-6">
-              <div className="flex items-center border-2 border-gray-200 rounded-full overflow-hidden">
-                <button className="w-12 h-12 text-gray-600 hover:bg-gray-50 font-bold text-xl transition-colors" onClick={() => setQty(q => Math.max(1, q - 1))}>−</button>
-                <span className="w-10 text-center font-black text-gray-900">{qty}</span>
-                <button className="w-12 h-12 text-gray-600 hover:bg-gray-50 font-bold text-xl transition-colors" onClick={() => setQty(q => q + 1)}>+</button>
-              </div>
-              <button
+              <button 
                 onClick={handleAddToCart}
-                className={`flex-1 py-3 rounded-full font-black text-lg transition-all flex items-center justify-center gap-2 ${added ? 'bg-emerald-500 text-white' : 'bg-gradient-to-r from-[#e040a0] to-[#c0208a] text-white hover:scale-105 shadow-lg shadow-pink-200'}`}
+                className={`flex-1 h-14 rounded-full font-black text-sm uppercase tracking-widest transition-all shadow-lg active:scale-95 ${added ? 'bg-emerald-500 text-white' : 'bg-[var(--color-primary)] hover:bg-[#1a2a36] text-white'}`}
               >
-                <span className="material-symbols-outlined" style={{ fontSize: '22px', fontVariationSettings: "'FILL' 1" }}>
-                  {added ? 'check_circle' : 'shopping_bag'}
-                </span>
-                {added ? 'Added!' : `Add to Cart · ₹${(price * qty).toLocaleString()}`}
+                {added ? 'Added to Cart' : `Add to Cart - ₹${(product.price * quantity).toFixed(2)}`}
               </button>
             </div>
 
-            {/* Features */}
-            <div className="grid grid-cols-2 gap-3 mb-8">
-              {product.features.map(f => (
-                <div key={f} className="flex items-center gap-2 text-sm text-gray-600">
-                  <span className="material-symbols-outlined text-emerald-500" style={{ fontSize: '18px', fontVariationSettings: "'FILL' 1" }}>check_circle</span>
-                  {f}
+            {/* Mini Trust & Payments */}
+            <div className="flex flex-col items-center gap-4 mb-8">
+              <p className="text-xs font-bold uppercase tracking-widest text-gray-500">30 Days Money Back Guarantee | Free Shipping over ₹999</p>
+              <div className="flex gap-2 grayscale opacity-60">
+                {/* Dummy Payment Icons */}
+                <div className="w-10 h-6 bg-gray-200 rounded"></div>
+                <div className="w-10 h-6 bg-gray-200 rounded"></div>
+                <div className="w-10 h-6 bg-gray-200 rounded"></div>
+                <div className="w-10 h-6 bg-gray-200 rounded"></div>
+              </div>
+            </div>
+
+            {/* Certifications Row */}
+            <div className="flex justify-between items-center py-6 border-y border-gray-100 mb-8">
+              <div className="flex flex-col items-center gap-2"><span className="material-symbols-outlined text-gray-400">recycling</span><span className="text-[10px] font-bold text-gray-500 uppercase">Plastic Free</span></div>
+              <div className="flex flex-col items-center gap-2"><span className="material-symbols-outlined text-gray-400">cruelty_free</span><span className="text-[10px] font-bold text-gray-500 uppercase">Cruelty Free</span></div>
+              <div className="flex flex-col items-center gap-2"><span className="material-symbols-outlined text-gray-400">psychiatry</span><span className="text-[10px] font-bold text-gray-500 uppercase">Plant Based</span></div>
+              <div className="flex flex-col items-center gap-2"><span className="material-symbols-outlined text-gray-400">water_drop</span><span className="text-[10px] font-bold text-gray-500 uppercase">Dissolves</span></div>
+            </div>
+
+            {/* Accordions */}
+            <div className="flex flex-col border-t border-gray-100">
+              {['description', 'ingredients', 'sustainability'].map((tab) => (
+                <div key={tab} className="border-b border-gray-100">
+                  <button 
+                    onClick={() => setAccordionOpen(accordionOpen === tab ? '' : tab)}
+                    className="w-full py-6 flex justify-between items-center text-left hover:text-[var(--color-primary)] transition-colors group"
+                  >
+                    <span className="font-black text-sm uppercase tracking-widest text-gray-900 group-hover:text-[var(--color-primary)]">{tab}</span>
+                    <span className="material-symbols-outlined font-bold">{accordionOpen === tab ? 'remove' : 'add'}</span>
+                  </button>
+                  {accordionOpen === tab && (
+                    <div className="pb-6 text-gray-500 text-sm leading-relaxed font-medium">
+                      {tab === 'description' && 'Our zero-waste laundry detergent sheets pack ultra-concentrated cleaning power into a tiny, pre-measured strip that instantly dissolves in water. No more heavy plastic jugs or messy liquids.'}
+                      {tab === 'ingredients' && 'Coconut oil extract (Surfactant), PVA (Biodegradable matrix), Enzyme blend, Essential oils (Fragrance). 100% free of parabens, phosphates, and bleach.'}
+                      {tab === 'sustainability' && 'Packaged in 100% compostable cardboard. Our ultra-lightweight design reduces transport emissions by 94% compared to traditional liquid detergents.'}
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
 
-            {/* Trust strip */}
-            <div className="flex flex-wrap gap-4 pt-4 border-t border-gray-100">
-              {['🔒 Secure Payment', '🚚 Free Ship ₹599+', '↩️ Easy Returns', '🌿 Eco-Certified'].map(b => (
-                <span key={b} className="text-xs font-semibold text-gray-500">{b}</span>
-              ))}
+          </div>
+        </section>
+      </main>
+
+      {/* 3. "How To Use" Alternating Section */}
+      <section className="bg-gray-50 py-24 px-4">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl md:text-5xl font-black text-center mb-16 tracking-tight text-gray-900">How to use E-Strip.</h2>
+          
+          <div className="flex flex-col gap-8 md:gap-16">
+            <div className="flex flex-col md:flex-row items-center gap-8 md:gap-16">
+              <div className="w-full md:w-1/2 relative aspect-video bg-gray-200 rounded-3xl overflow-hidden shadow-md">
+                <img src="https://images.unsplash.com/photo-1582735689369-4fe89db7114c?auto=format&fit=crop&q=80&w=800" className="w-full h-full object-cover" alt="Toss" />
+              </div>
+              <div className="w-full md:w-1/2 flex flex-col justify-center">
+                <h3 className="text-8xl font-black text-gray-200 mb-2">1</h3>
+                <h4 className="text-3xl font-black text-gray-900 mb-4 tracking-tight">Toss the sheet.</h4>
+                <p className="text-lg text-gray-500 font-medium">Drop a single E-strip directly into your washer drum. For large or heavily soiled loads, simply toss in two.</p>
+              </div>
+            </div>
+
+            <div className="flex flex-col md:flex-row-reverse items-center gap-8 md:gap-16">
+              <div className="w-full md:w-1/2 relative aspect-video bg-gray-200 rounded-3xl overflow-hidden shadow-md">
+                <img src="https://images.unsplash.com/photo-1626806819282-2c1dc01a5e0c?auto=format&fit=crop&q=80&w=800" className="w-full h-full object-cover" alt="Add Clothes" />
+              </div>
+              <div className="w-full md:w-1/2 flex flex-col justify-center">
+                <h3 className="text-8xl font-black text-gray-200 mb-2">2</h3>
+                <h4 className="text-3xl font-black text-gray-900 mb-4 tracking-tight">Add your laundry.</h4>
+                <p className="text-lg text-gray-500 font-medium">Add your clothes on top. It works perfectly in all machines, including HE front-loaders and top-loaders.</p>
+              </div>
+            </div>
+
+            <div className="flex flex-col md:flex-row items-center gap-8 md:gap-16">
+              <div className="w-full md:w-1/2 relative aspect-video bg-gray-200 rounded-3xl overflow-hidden shadow-md">
+                <img src="https://images.unsplash.com/photo-1542385151-efd9000785a0?auto=format&fit=crop&q=80&w=800" className="w-full h-full object-cover" alt="Clean" />
+              </div>
+              <div className="w-full md:w-1/2 flex flex-col justify-center">
+                <h3 className="text-8xl font-black text-gray-200 mb-2">3</h3>
+                <h4 className="text-3xl font-black text-gray-900 mb-4 tracking-tight">Enjoy the clean.</h4>
+                <p className="text-lg text-gray-500 font-medium">The sheet instantly dissolves in hot or cold water, leaving zero residue and delivering an incredibly powerful clean.</p>
+              </div>
             </div>
           </div>
         </div>
+      </section>
 
-        {/* Tabs */}
-        <div className="border-b border-gray-200 mb-8">
-          <div className="flex gap-6 overflow-x-auto">
-            {['description', 'ingredients', 'reviews'].map(tab => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={`pb-3 font-bold text-sm capitalize whitespace-nowrap border-b-2 transition-all ${activeTab === tab ? 'border-[#e040a0] text-[#e040a0]' : 'border-transparent text-gray-500 hover:text-gray-700'}`}
-              >
-                {tab === 'reviews' ? `Reviews (${product.reviews.toLocaleString()})` : tab}
-              </button>
+      {/* 4. Core Benefits Carousel (Baya Style) */}
+      <section className="py-24 px-4 bg-white border-b border-gray-100">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 hide-scrollbar">
+            {[
+              { t: 'Skin & Eco-Friendly', d: 'Hypoallergenic and free from harsh chemicals.', i: 'https://images.unsplash.com/photo-1555529771-835f59fc5efe?auto=format&fit=crop&q=80&w=400' },
+              { t: 'Powerful Clean', d: 'Enzyme-based formula tackles tough stains easily.', i: 'https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?auto=format&fit=crop&q=80&w=400' },
+              { t: 'Simple & Convenient', d: 'No measuring, no mess, no heavy jugs to lift.', i: 'https://images.unsplash.com/photo-1581622558667-3419a8dc5f83?auto=format&fit=crop&q=80&w=400' },
+              { t: 'Sustainable Choice', d: '100% plastic-free compostable packaging.', i: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=400' },
+            ].map((b, idx) => (
+              <div key={idx} className="min-w-[280px] sm:min-w-[320px] snap-start flex flex-col bg-gray-50 rounded-3xl overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow">
+                <img src={b.i} alt={b.t} className="w-full h-48 object-cover" />
+                <div className="p-6">
+                  <h4 className="font-black text-xl text-gray-900 mb-2">{b.t}</h4>
+                  <p className="text-sm font-medium text-gray-500 leading-relaxed">{b.d}</p>
+                </div>
+              </div>
             ))}
           </div>
         </div>
+      </section>
 
-        <div className="max-w-3xl">
-          {activeTab === 'description' && (
-            <div>
-              <p className="text-gray-600 leading-relaxed text-lg">{product.longDesc}</p>
-              <div className="mt-6 grid sm:grid-cols-2 gap-3">
-                {product.features.map(f => (
-                  <div key={f} className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl">
-                    <span className="material-symbols-outlined text-[#e040a0]" style={{ fontSize: '20px', fontVariationSettings: "'FILL' 1" }}>check_circle</span>
-                    <span className="text-sm font-semibold text-gray-700">{f}</span>
-                  </div>
-                ))}
+      {/* 5. How We Compare (Baya Style Table) */}
+      <section className="py-24 px-4 bg-gray-50">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-3xl md:text-5xl font-black text-center mb-16 tracking-tight text-gray-900">How we compare.</h2>
+          <div className="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100">
+            {/* Header */}
+            <div className="grid grid-cols-3 bg-white border-b border-gray-200">
+              <div className="p-6"></div>
+              <div className="p-6 flex flex-col items-center justify-center bg-blue-50 border-x border-blue-100">
+                <span className="text-2xl font-black text-gray-900 tracking-tighter">E-strip<span className="text-[#E30613]">.</span></span>
+              </div>
+              <div className="p-6 flex flex-col items-center justify-center opacity-50 grayscale">
+                <span className="text-lg font-black text-gray-600 tracking-tighter">Traditional</span>
               </div>
             </div>
-          )}
-          {activeTab === 'ingredients' && (
-            <div>
-              <p className="text-gray-600 mb-4">Made with 8 plant-based ingredients. Free from harsh chemicals, parabens, SLS, and optical brighteners.</p>
-              <div className="grid sm:grid-cols-2 gap-3">
-                {['Indian Soap Nuts (Reetha)', 'Coconut Surfactants', '5-Enzyme Blend', 'Citrus Extract', 'Corn Starch', 'Vegetable Glycerin', 'Baking Soda', 'Biodegradable PVA Film'].map(i => (
-                  <div key={i} className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl">
-                    <span className="material-symbols-outlined text-emerald-500" style={{ fontSize: '18px', fontVariationSettings: "'FILL' 1" }}>eco</span>
-                    <span className="text-sm font-semibold text-gray-700">{i}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-          {activeTab === 'reviews' && (
-            <div className="space-y-6">
-              {reviews.map((r, i) => (
-                <div key={i} className="p-5 border border-gray-100 rounded-2xl">
-                  <div className="flex items-center justify-between mb-3">
-                    <div>
-                      <span className="font-black text-gray-900 mr-2">{r.name}</span>
-                      {r.verified && <span className="text-xs bg-emerald-100 text-emerald-700 font-bold px-2 py-0.5 rounded-full">Verified Purchase</span>}
-                    </div>
-                    <span className="text-xs text-gray-400">{r.date}</span>
-                  </div>
-                  <div className="flex mb-2">{[1,2,3,4,5].map(s => <span key={s} className={`text-sm ${s <= r.rating ? 'text-amber-400' : 'text-gray-200'}`}>★</span>)}</div>
-                  <p className="text-gray-600 leading-relaxed">{r.text}</p>
+            {/* Rows */}
+            {[
+              '100% Plastic Free',
+              'Pre-measured',
+              'Zero harsh chemicals',
+              'Lightweight',
+              'Works in cold water'
+            ].map((feat, i) => (
+              <div key={i} className="grid grid-cols-3 border-b border-gray-100 last:border-0">
+                <div className="p-6 flex items-center"><span className="text-sm font-bold text-gray-600">{feat}</span></div>
+                <div className="p-6 flex items-center justify-center bg-blue-50/50 border-x border-blue-100/50">
+                  <div className="w-6 h-6 rounded-full bg-[var(--color-primary)] text-white flex items-center justify-center"><span className="material-symbols-outlined text-[14px]">check</span></div>
                 </div>
-              ))}
-            </div>
-          )}
-        </div>
-
-        {/* Related */}
-        {related.length > 0 && (
-          <div className="mt-20">
-            <h2 className="text-2xl font-black text-gray-900 mb-8">You Might Also Like</h2>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {related.map(p => <ProductCard key={p.id} product={p} />)}
-            </div>
+                <div className="p-6 flex items-center justify-center">
+                  {feat === 'Works in cold water' ? (
+                     <div className="w-6 h-6 rounded-full bg-gray-200 text-gray-600 flex items-center justify-center"><span className="material-symbols-outlined text-[14px]">check</span></div>
+                  ) : (
+                     <div className="w-6 h-6 rounded-full bg-red-100 text-red-500 flex items-center justify-center"><span className="material-symbols-outlined text-[14px]">close</span></div>
+                  )}
+                </div>
+              </div>
+            ))}
           </div>
-        )}
-      </div>
+        </div>
+      </section>
 
-      {/* Sticky Mobile ATC */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 lg:hidden bg-white border-t border-gray-100 px-4 py-3 safe-area-bottom">
-        <button
-          onClick={handleAddToCart}
-          className={`w-full py-4 rounded-full font-black text-base flex items-center justify-center gap-2 transition-all ${added ? 'bg-emerald-500 text-white' : 'bg-gradient-to-r from-[#e040a0] to-[#c0208a] text-white shadow-lg'}`}
-        >
-          {added ? '✓ Added to Cart' : `Add to Cart · ₹${(price * qty).toLocaleString()}`}
+      {/* 6. 50/50 Reviews & Lifestyle */}
+      <section className="py-24 px-4 bg-white">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-8">
+          <div className="w-full md:w-1/2 bg-gray-900 text-white p-12 rounded-3xl flex flex-col justify-center">
+            <div className="flex text-yellow-400 text-2xl mb-6">★★★★★</div>
+            <h3 className="text-3xl font-black tracking-tight mb-6 leading-tight">"Honestly, I was skeptical at first, but these sheets clean better than my old liquid detergent and take up zero space."</h3>
+            <p className="font-bold text-gray-400">— Sarah J., Verified Buyer</p>
+          </div>
+          <div className="w-full md:w-1/2 bg-gray-100 rounded-3xl overflow-hidden aspect-square md:aspect-auto h-[400px] md:h-auto">
+            <img src="https://images.unsplash.com/photo-1517646287270-a5a9ca602e5c?auto=format&fit=crop&q=80&w=800" alt="Lifestyle Laundry" className="w-full h-full object-cover" />
+          </div>
+        </div>
+      </section>
+
+      {/* 7. Key Ingredients Slider */}
+      <section className="py-24 px-4 bg-blue-50 border-y border-blue-100">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex justify-between items-end mb-12">
+            <h2 className="text-3xl md:text-5xl font-black tracking-tight text-gray-900">What's inside.</h2>
+            <button className="bg-[var(--color-primary)] text-white px-8 py-3 rounded-full font-black text-xs uppercase tracking-widest hover:scale-105 transition-transform hidden md:block">View All</button>
+          </div>
+          <div className="flex overflow-x-auto gap-6 pb-8 hide-scrollbar">
+            {['Plant-based Surfactant', 'Enzyme Blend', 'Coconut Oil Extract', 'Natural Fragrance'].map((ing, idx) => (
+              <div key={idx} className="min-w-[260px] bg-white p-8 rounded-3xl border border-blue-100 shadow-sm flex flex-col items-center text-center">
+                <div className="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center mb-6">
+                  <span className="material-symbols-outlined text-[var(--color-primary)] text-3xl">water_drop</span>
+                </div>
+                <h4 className="font-black text-lg text-gray-900 mb-2">{ing}</h4>
+                <p className="text-sm font-medium text-gray-500">Breaks down tough stains and lifts dirt from fabrics effortlessly.</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 6. Mobile Sticky ATC (Shopify Parity) */}
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 md:hidden z-50 flex items-center justify-between shadow-[0_-10px_40px_rgba(0,0,0,0.1)]">
+        <div>
+          <p className="text-xs font-black text-gray-500 uppercase">Total</p>
+          <p className="text-lg font-black text-gray-900">₹{(product.price * quantity).toFixed(2)}</p>
+        </div>
+        <button onClick={handleAddToCart} className={`px-8 py-3 rounded-full font-black text-sm uppercase tracking-widest transition-all ${added ? 'bg-emerald-500 text-white' : 'bg-[var(--color-primary)] text-white'}`}>
+          {added ? 'Added!' : 'Add to Cart'}
         </button>
       </div>
+
     </div>
   );
 }

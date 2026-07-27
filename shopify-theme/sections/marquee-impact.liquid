@@ -1,0 +1,40 @@
+<section class="bg-[#2B3F50] text-white py-4 md:py-6 overflow-hidden relative shadow-inner">
+  <div class="flex whitespace-nowrap animate-marquee w-max">
+    {% for i in (1..4) %}
+      <div class="flex items-center gap-10 md:gap-20 px-5 md:px-10">
+        <span class="text-xl md:text-2xl font-black uppercase tracking-widest">
+          {{ section.settings.text_1 | default: "🌏 Over 8,200,000 Plastic Bottles Saved" }}
+        </span>
+        <span class="text-xl md:text-2xl font-black uppercase tracking-widest text-[#ffe8e8]">
+          {{ section.settings.text_2 | default: "Make the Switch Today" }}
+        </span>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Marquee Impact",
+  "settings": [
+    {
+      "type": "text",
+      "id": "text_1",
+      "label": "Text Item 1",
+      "default": "🌏 Over 8,200,000 Plastic Bottles Saved"
+    },
+    {
+      "type": "text",
+      "id": "text_2",
+      "label": "Text Item 2",
+      "default": "Make the Switch Today"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marquee Impact",
+      "category": "Banner"
+    }
+  ]
+}
+{% endschema %}
