@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 
-export default function ScrollVideoSequence({ totalFrames = 300, folderName = "frames", children }) {
+export default function ScrollVideoSequence({ totalFrames = 300, folderName = "frames", frameStep = 3, children }) {
   const canvasRef = useRef(null);
   const containerRef = useRef(null);
   const textContainerRef = useRef(null);
@@ -13,7 +13,7 @@ export default function ScrollVideoSequence({ totalFrames = 300, folderName = "f
     const loadedImages = [];
     let loadedCount = 0;
 
-    for (let i = 1; i <= totalFrames; i++) {
+    for (let i = 1; i <= totalFrames; i += frameStep) {
       const img = new Image();
       // Format to 4 digits (e.g., 0001.webp)
       const frameNumber = i.toString().padStart(4, '0');
@@ -33,13 +33,14 @@ export default function ScrollVideoSequence({ totalFrames = 300, folderName = "f
     }
     
     setImages(loadedImages);
-  }, [totalFrames, folderName]);
+  }, [totalFrames, folderName, frameStep]);
 
   // Handle Scroll to map frame smoothly
   const targetFrame = useRef(0);
   const currentFrame = useRef(0);
   const targetProgress = useRef(0);
   const currentProgress = useRef(0);
+  const lastDrawnFrame = useRef(-1);
   const rafId = useRef(null);
 
   useEffect(() => {
@@ -54,8 +55,9 @@ export default function ScrollVideoSequence({ totalFrames = 300, folderName = "f
       let scrollProgress = -containerTop / (containerHeight - windowHeight);
       scrollProgress = Math.max(0, Math.min(1, scrollProgress));
       
+      const loadedFramesCount = Math.ceil(totalFrames / frameStep);
       targetProgress.current = scrollProgress;
-      targetFrame.current = scrollProgress * (totalFrames - 1);
+      targetFrame.current = scrollProgress * (loadedFramesCount - 1);
     };
 
     const renderLoop = () => {
@@ -63,23 +65,29 @@ export default function ScrollVideoSequence({ totalFrames = 300, folderName = "f
       currentFrame.current += (targetFrame.current - currentFrame.current) * 0.1;
       currentProgress.current += (targetProgress.current - currentProgress.current) * 0.1;
 
-      // 1. Draw Image
-      const frameIndex = Math.min(totalFrames - 1, Math.max(0, Math.round(currentFrame.current)));
-      const img = images[frameIndex];
+      // 1. Draw Image (ONLY if frame changed to save massive CPU/GPU overhead)
+      const loadedFramesCount = Math.ceil(totalFrames / frameStep);
+      const frameIndex = Math.min(loadedFramesCount - 1, Math.max(0, Math.round(currentFrame.current)));
       
-      if (img && img.complete && canvasRef.current) {
-        const canvas = canvasRef.current;
-        const ctx = canvas.getContext('2d');
+      if (frameIndex !== lastDrawnFrame.current) {
+        const img = images[frameIndex];
         
-        const hRatio = canvas.width / img.width;
-        const vRatio = canvas.height / img.height;
-        const ratio = Math.max(hRatio, vRatio);
-        const centerShift_x = (canvas.width - img.width * ratio) / 2;
-        const centerShift_y = (canvas.height - img.height * ratio) / 2;  
-        
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(img, 0, 0, img.width, img.height,
-                      centerShift_x, centerShift_y, img.width * ratio, img.height * ratio);
+        if (img && img.complete && canvasRef.current) {
+          const canvas = canvasRef.current;
+          const ctx = canvas.getContext('2d');
+          
+          const hRatio = canvas.width / img.width;
+          const vRatio = canvas.height / img.height;
+          const ratio = Math.max(hRatio, vRatio);
+          const centerShift_x = (canvas.width - img.width * ratio) / 2;
+          const centerShift_y = (canvas.height - img.height * ratio) / 2;  
+          
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(img, 0, 0, img.width, img.height,
+                        centerShift_x, centerShift_y, img.width * ratio, img.height * ratio);
+                        
+          lastDrawnFrame.current = frameIndex;
+        }
       }
 
       // 2. Parallax and fade effect for text
@@ -102,7 +110,7 @@ export default function ScrollVideoSequence({ totalFrames = 300, folderName = "f
       window.removeEventListener('scroll', handleScroll);
       if (rafId.current) cancelAnimationFrame(rafId.current);
     };
-  }, [images, totalFrames]);
+  }, [images, totalFrames, frameStep]);
 
   return (
     <div ref={containerRef} className="relative w-full" style={{ height: '350vh' }}>

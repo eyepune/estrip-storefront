@@ -1,6 +1,6 @@
 'use client';
-import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { motion, useInView } from 'framer-motion';
+import { useEffect, useState, useRef } from 'react';
 
 export default function PoweredByNature() {
   const cards = [
@@ -49,10 +49,10 @@ export default function PoweredByNature() {
   ];
 
   const [drops, setDrops] = useState([]);
+  const containerRef = useRef(null);
+  const isInView = useInView(containerRef, { once: false, margin: "200px 0px" });
 
   useEffect(() => {
-    // Generate a steady stream of items with equal horizontal spacing on the client
-    // to avoid SSR hydration mismatches caused by Math.random()
     const generatedDrops = Array.from({ length: 15 }).map((_, i) => {
       const item = fallingIcons[i % fallingIcons.length];
       return {
@@ -69,12 +69,12 @@ export default function PoweredByNature() {
   }, []);
 
   return (
-    <section className="py-24 px-4 bg-gradient-to-b from-white to-gray-50 relative overflow-hidden border-y border-gray-100">
+    <section ref={containerRef} className="py-24 px-4 bg-gradient-to-b from-white to-gray-50 relative overflow-hidden border-y border-gray-100">
       
       {/* Falling Background Icons - Sticky to viewport for smooth fall during scroll */}
       <div className="absolute inset-0 pointer-events-none opacity-30 z-0">
         <div className="sticky top-0 w-full h-[100svh] overflow-hidden">
-          {drops.map((drop) => (
+          {isInView && drops.map((drop) => (
             <motion.div
               key={drop.id}
               className={`absolute top-0 flex items-center justify-center ${drop.color}`}

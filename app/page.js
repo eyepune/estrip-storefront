@@ -52,7 +52,7 @@ export default function Home() {
       {/* 3. Impact Bar */}
       <section className="bg-gradient-to-r from-blue-600 via-purple-500 to-rose-500 text-white py-3 md:py-4 overflow-hidden relative shadow-inner border-y border-white/10">
         {/* Subtle noise/texture overlay for a premium matte finish */}
-        <div className="absolute inset-0 opacity-20 mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')] pointer-events-none"></div>
+        <div className="absolute inset-0 opacity-20 pointer-events-none mix-blend-overlay"></div>
         <div className="flex whitespace-nowrap animate-marquee w-max relative z-10">
           {[...Array(4)].map((_, i) => (
             <div key={i} className="flex items-center gap-8 md:gap-16 px-4 md:px-8">
