@@ -27,14 +27,14 @@ export default function RootLayout({ children }) {
       </head>
       <body className="antialiased min-h-screen flex flex-col font-sans bg-white">
         <CartProvider>
-          <Navbar />
-          <main className="flex-1">
-            <SmoothScroll>
+          <SmoothScroll>
+            <Navbar />
+            <main className="flex-1">
               {children}
-            </SmoothScroll>
-          </main>
-          <Footer />
-          <FloatingWidgets />
+            </main>
+            <Footer />
+            <FloatingWidgets />
+          </SmoothScroll>
         </CartProvider>
       </body>
     </html>

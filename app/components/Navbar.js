@@ -54,24 +54,68 @@ export default function Navbar() {
           </div>
         </div>
 
+        {/* Category Strip */}
+        <div className="w-full bg-white border-b border-gray-100 overflow-x-auto scrollbar-hide">
+          <div className="flex items-center gap-2 px-4 py-2 md:justify-center w-max md:w-full mx-auto">
+            {[
+              { id: 'floorings', label: 'For Floor', icon: 'cleaning_services', href: '/shop?category=floorings' },
+              { id: 'laundry', label: 'For Laundry', icon: 'local_laundry_service', href: '/shop?category=laundry' },
+              { id: 'kitchen', label: 'For Kitchen', icon: 'restaurant', href: '/shop?category=kitchen' },
+            ].map(cat => {
+              const isActive = pathname === cat.href || (cat.href !== '/shop' && pathname.startsWith(cat.href));
+              return (
+                <Link
+                  key={cat.id}
+                  href={cat.href}
+                  className={`shrink-0 flex items-center gap-1.5 px-4 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-wider transition-all duration-200 ${
+                    isActive
+                      ? 'bg-[var(--primary-blue)] text-white shadow-sm'
+                      : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                  }`}
+                >
+                  {cat.icon && (
+                    <span className="material-symbols-outlined text-[14px]" style={{ fontVariationSettings: "'FILL' 1" }}>
+                      {cat.icon}
+                    </span>
+                  )}
+                  {cat.label}
+                </Link>
+              );
+            })}
+          </div>
+        </div>
         {/* Floating / Fixed Main Header */}
         <div className={`w-full grid transition-all duration-500 ease-in-out ${isNavHidden ? 'grid-rows-[0fr] opacity-0 -translate-y-4 pointer-events-none' : 'grid-rows-[1fr] opacity-100 translate-y-0'}`}>
-          <div className="overflow-hidden">
+          <div className="overflow-visible">
             <header className={`w-full transition-all duration-500 flex justify-center ${scrolled ? 'px-4 sm:px-6 mt-3' : 'px-0 mt-0'}`}>
               <nav className={`w-full max-w-7xl mx-auto flex items-center justify-between transition-all duration-700 ${
             scrolled 
               ? 'h-[60px] sm:h-[64px] bg-white/90 backdrop-blur-2xl shadow-[0_8px_32px_rgba(35,0,255,0.08)] border border-white/60 rounded-full px-5 sm:px-8' 
               : 'h-[72px] sm:h-[88px] bg-white/95 backdrop-blur-md border-b border-gray-100/50 px-4 sm:px-6 lg:px-8 shadow-sm'
           }`}>
-            
-            {/* Logo */}
-            <Link href="/" className={`flex-shrink-0 relative hover:scale-105 transition-all duration-500 flex items-center justify-center z-50 ${scrolled ? 'w-40 sm:w-48 h-12 sm:h-16' : 'w-56 sm:w-64 h-16 sm:h-20'}`}>
-              <img 
-                src="/Logo.png" 
-                alt="E-strip Logo" 
-                className="w-full h-full object-contain"
-              />
-            </Link>
+            {/* Mobile hamburger (Left on mobile) */}
+            <button
+              className={`md:hidden p-2 rounded-full transition-colors flex items-center justify-center hover:bg-[var(--color-primary)]/10 text-gray-800`}
+              onClick={() => setMobileOpen(!mobileOpen)}
+              aria-label="Toggle menu"
+            >
+              <span className="material-symbols-outlined" style={{ fontSize: '24px' }}>
+                {mobileOpen ? 'close' : 'menu'}
+              </span>
+            </button>
+
+            {/* Logo (Centered on mobile, Left on desktop) */}
+            <div className="absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0 flex items-center justify-center pointer-events-none">
+              <Link href="/" className={`pointer-events-auto flex-shrink-0 relative hover:scale-105 transition-all duration-500 flex items-center justify-center z-50 ${scrolled ? 'w-44 sm:w-52 h-10 sm:h-12' : 'w-56 sm:w-64 h-14 sm:h-16'}`}>
+                <div className={`${scrolled ? 'w-full h-full' : 'w-full h-full sm:absolute sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 sm:-mt-6 sm:w-[140%] sm:h-[180%]'} pointer-events-none transition-all duration-300`}>
+                  <img 
+                    src="/Logo.png" 
+                    alt="E-strip Logo" 
+                    className="w-full h-full object-contain pointer-events-auto"
+                  />
+                </div>
+              </Link>
+            </div>
 
             {/* Desktop Nav */}
             <div className="hidden md:flex items-center gap-8">
@@ -88,7 +132,7 @@ export default function Navbar() {
               )})}
             </div>
 
-            {/* Actions */}
+            {/* Actions (Right) */}
             <div className="flex items-center gap-2 sm:gap-4">
               {/* Cart */}
               <button
@@ -96,7 +140,7 @@ export default function Navbar() {
                 className={`relative p-2 rounded-full transition-colors bouncy-hover flex items-center justify-center hover:bg-[var(--color-primary)]/10 text-gray-800`}
                 aria-label="Open cart"
               >
-                <span className="material-symbols-outlined" style={{ fontSize: '26px' }}>shopping_bag</span>
+                <span className="material-symbols-outlined" style={{ fontSize: '24px' }}>shopping_bag</span>
                 {totalItems > 0 && (
                   <span className="absolute -top-1 -right-1 bg-[var(--color-primary)] text-white text-[10px] font-bold min-w-[20px] h-[20px] rounded-full flex items-center justify-center px-1 shadow-md border-2 border-white">
                     {totalItems}
@@ -106,19 +150,8 @@ export default function Navbar() {
 
               {/* Account */}
               <Link href="/account" className={`hidden sm:flex p-2 rounded-full transition-colors bouncy-hover items-center justify-center hover:bg-[var(--color-primary)]/10 text-gray-800`}>
-                <span className="material-symbols-outlined" style={{ fontSize: '26px' }}>person</span>
+                <span className="material-symbols-outlined" style={{ fontSize: '24px' }}>person</span>
               </Link>
-
-              {/* Mobile hamburger */}
-              <button
-                className={`md:hidden p-2 rounded-full transition-colors flex items-center justify-center hover:bg-[var(--color-primary)]/10 text-gray-800`}
-                onClick={() => setMobileOpen(!mobileOpen)}
-                aria-label="Toggle menu"
-              >
-                <span className="material-symbols-outlined" style={{ fontSize: '26px' }}>
-                  {mobileOpen ? 'close' : 'menu'}
-                </span>
-              </button>
             </div>
           </nav>
 

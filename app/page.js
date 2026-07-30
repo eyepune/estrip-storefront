@@ -17,25 +17,7 @@ export default function Home() {
       <ScrollVideoSequence totalFrames={760}>
         <div className="flex flex-col items-center justify-center p-6 text-center">
           
-          {/* Category Filter Navigation (Hero) */}
-          <div className="flex gap-3 overflow-x-auto hide-scrollbar scrollbar-hide justify-center mb-6 w-full max-w-full pointer-events-auto">
-            {[
-              { id: 'floorings', label: 'For Floorings', icon: 'cleaning_services', color: 'var(--color-primary)' },
-              { id: 'laundry', label: 'For Laundry', icon: 'local_laundry_service', color: 'var(--color-secondary)' },
-              { id: 'kitchen', label: 'For Kitchen', icon: 'restaurant', color: 'var(--color-tertiary)' },
-            ].map((cat) => (
-              <Link 
-                key={cat.id} 
-                href={`/shop?category=${cat.id}`}
-                className="shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-full font-black text-xs uppercase tracking-widest transition-all duration-300 bg-white/10 backdrop-blur-md text-white border border-white/20 hover:bg-white hover:text-black shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:scale-105 group"
-              >
-                <span className="material-symbols-outlined text-[16px] group-hover:text-[var(--color-primary)] transition-colors" style={{ fontVariationSettings: "'FILL' 1" }}>
-                  {cat.icon}
-                </span>
-                {cat.label}
-              </Link>
-            ))}
-          </div>
+
 
           <h2 className="text-5xl md:text-7xl lg:text-8xl font-black text-white drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)] mb-6 tracking-tight">
             The Future of Clean.

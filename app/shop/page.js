@@ -65,7 +65,7 @@ function ShopContent() {
 
       {/* Category Filter Navigation (Sticky, Centered, Dynamic Colors) */}
       {/* Sticks right under the Global Navbar's scrolling announcement bar (which is ~40px) */}
-      <section className="bg-white/95 backdrop-blur-xl border-y border-[var(--color-outline-variant)] sticky top-[38px] sm:top-[40px] z-40 shadow-sm transition-all duration-300">
+      <section className="bg-white/95 backdrop-blur-xl border-y border-[var(--color-outline-variant)] sticky top-[74px] sm:top-[76px] z-40 shadow-sm transition-all duration-300">
         <div className="max-w-7xl mx-auto px-4 py-4 flex gap-3 overflow-x-auto hide-scrollbar scrollbar-hide md:justify-center">
           {categories.map((cat) => {
             const isActive = activeCategory === cat.id;
