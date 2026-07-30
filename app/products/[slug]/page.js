@@ -18,8 +18,9 @@ export default function ProductPage({ params }) {
   const [accordionOpen, setAccordionOpen] = useState('description');
   const [added, setAdded] = useState(false);
 
-  const unwrappedParams = use(params);
-  const slug = unwrappedParams.slug || 'smartclean-3x-laundry-detergent-sheets';
+  const isPromise = params && typeof params.then === 'function';
+  const unwrappedParams = isPromise ? use(params) : params;
+  const slug = unwrappedParams?.slug || 'smartclean-3x-laundry-detergent-sheets';
   const product = products[slug] || products['smartclean-3x-laundry-detergent-sheets'];
 
   const handleAddToCart = () => {
