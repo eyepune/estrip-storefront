@@ -81,6 +81,30 @@ export default function ProductPage({ params }) {
                 </div>
               </div>
             </div>
+
+            {/* Secure Checkout Payments (Moved to Left Side) */}
+            <div className="flex flex-col gap-6 bg-gray-50 p-8 rounded-3xl border border-gray-100 items-center justify-center text-center mt-2">
+              <span className="text-sm font-black uppercase tracking-widest text-gray-500 flex items-center gap-2">
+                <span className="material-symbols-outlined text-base">lock</span> 100% Secure Checkout
+              </span>
+              <div className="flex flex-wrap justify-center items-center gap-4 md:gap-6">
+                {[
+                  { src: '/visa_1_color_card.svg', alt: 'Visa' },
+                  { src: '/upi_color_card.svg', alt: 'UPI' },
+                  { src: '/googlepay_color_card.svg', alt: 'Google Pay' },
+                  { src: '/mastercard_color_card.svg', alt: 'Mastercard' },
+                  { src: '/paytm_color_card.svg', alt: 'Paytm' },
+                  { src: '/phonepe_color_card.svg', alt: 'PhonePe' },
+                ].map(payment => (
+                  <img 
+                    key={payment.alt} 
+                    src={payment.src} 
+                    alt={payment.alt} 
+                    className="h-10 md:h-12 w-auto object-contain opacity-80 mix-blend-multiply" 
+                  />
+                ))}
+              </div>
+            </div>
           </div>
 
           {/* RIGHT: Buy Box */}

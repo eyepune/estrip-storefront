@@ -55,8 +55,10 @@ export default function Navbar() {
         </div>
 
         {/* Category Strip */}
-        <div className="w-full bg-white border-b border-gray-100 overflow-x-auto scrollbar-hide">
-          <div className="flex items-center gap-2 px-4 py-2 md:justify-center w-max md:w-full mx-auto">
+        <div className={`w-full grid transition-all duration-500 ease-in-out bg-white ${scrolled ? 'md:grid-rows-[0fr] md:opacity-0 border-transparent' : 'grid-rows-[1fr] opacity-100 border-b border-gray-100'}`}>
+          <div className="overflow-hidden w-full">
+            <div className="overflow-x-auto scrollbar-hide w-full">
+              <div className="flex items-center gap-2 px-4 py-2 md:justify-center w-max md:w-full mx-auto">
             {[
               { id: 'floorings', label: 'For Floor', icon: 'cleaning_services', href: '/shop?category=floorings' },
               { id: 'laundry', label: 'For Laundry', icon: 'local_laundry_service', href: '/shop?category=laundry' },
@@ -82,6 +84,8 @@ export default function Navbar() {
                 </Link>
               );
             })}
+              </div>
+            </div>
           </div>
         </div>
         {/* Floating / Fixed Main Header */}

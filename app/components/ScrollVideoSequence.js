@@ -1,12 +1,13 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 
-export default function ScrollVideoSequence({ totalFrames = 300, folderName = "frames", frameStep = 3, children }) {
+export default function ScrollVideoSequence({ totalFrames = 300, folderName = "frames", frameStep = 6, children }) {
   const canvasRef = useRef(null);
   const containerRef = useRef(null);
   const textContainerRef = useRef(null);
   const [images, setImages] = useState([]);
-  const [imagesLoaded, setImagesLoaded] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+  const isLoadingRef = useRef(true);
 
   // Preload images
   useEffect(() => {
@@ -21,10 +22,17 @@ export default function ScrollVideoSequence({ totalFrames = 300, folderName = "f
       
       img.onload = () => {
         loadedCount++;
-        setImagesLoaded(loadedCount);
+        
+        const totalToLoad = Math.ceil(totalFrames / frameStep);
+        // Turn off loading screen once 10% of frames are ready
+        if (loadedCount >= totalToLoad * 0.1 && isLoadingRef.current) {
+          isLoadingRef.current = false;
+          setIsLoading(false);
+        }
+
         // Draw the first frame immediately once it loads
         if (i === 1 && canvasRef.current) {
-          const ctx = canvasRef.current.getContext('2d');
+          const ctx = canvasRef.current.getContext('2d', { alpha: false });
           ctx.drawImage(img, 0, 0, canvasRef.current.width, canvasRef.current.height);
         }
       };
@@ -42,14 +50,31 @@ export default function ScrollVideoSequence({ totalFrames = 300, folderName = "f
   const currentProgress = useRef(0);
   const lastDrawnFrame = useRef(-1);
   const rafId = useRef(null);
+  const bounds = useRef({ top: 0, height: 0 });
+
+  // Cache bounds to prevent layout thrashing
+  useEffect(() => {
+    const updateBounds = () => {
+      if (containerRef.current) {
+        const rect = containerRef.current.getBoundingClientRect();
+        bounds.current.top = rect.top + window.scrollY;
+        bounds.current.height = rect.height;
+      }
+    };
+    
+    // Slight delay to ensure layout is settled
+    setTimeout(updateBounds, 500);
+    window.addEventListener('resize', updateBounds);
+    return () => window.removeEventListener('resize', updateBounds);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (!containerRef.current) return;
+      if (!bounds.current.height) return;
       
-      const rect = containerRef.current.getBoundingClientRect();
-      const containerTop = rect.top;
-      const containerHeight = rect.height;
+      const scrollY = window.scrollY;
+      const containerTop = bounds.current.top - scrollY;
+      const containerHeight = bounds.current.height;
       const windowHeight = window.innerHeight;
       
       let scrollProgress = -containerTop / (containerHeight - windowHeight);
@@ -61,42 +86,45 @@ export default function ScrollVideoSequence({ totalFrames = 300, folderName = "f
     };
 
     const renderLoop = () => {
-      // Lerp (Linear Interpolation) for buttery smooth scrubbing
-      currentFrame.current += (targetFrame.current - currentFrame.current) * 0.1;
-      currentProgress.current += (targetProgress.current - currentProgress.current) * 0.1;
+      // Only process and draw if we actually need to animate (saves massive CPU/GPU)
+      if (Math.abs(targetProgress.current - currentProgress.current) > 0.001) {
+        // Lerp (Linear Interpolation) for buttery smooth scrubbing
+        currentFrame.current += (targetFrame.current - currentFrame.current) * 0.1;
+        currentProgress.current += (targetProgress.current - currentProgress.current) * 0.1;
 
-      // 1. Draw Image (ONLY if frame changed to save massive CPU/GPU overhead)
-      const loadedFramesCount = Math.ceil(totalFrames / frameStep);
-      const frameIndex = Math.min(loadedFramesCount - 1, Math.max(0, Math.round(currentFrame.current)));
-      
-      if (frameIndex !== lastDrawnFrame.current) {
-        const img = images[frameIndex];
+        // 1. Draw Image (ONLY if frame changed)
+        const loadedFramesCount = Math.ceil(totalFrames / frameStep);
+        const frameIndex = Math.min(loadedFramesCount - 1, Math.max(0, Math.round(currentFrame.current)));
         
-        if (img && img.complete && canvasRef.current) {
-          const canvas = canvasRef.current;
-          const ctx = canvas.getContext('2d');
+        if (frameIndex !== lastDrawnFrame.current) {
+          const img = images[frameIndex];
           
-          const hRatio = canvas.width / img.width;
-          const vRatio = canvas.height / img.height;
-          const ratio = Math.max(hRatio, vRatio);
-          const centerShift_x = (canvas.width - img.width * ratio) / 2;
-          const centerShift_y = (canvas.height - img.height * ratio) / 2;  
-          
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-          ctx.drawImage(img, 0, 0, img.width, img.height,
-                        centerShift_x, centerShift_y, img.width * ratio, img.height * ratio);
-                        
-          lastDrawnFrame.current = frameIndex;
+          if (img && img.complete && canvasRef.current) {
+            const canvas = canvasRef.current;
+            const ctx = canvas.getContext('2d', { alpha: false }); // Optimize for opaque images
+            
+            const hRatio = canvas.width / img.width;
+            const vRatio = canvas.height / img.height;
+            const ratio = Math.max(hRatio, vRatio);
+            const centerShift_x = (canvas.width - img.width * ratio) / 2;
+            const centerShift_y = (canvas.height - img.height * ratio) / 2;  
+            
+            // Note: clearRect is not needed since we draw over the entire canvas (opaque)
+            ctx.drawImage(img, 0, 0, img.width, img.height,
+                          centerShift_x, centerShift_y, img.width * ratio, img.height * ratio);
+                          
+            lastDrawnFrame.current = frameIndex;
+          }
         }
-      }
 
-      // 2. Parallax and fade effect for text
-      if (textContainerRef.current) {
-        const textOpacity = 1 - (currentProgress.current * 3);
-        const translateY = currentProgress.current * 100;
-        textContainerRef.current.style.opacity = Math.max(0, textOpacity);
-        textContainerRef.current.style.transform = `translateY(${translateY}px)`;
-        textContainerRef.current.style.pointerEvents = textOpacity <= 0 ? 'none' : 'auto';
+        // 2. Parallax and fade effect for text
+        if (textContainerRef.current) {
+          const textOpacity = 1 - (currentProgress.current * 3);
+          const translateY = currentProgress.current * 100;
+          textContainerRef.current.style.opacity = Math.max(0, textOpacity);
+          textContainerRef.current.style.transform = `translateY(${translateY}px)`;
+          textContainerRef.current.style.pointerEvents = textOpacity <= 0 ? 'none' : 'auto';
+        }
       }
 
       rafId.current = requestAnimationFrame(renderLoop);
@@ -115,9 +143,9 @@ export default function ScrollVideoSequence({ totalFrames = 300, folderName = "f
   return (
     <div ref={containerRef} className="relative w-full" style={{ height: '350vh' }}>
       <div className="sticky top-0 w-full h-screen overflow-hidden bg-black flex items-center justify-center">
-        {imagesLoaded < totalFrames * 0.1 && (
+        {isLoading && (
           <div className="absolute inset-0 flex items-center justify-center bg-black z-10 text-white font-bold">
-            Loading Animation... {Math.round((imagesLoaded / totalFrames) * 100)}%
+            <span className="animate-pulse">Loading Animation...</span>
           </div>
         )}
         <canvas 

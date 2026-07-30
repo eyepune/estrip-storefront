@@ -99,11 +99,33 @@ export default function Footer() {
         <div className="h-px w-full bg-gray-200 mb-8" />
 
         {/* Bottom */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-6 text-xs font-bold text-gray-500 text-center md:text-left">
-          <p className="leading-relaxed">
+        <div className="flex flex-col lg:flex-row justify-between items-center gap-6 text-xs font-bold text-gray-500 text-center lg:text-left">
+          {/* Copyright */}
+          <p className="leading-relaxed lg:w-1/3">
             © {new Date().getFullYear()} E-strip India. All rights reserved. Designed and developed by <a href="https://www.eyepune.com" target="_blank" rel="noopener noreferrer" className="text-[#dc143c] hover:underline font-black">EyE PunE</a>. Made with 💚 for the planet. <span className="inline-flex items-center justify-center gap-1.5 ml-1 mt-2 md:mt-0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 225 150" width="18" height="12" className="inline-block rounded-sm"><rect width="225" height="150" fill="#138808"/><rect width="225" height="100" fill="#ffffff"/><rect width="225" height="50" fill="#FF9933"/><circle cx="112.5" cy="75" r="20" fill="#000080"/></svg> Made specially for Indians.</span>
           </p>
-          <div className="flex flex-wrap justify-center gap-4 md:gap-6">
+
+          {/* Payment Logos */}
+          <div className="flex flex-wrap justify-center items-center gap-2 lg:w-1/3">
+            {[
+              { src: '/visa_1_color_card.svg', alt: 'Visa' },
+              { src: '/upi_color_card.svg', alt: 'UPI' },
+              { src: '/googlepay_color_card.svg', alt: 'Google Pay' },
+              { src: '/mastercard_color_card.svg', alt: 'Mastercard' },
+              { src: '/paytm_color_card.svg', alt: 'Paytm' },
+              { src: '/phonepe_color_card.svg', alt: 'PhonePe' },
+            ].map(payment => (
+              <img 
+                key={payment.alt} 
+                src={payment.src} 
+                alt={payment.alt} 
+                className="h-7 w-auto object-contain opacity-75 hover:opacity-100 hover:scale-105 transition-all duration-300 drop-shadow-sm" 
+              />
+            ))}
+          </div>
+
+          {/* Links */}
+          <div className="flex flex-wrap justify-center lg:justify-end gap-4 md:gap-6 lg:w-1/3">
             {['Privacy Policy', 'Terms of Service', 'Refund Policy'].map(l => (
               <a key={l} href="#" className="hover:text-[var(--color-primary)] transition-colors">{l}</a>
             ))}

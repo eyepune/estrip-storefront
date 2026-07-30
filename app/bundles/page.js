@@ -105,13 +105,32 @@ export default function BundlesPage() {
                     <span className="text-4xl font-black text-gray-900">₹{bundle.price}</span>
                   </div>
                   
-                  <button 
-                    onClick={() => handleAddToCart(bundle)}
-                    className={`btn w-full sm:w-auto h-[60px] px-10 rounded-[9999px] font-black text-sm uppercase tracking-widest shadow-lg transition-all hover:-translate-y-1 flex items-center justify-center gap-2 ${addedId === bundle.id ? 'bg-emerald-500 text-white shadow-emerald-500/30' : 'bg-[var(--color-primary)] hover:brightness-110 text-white shadow-[0_10px_30px_rgba(224,64,160,0.3)]'}`}
-                  >
-                    <span className="material-symbols-outlined text-[20px]">{addedId === bundle.id ? 'check' : 'shopping_bag'}</span>
-                    {addedId === bundle.id ? 'Added' : 'Add Bundle'}
-                  </button>
+                  <div className="flex flex-col items-center sm:items-end gap-3 w-full sm:w-auto">
+                    <button 
+                      onClick={() => handleAddToCart(bundle)}
+                      className={`btn w-full sm:w-auto h-[60px] px-10 rounded-[9999px] font-black text-sm uppercase tracking-widest shadow-lg transition-all hover:-translate-y-1 flex items-center justify-center gap-2 ${addedId === bundle.id ? 'bg-emerald-500 text-white shadow-emerald-500/30' : 'bg-[var(--color-primary)] hover:brightness-110 text-white shadow-[0_10px_30px_rgba(224,64,160,0.3)]'}`}
+                    >
+                      <span className="material-symbols-outlined text-[20px]">{addedId === bundle.id ? 'check' : 'shopping_bag'}</span>
+                      {addedId === bundle.id ? 'Added' : 'Add Bundle'}
+                    </button>
+                    {/* Payment Logos */}
+                    <div className="flex items-center gap-3 opacity-70 mix-blend-multiply mt-1">
+                      {[
+                        { src: '/visa_1_color_card.svg', alt: 'Visa' },
+                        { src: '/upi_color_card.svg', alt: 'UPI' },
+                        { src: '/googlepay_color_card.svg', alt: 'Google Pay' },
+                        { src: '/mastercard_color_card.svg', alt: 'Mastercard' },
+                        { src: '/paytm_color_card.svg', alt: 'Paytm' },
+                      ].map(payment => (
+                        <img 
+                          key={payment.alt} 
+                          src={payment.src} 
+                          alt={payment.alt} 
+                          className="h-8 w-auto object-contain" 
+                        />
+                      ))}
+                    </div>
+                  </div>
                 </div>
 
               </div>
