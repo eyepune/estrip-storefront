@@ -1,0 +1,70 @@
+<svg viewBox="0 0 650 500" xmlns="http://www.w3.org/2000/svg" font-family="'Inter', 'Helvetica Neue', Arial, sans-serif">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0f0066"/>
+      <stop offset="100%" stop-color="#0a0044"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="650" height="500" fill="url(#bgGrad)"/>
+  
+  <text x="325" y="50" font-size="24" font-family="Georgia, serif" font-weight="bold" fill="#ffffff" text-anchor="middle">How to Use</text>
+
+  <!-- Instructions Grid -->
+  <g transform="translate(100, 100)">
+    <g transform="translate(0, 0)">
+      <circle cx="30" cy="30" r="25" fill="#0096cc" opacity="0.2"/>
+      <text x="30" y="38" font-size="24" font-weight="900" fill="#0096cc" text-anchor="middle">1</text>
+      <text x="80" y="25" font-size="16" font-weight="800" fill="#ffffff">Toss in Machine</text>
+      <text x="80" y="45" font-size="11" font-weight="400" fill="#a3a3c2">Place 1 sheet directly into the drum.</text>
+    </g>
+    
+    <g transform="translate(0, 80)">
+      <circle cx="30" cy="30" r="25" fill="#e040a0" opacity="0.2"/>
+      <text x="30" y="38" font-size="24" font-weight="900" fill="#e040a0" text-anchor="middle">2</text>
+      <text x="80" y="25" font-size="16" font-weight="800" fill="#ffffff">Add Clothes</text>
+      <text x="80" y="45" font-size="11" font-weight="400" fill="#a3a3c2">Works in hot or cold water, all machine types.</text>
+    </g>
+
+    <g transform="translate(0, 160)">
+      <circle cx="30" cy="30" r="25" fill="#0096cc" opacity="0.2"/>
+      <text x="30" y="38" font-size="24" font-weight="900" fill="#0096cc" text-anchor="middle">3</text>
+      <text x="80" y="25" font-size="16" font-weight="800" fill="#ffffff">Enjoy the Clean</text>
+      <text x="80" y="45" font-size="11" font-weight="400" fill="#a3a3c2">Instant dissolve. Zero residue. Plastic free.</text>
+    </g>
+  </g>
+
+  <!-- Ingredients & Info -->
+  <g transform="translate(450, 100)">
+    <text x="0" y="0" font-size="14" font-weight="800" fill="#e040a0">INGREDIENTS</text>
+    <text x="0" y="20" font-size="10" fill="#a3a3c2">Plant-based surfactants,</text>
+    <text x="0" y="35" font-size="10" fill="#a3a3c2">Enzyme blend, Coconut oil extract,</text>
+    <text x="0" y="50" font-size="10" fill="#a3a3c2">Natural fragrance, PVA (biodegradable).</text>
+    
+    <text x="0" y="90" font-size="14" font-weight="800" fill="#e30613">CAUTION</text>
+    <text x="0" y="110" font-size="10" fill="#a3a3c2">Keep out of reach of children.</text>
+    <text x="0" y="125" font-size="10" fill="#a3a3c2">If swallowed, drink water and</text>
+    <text x="0" y="140" font-size="10" fill="#a3a3c2">consult a physician.</text>
+  </g>
+
+  <!-- Footer / Barcode -->
+  <rect x="50" y="380" width="550" height="1" fill="#ffffff" opacity="0.1"/>
+  
+  <text x="50" y="420" font-size="10" font-weight="700" fill="#ffffff">Manufactured for:</text>
+  <text x="50" y="435" font-size="10" fill="#a3a3c2">E-Strip India Pvt. Ltd.</text>
+  <text x="50" y="450" font-size="10" fill="#a3a3c2">www.estrip.in | hello@estrip.in</text>
+
+  <!-- Dummy Barcode Placeholder -->
+  <rect x="450" y="400" width="150" height="60" fill="#ffffff"/>
+  <rect x="460" y="410" width="5" height="40" fill="#000000"/>
+  <rect x="470" y="410" width="2" height="40" fill="#000000"/>
+  <rect x="475" y="410" width="8" height="40" fill="#000000"/>
+  <rect x="490" y="410" width="4" height="40" fill="#000000"/>
+  <rect x="500" y="410" width="12" height="40" fill="#000000"/>
+  <rect x="520" y="410" width="3" height="40" fill="#000000"/>
+  <rect x="530" y="410" width="6" height="40" fill="#000000"/>
+  <rect x="545" y="410" width="8" height="40" fill="#000000"/>
+  <rect x="560" y="410" width="2" height="40" fill="#000000"/>
+  <rect x="575" y="410" width="5" height="40" fill="#000000"/>
+  <text x="525" y="458" font-size="8" font-family="monospace" fill="#000000" text-anchor="middle">8 901234 567890</text>
+</svg>

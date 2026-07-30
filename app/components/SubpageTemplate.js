@@ -7,16 +7,16 @@ export default function SubpageTemplate({ title, subtitle, category, children })
       <main className="flex-grow">
         
         {/* Dynamic Header */}
-        <div className="bg-gray-50 py-16 md:py-24 border-b border-gray-100 text-center px-4">
+        <div className="bg-gradient-to-b from-[var(--color-surface-container)] to-[var(--color-surface-container-low)] py-16 md:py-24 border-b border-[var(--color-outline-variant)] text-center px-4">
           <div className="max-w-4xl mx-auto">
             {category && (
-              <div className="inline-block px-3 py-1 bg-gray-200 text-gray-700 rounded-full font-bold text-xs mb-6 uppercase tracking-widest">
+              <div className="inline-block px-3 py-1 bg-[var(--color-primary)]/10 text-[var(--color-primary)] rounded-full font-bold text-xs mb-6 uppercase tracking-widest">
                 {category}
               </div>
             )}
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-gray-900 mb-6 tracking-tight">{title}</h1>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-[var(--color-on-surface)] mb-6 tracking-tight">{title}</h1>
             {subtitle && (
-              <p className="text-lg md:text-xl text-gray-500 font-medium max-w-2xl mx-auto leading-relaxed">{subtitle}</p>
+              <p className="text-lg md:text-xl text-[var(--color-on-surface-variant)] font-medium max-w-2xl mx-auto leading-relaxed">{subtitle}</p>
             )}
           </div>
         </div>

@@ -59,7 +59,7 @@ export default function CartSidebar() {
               <Link
                 href="/shop"
                 onClick={() => setIsOpen(false)}
-                className="bg-[#e040a0] text-white px-6 py-3 rounded-full font-bold text-sm hover:bg-[#c0208a] transition-colors"
+                className="bg-white text-rose-600 ring-4 ring-rose-600 px-6 py-3 rounded-full font-black text-sm uppercase tracking-widest hover:bg-rose-600 hover:text-white transition-all shadow-sm hover:-translate-y-1"
               >
                 Shop All Products
               </Link>

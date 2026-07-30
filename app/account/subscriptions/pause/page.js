@@ -107,7 +107,7 @@ export default function PausePage() {
           <button
             onClick={handlePause}
             disabled={!selected}
-            className="w-full bg-gray-900 text-white py-4 rounded-full font-black text-lg hover:bg-gray-700 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+            className="w-full bg-[var(--color-primary)] text-white py-4 rounded-full font-black text-lg hover:brightness-110 transition-all disabled:opacity-40 disabled:cursor-not-allowed"
           >
             Pause Subscription
           </button>

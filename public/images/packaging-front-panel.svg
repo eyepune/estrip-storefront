@@ -1,0 +1,28 @@
+<svg viewBox="0 0 650 150" xmlns="http://www.w3.org/2000/svg" font-family="'Inter', 'Helvetica Neue', Arial, sans-serif">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0f0066"/>
+      <stop offset="100%" stop-color="#0a0044"/>
+    </linearGradient>
+    <linearGradient id="wave" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0f0066"/>
+      <stop offset="50%" stop-color="#e040a0"/>
+      <stop offset="100%" stop-color="#0f0066"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="650" height="150" fill="url(#bgGrad)"/>
+  
+  <!-- Subtle top highlight for the fold edge -->
+  <rect width="650" height="3" fill="url(#wave)" opacity="0.6"/>
+
+  <!-- Logo (Centered) -->
+  <g transform="translate(245, 55) scale(0.6)">
+    <!-- e>strip Text -->
+    <image href="https://estrip.in/cdn/shop/files/Primary-Logo_Blue-scaled_1.png?v=1777612281" x="-115" y="-55" width="230" height="90" style="filter: brightness(0) invert(1);" />
+  </g>
+
+  <!-- Secondary Text -->
+  <text x="325" y="110" font-size="12" font-weight="700" letter-spacing="4" fill="#0096cc" text-anchor="middle">LAUNDRY DETERGENT SHEETS</text>
+</svg>

@@ -14,8 +14,8 @@ export default function Footer() {
               <span className="material-symbols-outlined text-[250px]" style={{ fontVariationSettings: "'FILL' 1" }}>eco</span>
             </div>
             <div>
-              <div className="relative w-32 h-12 mb-6">
-                <Image src="https://estrip.in/cdn/shop/files/Primary-Logo_Blue-scaled_1.png?v=1777612281" alt="E-strip" fill className="object-contain object-left" sizes="128px" unoptimized />
+              <div className="relative w-56 h-24 mb-6">
+                <Image src="/Logo.png" alt="E-strip" fill className="object-contain object-left" sizes="224px" unoptimized />
               </div>
               <p className="text-gray-600 text-sm leading-relaxed mb-8 max-w-sm relative z-10 font-medium">
                 High-performance cleaning. Zero compromise. Plastic-free, planet-first, people-safe.
@@ -43,10 +43,10 @@ export default function Footer() {
               <h4 className="text-sm font-black text-[var(--color-on-secondary-container)] uppercase tracking-widest mb-6">Shop</h4>
               <ul className="space-y-4 text-sm font-semibold text-[var(--color-on-secondary-container)]/80">
                 {[
-                  { label: 'Laundry Sheets', href: '/shop?category=laundry' },
-                  { label: 'Dishwashing Sheets', href: '/shop?category=dish' },
+                  { label: 'For Laundry', href: '/shop?category=laundry' },
+                  { label: 'For Kitchen', href: '/shop?category=kitchen' },
                   { label: 'Baby Formula', href: '/shop?category=baby' },
-                  { label: 'Floor Cleaner', href: '/shop?category=floor' },
+                  { label: 'For Floorings', href: '/shop?category=floorings' },
                   { label: 'All Products', href: '/shop' },
                 ].map(l => (
                   <li key={l.href}><Link href={l.href} className="hover:text-[var(--color-secondary)] transition-colors inline-block">{l.label}</Link></li>
@@ -57,10 +57,10 @@ export default function Footer() {
               <h4 className="text-sm font-black text-[var(--color-on-secondary-container)] uppercase tracking-widest mb-6">Company</h4>
               <ul className="space-y-4 text-sm font-semibold text-[var(--color-on-secondary-container)]/80">
                 {[
-                  { label: 'Our Mission', href: '/mission' },
-                  { label: 'Sustainability', href: '/mission#sustainability' },
+                  { label: 'Our Story', href: '/mission' },
                   { label: 'My Account', href: '/account' },
                   { label: 'Subscriptions', href: '/account/subscriptions' },
+                  { label: 'FAQ', href: '/faq' },
                   { label: 'Contact Us', href: '/contact' },
                 ].map(l => (
                   <li key={l.label}><Link href={l.href} className="hover:text-[var(--color-secondary)] transition-colors inline-block">{l.label}</Link></li>

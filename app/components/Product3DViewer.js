@@ -87,7 +87,7 @@ export default function Product3DViewer() {
         <directionalLight position={[-10, -10, -5]} intensity={0.5} />
         
         {/* Soft studio lighting environment */}
-        <Environment preset="city" />
+        {/* <Environment preset="city" /> Removed to prevent failed to fetch error for external HDR */}
         
         <PackagingBox />
         

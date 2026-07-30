@@ -14,20 +14,21 @@ export default function ReviewsPage() {
   ];
 
   return (
-    <div className="bg-[#f6f6f6] min-h-screen pb-24">
+    <div className="bg-[var(--color-surface-container-low)] min-h-screen pb-24">
       
       {/* Header */}
-      <section className="bg-gray-900 text-white py-20 text-center px-4 relative overflow-hidden">
+      <section className="bg-gradient-to-br from-[var(--primary-deep)] to-[var(--color-secondary)] text-white py-20 text-center px-4 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_30%_50%,var(--color-primary),transparent_60%)]"></div>
         <div className="relative z-10 max-w-4xl mx-auto">
           <h1 className="text-4xl md:text-6xl font-black mb-6 tracking-tight">Real people. Real results.</h1>
           
           <div className="flex flex-col items-center justify-center gap-2 mb-6">
             <span className="text-6xl font-black text-[#FFC107]">4.9</span>
             <div className="flex text-[#FFC107] text-2xl">★★★★★</div>
-            <p className="text-gray-400 font-bold uppercase tracking-widest text-sm mt-2">Based on 10,248 Reviews</p>
+            <p className="text-[var(--color-primary-fixed)] font-bold uppercase tracking-widest text-sm mt-2">Based on 10,248 Reviews</p>
           </div>
           
-          <div className="flex items-center justify-center gap-6 mt-8 opacity-60 grayscale">
+          <div className="flex items-center justify-center gap-6 mt-8 opacity-70">
             <div className="flex items-center gap-2"><span className="material-symbols-outlined text-[20px]">verified_user</span> Google Certified</div>
             <div className="flex items-center gap-2"><span className="material-symbols-outlined text-[20px]">thumb_up</span> Trustpilot 4.8/5</div>
           </div>
@@ -39,7 +40,7 @@ export default function ReviewsPage() {
         {/* We use CSS columns for a simple masonry layout */}
         <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
           {reviews.map((review, i) => (
-            <div key={i} className="break-inside-avoid bg-white p-6 rounded-3xl border border-gray-100 shadow-[0_10px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)] transition-shadow">
+            <div key={i} className="break-inside-avoid bg-white p-6 rounded-3xl border border-[var(--color-outline-variant)] shadow-[0_10px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_10px_30px_rgba(224,64,160,0.08)] transition-shadow">
               
               <div className="flex items-center justify-between mb-4">
                 <div className="flex text-[#FFC107] text-sm">
@@ -53,7 +54,7 @@ export default function ReviewsPage() {
               <p className="text-gray-700 font-medium leading-relaxed mb-6">"{review.text}"</p>
               
               <div className="flex items-center gap-3 mt-auto">
-                <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center font-black text-gray-900 border border-gray-200">
+                <div className="w-10 h-10 bg-[var(--color-primary)]/10 rounded-full flex items-center justify-center font-black text-[var(--color-primary)] border border-[var(--color-primary)]/20">
                   {review.name.charAt(0)}
                 </div>
                 <div>
@@ -67,7 +68,7 @@ export default function ReviewsPage() {
         </div>
         
         <div className="mt-16 text-center">
-          <button className="btn bg-white border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white px-10 py-4 rounded-[9999px] font-black text-sm tracking-widest uppercase shadow-sm transition-colors">
+          <button className="btn bg-[var(--color-primary)] text-white hover:brightness-110 px-10 py-4 rounded-[9999px] font-black text-sm tracking-widest uppercase shadow-[0_10px_30px_rgba(224,64,160,0.25)] transition-all">
             Load More Reviews
           </button>
         </div>

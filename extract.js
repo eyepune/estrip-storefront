@@ -5,8 +5,8 @@ const path = require('path');
 
 ffmpeg.setFfmpegPath(ffmpegInstaller.path);
 
-const videoPath = path.join(__dirname, 'public', 'Products_montage_estrip.in_1080p_202607150148.mp4');
-const outputDir = path.join(__dirname, 'public', 'frames');
+const videoPath = path.join(__dirname, 'public', 'Turmeric_stain_dissolving_on_fabric_202607292244.mp4');
+const outputDir = path.join(__dirname, 'public', 'spray-frames');
 
 // Create directory if it doesn't exist
 if (!fs.existsSync(outputDir)) {

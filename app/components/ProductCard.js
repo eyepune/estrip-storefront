@@ -29,7 +29,11 @@ export default function ProductCard({ product, view = 'desktop' }) {
           <img className="w-full h-full object-cover" alt={product.name} src={product.image} />
           {product.badge && (
             <div className="absolute top-2 right-2 flex gap-1">
-              <span className={`bg-${product.color}-fixed text-on-${product.color}-fixed text-[10px] font-bold px-2 py-1 rounded-full uppercase`}>
+              <span className={`text-[10px] font-bold px-2 py-1 rounded-full uppercase ${
+                product.color === 'primary' ? 'bg-[var(--color-primary-fixed)] text-[var(--color-on-primary-fixed)]' :
+                product.color === 'secondary' ? 'bg-[var(--color-secondary-fixed)] text-[var(--color-on-secondary-fixed)]' :
+                'bg-[var(--color-tertiary-fixed)] text-[var(--color-on-tertiary-fixed)]'
+              }`}>
                 {product.badge}
               </span>
             </div>
@@ -80,7 +84,7 @@ export default function ProductCard({ product, view = 'desktop' }) {
           <motion.button 
             whileTap={{ scale: 0.9 }}
             onClick={handleAddToCart}
-            className={`btn bg-${product.color || 'primary'} hover:bg-surface-tint text-white px-6 py-2 rounded-full font-bold text-sm tracking-wide transition-colors flex items-center gap-2`}
+            className={`btn bg-white text-rose-600 px-6 py-2 rounded-full font-black text-xs uppercase tracking-widest ring-4 ring-rose-600 hover:bg-rose-600 hover:text-white transition-all duration-300 shadow-sm flex items-center gap-2`}
           >
             <span className="material-symbols-outlined text-sm">add_shopping_cart</span>
             Add to Cart
@@ -103,7 +107,11 @@ export default function ProductCard({ product, view = 'desktop' }) {
         <div>
           <div className="flex justify-between items-start mb-2">
             {product.badge && (
-              <span className={`bg-${product.color || 'tertiary'}-fixed text-on-${product.color || 'tertiary'}-fixed-variant px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider`}>
+              <span className={`px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider ${
+                product.color === 'primary' ? 'bg-[var(--color-primary-fixed)] text-[var(--color-on-primary-fixed-variant)]' :
+                product.color === 'secondary' ? 'bg-[var(--color-secondary-fixed)] text-[var(--color-on-secondary-fixed-variant)]' :
+                'bg-[var(--color-tertiary-fixed)] text-[var(--color-on-tertiary-fixed-variant)]'
+              }`}>
                 {product.badge}
               </span>
             )}
@@ -145,13 +153,18 @@ export default function ProductCard({ product, view = 'desktop' }) {
           </select>
         )}
         <div className={`flex items-center justify-between ${!isSubscription ? 'mt-4' : ''}`}>
-          <span className={`text-2xl font-black text-${product.color || 'tertiary'}`}>
+          <span className={`text-2xl font-black ${
+            product.category === 'laundry' ? 'text-blue-500' :
+            product.category === 'kitchen' ? 'text-yellow-500' :
+            product.category === 'baby' ? 'text-purple-500' :
+            product.category === 'floorings' ? 'text-pink-500' : 'text-gray-900'
+          }`}>
             {isSubscription ? `₹${(product.price * 0.85).toFixed(2)}` : `₹${product.price}`}
           </span>
           <motion.button 
             whileTap={{ scale: 0.9 }}
             onClick={handleAddToCart}
-            className={`btn whitespace-nowrap flex-shrink-0 bg-${product.color || 'tertiary'} text-white px-8 py-3 rounded-full font-bold tracking-wide hover:bg-${product.color || 'tertiary'}-container hover:text-on-${product.color || 'tertiary'}-container transition-colors`}
+            className={`btn whitespace-nowrap bg-white text-rose-600 px-4 py-2 rounded-full font-black text-[11px] tracking-widest uppercase ring-2 ring-rose-600 hover:bg-rose-600 hover:text-white shadow-sm hover:-translate-y-1 transition-all duration-300`}
           >
             Quick Add
           </motion.button>

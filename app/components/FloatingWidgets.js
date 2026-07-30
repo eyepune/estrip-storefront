@@ -1,13 +1,22 @@
 'use client';
+import { usePathname } from 'next/navigation';
 
 export default function FloatingWidgets() {
+  const pathname = usePathname() || '';
+  const isProductPage = pathname.includes('/products/');
+  
+  // On product pages, we have a sticky Add To Cart bar at the bottom on mobile.
+  // We need to push the widgets up so they align right above it.
+  const bottomClassLeft = isProductPage ? "bottom-28 md:bottom-8" : "bottom-6 md:bottom-8";
+  const bottomClassRight = isProductPage ? "bottom-28 md:bottom-8" : "bottom-6 md:bottom-8";
+
   return (
     <div className="pointer-events-none fixed inset-0 z-50 overflow-hidden">
       {/* WhatsApp Button - Left */}
-      <div className="absolute bottom-24 left-6 md:bottom-32 md:left-8 pointer-events-auto flex items-center group">
+      <div className={`absolute ${bottomClassLeft} left-4 md:left-8 pointer-events-auto flex items-center group z-40 transition-all duration-300`}>
         <button 
           onClick={() => alert("WhatsApp placeholder clicked!")}
-          className="relative flex items-center justify-center w-12 h-12 md:w-14 md:h-14 bg-[#25D366] text-white rounded-full shadow-[0_4px_16px_rgba(37,211,102,0.4)] hover:scale-110 transition-transform duration-300 z-10"
+          className="relative flex items-center justify-center w-12 h-12 md:w-14 md:h-14 bg-[#25D366] text-white rounded-full shadow-[0_4px_16px_rgba(37,211,102,0.4)] hover:scale-110 transition-transform duration-300"
           aria-label="Chat on WhatsApp"
         >
           {/* Pulse effect */}
@@ -20,17 +29,6 @@ export default function FloatingWidgets() {
         </div>
       </div>
 
-      {/* AI Chatbot Button - Right */}
-      <div className="absolute bottom-24 right-6 md:bottom-32 md:right-8 pointer-events-auto flex items-center justify-end group">
-        <button 
-          onClick={() => alert("AI Chatbot placeholder clicked!")}
-          className="relative flex items-center justify-center gap-2 md:gap-3 h-11 md:h-14 px-6 md:px-10 bg-[var(--color-secondary)] text-white rounded-full hover:-translate-y-1 transition-transform duration-300 z-10 shadow-2xl"
-          aria-label="Open AI Chatbot"
-        >
-          <span className="material-symbols-outlined text-lg md:text-2xl animate-pulse" style={{ fontVariationSettings: "'FILL' 1" }}>robot_2</span>
-          <span className="font-bold text-xs md:text-lg tracking-wide whitespace-nowrap">Chat</span>
-        </button>
-      </div>
     </div>
   );
 }

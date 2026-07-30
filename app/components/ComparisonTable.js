@@ -13,10 +13,10 @@ export default function ComparisonTable() {
   ];
 
   return (
-    <section className="py-20 px-4 max-w-5xl mx-auto">
+    <section className="py-12 px-4 max-w-4xl mx-auto">
       <div className="text-center mb-12">
-        <h2 className="text-3xl md:text-5xl font-black text-gray-900 mb-4 tracking-tight">WHY CHOOSE US?</h2>
-        <p className="text-gray-500 font-medium text-lg">See how we stack up against traditional supermarket brands.</p>
+        <h2 className="text-2xl md:text-4xl font-black text-[var(--color-on-surface)] mb-4 tracking-tight">WHY CHOOSE US?</h2>
+        <p className="text-[var(--color-on-surface-variant)] font-medium text-lg">See how we stack up against traditional supermarket brands.</p>
       </div>
 
       <div className="bg-white rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.08)] overflow-hidden border border-gray-100">
@@ -71,9 +71,9 @@ export default function ComparisonTable() {
       </div>
 
       <div className="mt-12 text-center">
-        <p className="text-2xl font-black text-gray-900 mb-2">₹5.88 per wash</p>
-        <p className="text-gray-500 font-medium text-sm mb-6">When you subscribe to the Ultimate Bundle</p>
-        <a href="#bundle-widget" className="btn bg-[var(--primary-deep)] text-white hover:opacity-90 px-12 py-4 text-sm font-bold tracking-widest uppercase rounded-[9999px] inline-block shadow-lg">
+        <p className="text-xl font-black text-[var(--color-on-surface)] mb-2">₹5.88 per wash</p>
+        <p className="text-[var(--color-on-surface-variant)] font-medium text-sm mb-6">When you subscribe to the Ultimate Bundle</p>
+        <a href="#bundle-widget" className="btn bg-[var(--color-primary)] text-white hover:brightness-110 px-10 py-3 text-xs md:text-sm font-bold tracking-widest uppercase rounded-[9999px] inline-block shadow-[0_10px_20px_rgba(224,64,160,0.2)] hover:-translate-y-1 transition-all">
           Make The Switch
         </a>
       </div>

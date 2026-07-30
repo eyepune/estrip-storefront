@@ -26,7 +26,7 @@ export default function FAQPage() {
       { q: "Are there any hidden fees?", a: "None. You only pay for the products you receive, and shipping is always free on subscription orders." }
     ],
     'Returns': [
-      { q: "What is your return policy?", a: "We offer a 30-day money-back guarantee. If you're not completely satisfied with your purchase, simply contact us for a full refund." },
+      { q: "What is your return policy?", a: "If you have any issues with your purchase or if it arrives damaged, simply contact us and we'll make it right." },
       { q: "How do I initiate a return?", a: "Email our support team at hello@estrip.in with your order number, and we'll provide you with a prepaid return label." }
     ]
   };
@@ -36,13 +36,14 @@ export default function FAQPage() {
   };
 
   return (
-    <div className="bg-[#f6f6f6] min-h-screen pb-24">
+    <div className="bg-[var(--color-surface-container-low)] min-h-screen pb-24">
       
       {/* Header */}
-      <section className="bg-gray-900 text-white py-20 text-center px-4 relative overflow-hidden">
+      <section className="bg-gradient-to-br from-[var(--primary-deep)] to-[var(--color-secondary)] text-white py-20 text-center px-4 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_70%_30%,var(--color-primary),transparent_60%)]"></div>
         <div className="relative z-10 max-w-3xl mx-auto">
           <h1 className="text-4xl md:text-6xl font-black mb-4 tracking-tight">Got Questions?</h1>
-          <p className="text-gray-300 font-medium text-lg">Everything you need to know about E-strip and making the switch.</p>
+          <p className="text-[var(--color-primary-fixed)] font-medium text-lg">Everything you need to know about E-strip and making the switch.</p>
         </div>
       </section>
 
@@ -68,7 +69,7 @@ export default function FAQPage() {
             
             <div className="space-y-4">
               {faqs[activeTab].map((faq, index) => (
-                <div key={index} className={`border rounded-xl transition-all ${openFaq === index ? 'border-gray-900 shadow-md bg-white' : 'border-gray-200 bg-gray-50 hover:border-gray-300'}`}>
+                <div key={index} className={`border rounded-xl transition-all ${openFaq === index ? 'border-[var(--color-primary)] shadow-md bg-white' : 'border-[var(--color-outline-variant)] bg-[var(--color-surface-container-low)] hover:border-[var(--color-primary)]/40'}`}>
                   <button 
                     onClick={() => toggleFaq(index)}
                     className="w-full flex justify-between items-center p-5 text-left focus:outline-none"
@@ -92,7 +93,7 @@ export default function FAQPage() {
         {/* Still need help */}
         <div className="mt-12 text-center">
           <p className="text-gray-500 font-medium mb-4">Can't find what you're looking for?</p>
-          <Link href="/contact" className="btn bg-gray-900 text-white hover:bg-[var(--color-primary)] px-8 py-3 rounded-full font-bold text-sm tracking-widest shadow-lg inline-block transition-colors">
+          <Link href="/contact" className="btn bg-[var(--color-primary)] text-white hover:brightness-110 px-8 py-3 rounded-full font-bold text-sm tracking-widest shadow-[0_10px_30px_rgba(224,64,160,0.25)] inline-block transition-all">
             Contact Support
           </Link>
         </div>

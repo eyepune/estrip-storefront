@@ -13,7 +13,7 @@ export default function PageComponent() {
           loop 
           muted 
           playsInline 
-          className="w-full h-full object-cover mix-blend-multiply opacity-50"
+          className="w-full h-full object-cover opacity-15 transform-gpu"
         >
           <source src="/Drone_shot_above_green_forest_202607210047.mp4" type="video/mp4" />
         </video>
@@ -43,7 +43,7 @@ export default function PageComponent() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               
-              <div className="md:col-span-2 bg-white/60 backdrop-blur-2xl border border-white/50 p-6 sm:p-10 rounded-3xl shadow-xl flex flex-col justify-between hover:-translate-y-2 transition-transform duration-300">
+              <div className="md:col-span-2 bg-white/80 border border-white/50 p-6 sm:p-10 rounded-3xl shadow-xl flex flex-col justify-between hover:-translate-y-2 transition-transform duration-300">
                 <div>
                   <div className="w-16 h-16 bg-[var(--color-tertiary-fixed)] flex items-center justify-center rounded-full mb-8 shadow-inner">
                     <span className="material-symbols-outlined text-[var(--color-tertiary)] text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>eco</span>
@@ -58,8 +58,8 @@ export default function PageComponent() {
                 </div>
               </div>
 
-              <div className="bg-[var(--color-primary-container)]/80 backdrop-blur-2xl border border-white/40 p-6 sm:p-10 rounded-3xl text-[var(--color-on-primary-container)] shadow-xl flex flex-col items-center text-center hover:-translate-y-2 transition-transform duration-300">
-                <div className="w-20 h-20 bg-white/40 backdrop-blur-md flex items-center justify-center rounded-full mb-8 shadow-inner">
+              <div className="bg-[var(--color-primary-container)]/95 border border-white/40 p-6 sm:p-10 rounded-3xl text-[var(--color-on-primary-container)] shadow-xl flex flex-col items-center text-center hover:-translate-y-2 transition-transform duration-300">
+                <div className="w-20 h-20 bg-white/40 flex items-center justify-center rounded-full mb-8 shadow-inner">
                   <span className="material-symbols-outlined text-white text-5xl" style={{ fontVariationSettings: "'FILL' 1" }}>biotech</span>
                 </div>
                 <h3 className="text-2xl sm:text-3xl font-black mb-4">Plant-Powered Science</h3>
@@ -79,7 +79,7 @@ export default function PageComponent() {
                 </div>
               </div>
 
-              <div className="md:col-span-2 bg-white/40 backdrop-blur-xl border border-white/50 p-6 sm:p-10 rounded-3xl shadow-lg flex flex-col md:flex-row gap-8 items-center hover:-translate-y-2 transition-transform duration-300">
+              <div className="md:col-span-2 bg-white/70 border border-white/50 p-6 sm:p-10 rounded-3xl shadow-lg flex flex-col md:flex-row gap-8 items-center hover:-translate-y-2 transition-transform duration-300">
                 <div className="flex-1">
                   <h3 className="text-xl sm:text-2xl font-black text-gray-900 mb-3">Total Transparency</h3>
                   <p className="text-gray-700 leading-relaxed font-medium text-sm sm:text-base">No hidden ingredients. No confusing labels. Just honest, effective cleaning that you can feel good about using in your home.</p>
@@ -145,7 +145,7 @@ export default function PageComponent() {
 
           {/* CTA Section */}
           <section className="text-center">
-            <div className="bg-white/60 backdrop-blur-2xl border border-white/50 p-6 sm:p-16 rounded-3xl shadow-xl relative overflow-hidden">
+            <div className="bg-white/80 border border-white/50 p-6 sm:p-16 rounded-3xl shadow-xl relative overflow-hidden">
               <div className="absolute top-0 right-0 p-8 opacity-5 pointer-events-none">
                 <span className="material-symbols-outlined text-9xl">bubble_chart</span>
               </div>

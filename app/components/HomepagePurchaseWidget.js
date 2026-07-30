@@ -41,8 +41,8 @@ export default function HomepagePurchaseWidget() {
   };
 
   return (
-    <section id="bundle-widget" className="py-24 px-4 bg-white border-t border-gray-100">
-      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
+    <section id="bundle-widget" className="py-12 px-4 bg-white border-t border-gray-100">
+      <div className="max-w-5xl mx-auto flex flex-col lg:flex-row gap-8 lg:gap-12 items-start">
         
         {/* Left Column: Media Gallery */}
         <div className="w-full lg:w-1/2 flex flex-col gap-4">
@@ -56,7 +56,7 @@ export default function HomepagePurchaseWidget() {
               priority
               unoptimized
             />
-            <div className="absolute top-4 left-4 bg-[#E30613] text-white text-xs font-black px-4 py-1.5 rounded-[4px] uppercase tracking-widest shadow-md">
+            <div className="absolute top-4 left-4 bg-[var(--color-primary)] text-white text-xs font-black px-4 py-1.5 rounded-[4px] uppercase tracking-widest shadow-md">
               SAVE 50% TODAY
             </div>
           </div>
@@ -84,13 +84,13 @@ export default function HomepagePurchaseWidget() {
             <span className="text-sm text-gray-500 font-bold">{bundle.rating} ({bundle.reviews.toLocaleString()} reviews)</span>
           </div>
 
-          <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-3 leading-tight tracking-tight">{bundle.name}</h2>
-          <p className="text-gray-600 text-lg mb-8 font-medium max-w-lg">{bundle.subtitle}</p>
+          <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-3 leading-tight tracking-tight">{bundle.name}</h2>
+          <p className="text-gray-600 text-base mb-6 font-medium max-w-lg">{bundle.subtitle}</p>
 
           {/* Pricing Block */}
-          <div className="flex items-baseline gap-4 mb-8 bg-gray-50 p-6 rounded-2xl border border-gray-200">
-            <span className="text-4xl font-black text-[#E30613]">₹{finalPrice}</span>
-            <span className="text-2xl text-gray-400 line-through font-bold">₹{bundle.comparePrice}</span>
+          <div className="flex items-baseline gap-4 mb-6 bg-gray-50 p-4 rounded-xl border border-gray-200">
+            <span className="text-3xl font-black text-[var(--color-primary)]">₹{finalPrice}</span>
+            <span className="text-2xl text-[var(--color-on-surface-variant)] line-through font-bold">₹{bundle.comparePrice}</span>
             <span className="bg-emerald-100 text-emerald-700 text-xs font-black px-3 py-1 rounded-[4px] tracking-wide uppercase ml-auto">
               IN STOCK - SHIPS TODAY
             </span>
@@ -145,7 +145,7 @@ export default function HomepagePurchaseWidget() {
           {/* Add to Cart */}
           <button
             onClick={handleAddToCart}
-            className="w-full bg-[#E30613] hover:bg-red-700 text-white h-[64px] rounded-[9999px] font-black text-lg tracking-widest uppercase shadow-[0_10px_30px_rgba(227,6,19,0.3)] transition-all hover:-translate-y-1 hover:shadow-[0_15px_40px_rgba(227,6,19,0.4)] flex items-center justify-center gap-3"
+            className="w-full bg-white text-[var(--color-primary)] ring-4 ring-[var(--color-primary)] h-[56px] rounded-[9999px] font-black text-base tracking-widest uppercase shadow-[0_10px_20px_rgba(0,0,0,0.1)] transition-all hover:-translate-y-1 hover:shadow-[0_15px_30px_rgba(0,0,0,0.15)] hover:bg-[var(--color-primary)] hover:text-white flex items-center justify-center gap-3"
           >
             <span className="material-symbols-outlined text-[24px]">shopping_cart</span>
             Add to Cart — ₹{finalPrice}
@@ -153,7 +153,7 @@ export default function HomepagePurchaseWidget() {
           
           <div className="flex items-center justify-center gap-2 mt-6 text-gray-500 text-sm font-bold">
             <span className="material-symbols-outlined text-[18px]">lock</span>
-            Secure checkout. 30-day money-back guarantee.
+            Secure checkout. Guaranteed safety.
           </div>
 
         </div>

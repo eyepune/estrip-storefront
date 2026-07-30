@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, use } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -18,7 +18,8 @@ export default function ProductPage({ params }) {
   const [accordionOpen, setAccordionOpen] = useState('description');
   const [added, setAdded] = useState(false);
 
-  const slug = params.slug || 'smartclean-3x-laundry-detergent-sheets';
+  const unwrappedParams = use(params);
+  const slug = unwrappedParams.slug || 'smartclean-3x-laundry-detergent-sheets';
   const product = products[slug] || products['smartclean-3x-laundry-detergent-sheets'];
 
   const handleAddToCart = () => {
@@ -32,7 +33,7 @@ export default function ProductPage({ params }) {
       {/* 1. Trust Badges Bar */}
       <div className="bg-gray-50 border-b border-gray-100 py-3 px-4 hidden md:flex justify-center gap-8 md:gap-16 text-xs font-bold text-gray-600 tracking-widest uppercase">
         <span className="flex items-center gap-2"><span className="material-symbols-outlined text-sm">local_shipping</span> Free shipping above ₹999</span>
-        <span className="flex items-center gap-2"><span className="material-symbols-outlined text-sm">verified_user</span> 30-Day Money Back Guarantee</span>
+
         <span className="flex items-center gap-2"><span className="material-symbols-outlined text-sm">eco</span> Climate Pledge Friendly</span>
         <span className="flex items-center gap-2"><span className="material-symbols-outlined text-sm">public</span> Indian Brand</span>
       </div>
@@ -45,7 +46,7 @@ export default function ProductPage({ params }) {
           <div className="w-full lg:w-[55%] flex flex-col gap-6">
             {/* Gallery */}
             <div className="relative aspect-[4/5] md:aspect-square bg-gray-50 rounded-3xl overflow-hidden shadow-sm group">
-              <div className="absolute top-6 left-6 z-10 bg-gray-900 text-white text-xs font-black uppercase tracking-widest px-4 py-2 rounded-full shadow-lg">Best Seller</div>
+              <div className="absolute top-6 left-6 z-10 bg-[var(--color-primary)] text-white text-xs font-black uppercase tracking-widest px-4 py-2 rounded-full shadow-lg">Best Seller</div>
               <Image 
                 src={product.img} 
                 alt={product.title} 
@@ -105,7 +106,7 @@ export default function ProductPage({ params }) {
                   <button 
                     key={v}
                     onClick={() => setActiveVariant(v)}
-                    className={`px-6 py-3 rounded-full text-sm font-bold border transition-all ${activeVariant === v ? 'border-gray-900 bg-gray-900 text-white' : 'border-gray-200 bg-white text-gray-600 hover:border-gray-900'}`}
+                    className={`px-6 py-3 rounded-full text-sm font-bold border-2 transition-all ${activeVariant === v ? 'border-rose-600 bg-rose-600 text-white shadow-md' : 'border-gray-200 bg-white text-gray-500 hover:border-rose-600 hover:text-rose-600'}`}
                   >
                     {v}
                   </button>
@@ -122,7 +123,7 @@ export default function ProductPage({ params }) {
               </div>
               <button 
                 onClick={handleAddToCart}
-                className={`flex-1 h-14 rounded-full font-black text-sm uppercase tracking-widest transition-all shadow-lg active:scale-95 ${added ? 'bg-emerald-500 text-white' : 'bg-[var(--color-primary)] hover:bg-[#1a2a36] text-white'}`}
+                className={`flex-1 h-14 rounded-full font-black text-sm uppercase tracking-widest transition-all hover:-translate-y-1 shadow-sm hover:shadow-lg active:scale-95 ${added ? 'bg-emerald-500 text-white ring-4 ring-emerald-500' : 'bg-white text-rose-600 ring-4 ring-rose-600 hover:bg-rose-600 hover:text-white'}`}
               >
                 {added ? 'Added to Cart' : `Add to Cart - ₹${(product.price * quantity).toFixed(2)}`}
               </button>
@@ -130,7 +131,7 @@ export default function ProductPage({ params }) {
 
             {/* Mini Trust & Payments */}
             <div className="flex flex-col items-center gap-4 mb-8">
-              <p className="text-xs font-bold uppercase tracking-widest text-gray-500">30 Days Money Back Guarantee | Free Shipping over ₹999</p>
+              <p className="text-xs font-bold uppercase tracking-widest text-gray-500">Free Shipping over ₹999</p>
               <div className="flex gap-2 grayscale opacity-60">
                 {/* Dummy Payment Icons */}
                 <div className="w-10 h-6 bg-gray-200 rounded"></div>
@@ -247,7 +248,7 @@ export default function ProductPage({ params }) {
             <div className="grid grid-cols-3 bg-white border-b border-gray-200">
               <div className="p-6"></div>
               <div className="p-6 flex flex-col items-center justify-center bg-blue-50 border-x border-blue-100">
-                <span className="text-2xl font-black text-gray-900 tracking-tighter">E-strip<span className="text-[#E30613]">.</span></span>
+                <span className="text-2xl font-black text-[var(--color-on-surface)] tracking-tighter">E-strip<span className="text-[var(--color-primary)]">.</span></span>
               </div>
               <div className="p-6 flex flex-col items-center justify-center opacity-50 grayscale">
                 <span className="text-lg font-black text-gray-600 tracking-tighter">Traditional</span>
@@ -282,7 +283,7 @@ export default function ProductPage({ params }) {
       {/* 6. 50/50 Reviews & Lifestyle */}
       <section className="py-24 px-4 bg-white">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-8">
-          <div className="w-full md:w-1/2 bg-gray-900 text-white p-12 rounded-3xl flex flex-col justify-center">
+          <div className="w-full md:w-1/2 bg-[var(--primary-deep)] text-white p-12 rounded-3xl flex flex-col justify-center">
             <div className="flex text-yellow-400 text-2xl mb-6">★★★★★</div>
             <h3 className="text-3xl font-black tracking-tight mb-6 leading-tight">"Honestly, I was skeptical at first, but these sheets clean better than my old liquid detergent and take up zero space."</h3>
             <p className="font-bold text-gray-400">— Sarah J., Verified Buyer</p>
@@ -294,7 +295,7 @@ export default function ProductPage({ params }) {
       </section>
 
       {/* 7. Key Ingredients Slider */}
-      <section className="py-24 px-4 bg-blue-50 border-y border-blue-100">
+      <section className="py-24 px-4 bg-[var(--color-primary)]/5 border-y border-[var(--color-primary)]/10">
         <div className="max-w-7xl mx-auto">
           <div className="flex justify-between items-end mb-12">
             <h2 className="text-3xl md:text-5xl font-black tracking-tight text-gray-900">What's inside.</h2>

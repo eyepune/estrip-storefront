@@ -12,13 +12,14 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="bg-[#f6f6f6] min-h-screen pb-24">
+    <div className="bg-[var(--color-surface-container-low)] min-h-screen pb-24">
       
       {/* Header */}
-      <section className="bg-gray-900 text-white py-20 text-center px-4 relative overflow-hidden">
+      <section className="bg-gradient-to-br from-[var(--primary-deep)] to-[var(--color-secondary)] text-white py-20 text-center px-4 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_50%_50%,var(--color-primary),transparent_60%)]"></div>
         <div className="relative z-10 max-w-3xl mx-auto">
           <h1 className="text-4xl md:text-6xl font-black mb-4 tracking-tight">Let's talk.</h1>
-          <p className="text-gray-300 font-medium text-lg">We're here to help with orders, subscriptions, or general inquiries.</p>
+          <p className="text-[var(--color-primary-fixed)] font-medium text-lg">We're here to help with orders, subscriptions, or general inquiries.</p>
         </div>
       </section>
 
@@ -33,8 +34,8 @@ export default function ContactPage() {
               
               <div className="space-y-8">
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm shrink-0 border border-gray-200">
-                    <span className="material-symbols-outlined text-gray-900 text-[20px]">email</span>
+                  <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm shrink-0 border border-[var(--color-outline-variant)]">
+                    <span className="material-symbols-outlined text-[var(--color-primary)] text-[20px]">email</span>
                   </div>
                   <div>
                     <h4 className="font-bold text-gray-900 text-sm uppercase tracking-widest mb-1">Email Us</h4>
@@ -44,8 +45,8 @@ export default function ContactPage() {
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm shrink-0 border border-gray-200">
-                    <span className="material-symbols-outlined text-gray-900 text-[20px]">location_on</span>
+                  <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm shrink-0 border border-[var(--color-outline-variant)]">
+                    <span className="material-symbols-outlined text-[var(--color-primary)] text-[20px]">location_on</span>
                   </div>
                   <div>
                     <h4 className="font-bold text-gray-900 text-sm uppercase tracking-widest mb-1">HQ Address</h4>
@@ -103,7 +104,7 @@ export default function ContactPage() {
                 <textarea required rows="4" className="border-2 border-gray-200 rounded-lg px-4 py-3 font-medium text-gray-900 focus:outline-none focus:border-gray-900 transition-colors resize-none" placeholder="Write your message here..."></textarea>
               </div>
 
-              <button type="submit" className="btn bg-gray-900 hover:bg-[var(--color-primary)] text-white h-[60px] rounded-[9999px] font-black text-sm tracking-widest uppercase shadow-lg transition-all hover:-translate-y-1 mt-2">
+              <button type="submit" className="btn bg-[var(--color-primary)] hover:brightness-110 text-white h-[60px] rounded-[9999px] font-black text-sm tracking-widest uppercase shadow-[0_10px_30px_rgba(224,64,160,0.25)] transition-all hover:-translate-y-1 mt-2">
                 Send Message
               </button>
               

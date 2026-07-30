@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 
-export default function ScrollVideoSequence({ totalFrames = 300 }) {
+export default function ScrollVideoSequence({ totalFrames = 300, folderName = "frames", children }) {
   const canvasRef = useRef(null);
   const containerRef = useRef(null);
   const textContainerRef = useRef(null);
@@ -17,7 +17,7 @@ export default function ScrollVideoSequence({ totalFrames = 300 }) {
       const img = new Image();
       // Format to 4 digits (e.g., 0001.webp)
       const frameNumber = i.toString().padStart(4, '0');
-      img.src = `/frames/${frameNumber}.webp`;
+      img.src = `/${folderName}/${frameNumber}.webp`;
       
       img.onload = () => {
         loadedCount++;
@@ -33,7 +33,7 @@ export default function ScrollVideoSequence({ totalFrames = 300 }) {
     }
     
     setImages(loadedImages);
-  }, [totalFrames]);
+  }, [totalFrames, folderName]);
 
   // Handle Scroll to map frame smoothly
   const targetFrame = useRef(0);
@@ -105,7 +105,7 @@ export default function ScrollVideoSequence({ totalFrames = 300 }) {
   }, [images, totalFrames]);
 
   return (
-    <div ref={containerRef} className="relative w-full" style={{ height: '300vh' }}>
+    <div ref={containerRef} className="relative w-full" style={{ height: '350vh' }}>
       <div className="sticky top-0 w-full h-screen overflow-hidden bg-black flex items-center justify-center">
         {imagesLoaded < totalFrames * 0.1 && (
           <div className="absolute inset-0 flex items-center justify-center bg-black z-10 text-white font-bold">
@@ -120,19 +120,23 @@ export default function ScrollVideoSequence({ totalFrames = 300 }) {
         />
         
         {/* Gradient Overlay for Text Visibility */}
-        <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/40 via-black/10 to-transparent pointer-events-none"></div>
+        <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/80 via-black/40 to-black/10 pointer-events-none"></div>
 
         {/* Overlay Content */}
-        <div ref={textContainerRef} className="absolute inset-0 z-20 flex flex-col items-center justify-center p-6 text-center pointer-events-none">
-          <h2 className="text-5xl md:text-7xl lg:text-8xl font-black text-white drop-shadow-2xl mb-6 tracking-tight">
-            The Future of Clean.
-          </h2>
-          <p className="text-xl md:text-2xl text-white drop-shadow-xl font-medium max-w-2xl mb-10">
-            Scroll to see how our plant-powered sheets dissolve instantly and power through stains.
-          </p>
-          <a href="/shop" className="pointer-events-auto btn bg-white text-gray-900 hover:bg-gray-200 px-12 py-4 text-sm font-bold tracking-widest uppercase rounded-[9999px] shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
-            Shop Now
-          </a>
+        <div ref={textContainerRef} className="absolute inset-0 z-20 w-full h-full flex items-center justify-center pointer-events-none">
+          {children || (
+            <div className="flex flex-col items-center justify-center p-6 text-center">
+              <h2 className="text-5xl md:text-7xl lg:text-8xl font-black text-white drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)] mb-6 tracking-tight">
+                The Future of Clean.
+              </h2>
+              <p className="text-xl md:text-2xl text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] font-medium max-w-2xl mb-10 bg-black/20 px-6 py-2 rounded-full backdrop-blur-sm">
+                Scroll to see how our plant-powered sheets dissolve instantly and power through stains.
+              </p>
+              <a href="/shop" className="pointer-events-auto btn bg-white text-rose-600 px-12 py-4 text-sm font-black tracking-widest uppercase rounded-[9999px] ring-4 ring-rose-600 shadow-[0_15px_30px_rgba(0,0,0,0.15)] hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(0,0,0,0.2)] hover:bg-rose-600 hover:text-white transition-all duration-300">
+                Shop Now
+              </a>
+            </div>
+          )}
         </div>
       </div>
     </div>

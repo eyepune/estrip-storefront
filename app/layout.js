@@ -2,6 +2,7 @@ import { CartProvider } from "@/context/CartContext";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import FloatingWidgets from "./components/FloatingWidgets";
+import SmoothScroll from "./components/SmoothScroll";
 import "./globals.css";
 
 import { DM_Sans } from "next/font/google";
@@ -28,7 +29,9 @@ export default function RootLayout({ children }) {
         <CartProvider>
           <Navbar />
           <main className="flex-1">
-            {children}
+            <SmoothScroll>
+              {children}
+            </SmoothScroll>
           </main>
           <Footer />
           <FloatingWidgets />

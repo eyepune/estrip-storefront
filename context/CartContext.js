@@ -38,6 +38,7 @@ export function CartProvider({ children }) {
   const [state, dispatch] = useReducer(cartReducer, initialState);
   const [isOpen, setIsOpen] = useState(false);
   const [hydrated, setHydrated] = useState(false);
+  const [isNavHidden, setIsNavHidden] = useState(false);
 
   useEffect(() => {
     try {
@@ -73,7 +74,7 @@ export function CartProvider({ children }) {
   const clearCart = () => dispatch({ type: 'CLEAR_CART' });
 
   return (
-    <CartContext.Provider value={{ items: state.items, totalItems, subtotal, shippingProgress, amountToFreeShipping, isOpen, setIsOpen, addItem, removeItem, updateQty, updateFrequency, clearCart }}>
+    <CartContext.Provider value={{ items: state.items, totalItems, subtotal, shippingProgress, amountToFreeShipping, isOpen, setIsOpen, addItem, removeItem, updateQty, updateFrequency, clearCart, isNavHidden, setIsNavHidden }}>
       {children}
     </CartContext.Provider>
   );

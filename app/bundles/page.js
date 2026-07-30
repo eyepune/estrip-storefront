@@ -51,15 +51,15 @@ export default function BundlesPage() {
   };
 
   return (
-    <div className="bg-[#f6f6f6] min-h-screen pb-24">
+    <div className="bg-[var(--color-surface-container-low)] min-h-screen pb-24">
       
       {/* Header */}
-      <section className="bg-gray-900 text-white py-24 text-center px-4 relative overflow-hidden">
+      <section className="bg-gradient-to-br from-[var(--primary-deep)] to-[var(--color-secondary)] text-white py-24 text-center px-4 relative overflow-hidden">
         <div className="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
         <div className="relative z-10 max-w-3xl mx-auto">
           <span className="text-[var(--color-primary)] font-black tracking-[0.2em] uppercase text-xs md:text-sm mb-4 block">Bundle & Save</span>
           <h1 className="text-5xl md:text-7xl font-black mb-6 tracking-tight">The Best Value.</h1>
-          <p className="text-gray-300 font-medium text-lg md:text-xl">Stock up on your eco-friendly favorites and save up to 25%. Free shipping included on all bundles.</p>
+          <p className="text-[var(--color-primary-fixed)] font-medium text-lg md:text-xl">Stock up on your eco-friendly favorites and save up to 25%. Free shipping included on all bundles.</p>
         </div>
       </section>
 
@@ -72,11 +72,11 @@ export default function BundlesPage() {
               {/* Image Side */}
               <div className={`w-full md:w-1/2 relative bg-gray-50 min-h-[300px] md:min-h-[400px] flex items-center justify-center p-8 ${idx % 2 === 1 ? 'md:order-last' : ''}`}>
                 <Image src={bundle.image} alt={bundle.name} fill className="object-contain p-8 mix-blend-multiply group-hover:scale-105 transition-transform duration-700" unoptimized />
-                <div className="absolute top-6 left-6 bg-[#E30613] text-white text-xs font-black px-4 py-2 rounded-[4px] uppercase tracking-widest shadow-md">
+                <div className="absolute top-6 left-6 bg-[var(--color-primary)] text-white text-xs font-black px-4 py-2 rounded-[4px] uppercase tracking-widest shadow-md">
                   {bundle.discount}
                 </div>
                 {bundle.badge && (
-                  <div className="absolute top-6 right-6 bg-yellow-400 text-yellow-900 text-xs font-black px-4 py-2 rounded-full uppercase tracking-widest shadow-md">
+                  <div className="absolute top-6 right-6 bg-[var(--color-tertiary)] text-white text-xs font-black px-4 py-2 rounded-full uppercase tracking-widest shadow-md">
                     {bundle.badge}
                   </div>
                 )}
@@ -107,7 +107,7 @@ export default function BundlesPage() {
                   
                   <button 
                     onClick={() => handleAddToCart(bundle)}
-                    className={`btn w-full sm:w-auto h-[60px] px-10 rounded-[9999px] font-black text-sm uppercase tracking-widest shadow-lg transition-all hover:-translate-y-1 flex items-center justify-center gap-2 ${addedId === bundle.id ? 'bg-emerald-500 text-white shadow-emerald-500/30' : 'bg-[#E30613] hover:bg-red-700 text-white shadow-red-500/30'}`}
+                    className={`btn w-full sm:w-auto h-[60px] px-10 rounded-[9999px] font-black text-sm uppercase tracking-widest shadow-lg transition-all hover:-translate-y-1 flex items-center justify-center gap-2 ${addedId === bundle.id ? 'bg-emerald-500 text-white shadow-emerald-500/30' : 'bg-[var(--color-primary)] hover:brightness-110 text-white shadow-[0_10px_30px_rgba(224,64,160,0.3)]'}`}
                   >
                     <span className="material-symbols-outlined text-[20px]">{addedId === bundle.id ? 'check' : 'shopping_bag'}</span>
                     {addedId === bundle.id ? 'Added' : 'Add Bundle'}

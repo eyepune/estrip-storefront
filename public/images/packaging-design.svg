@@ -1,0 +1,237 @@
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg" font-family="'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif">
+  <defs>
+    <!-- Background Gradient Blend -->
+    <linearGradient id="bgBase" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0284c7"/>
+      <stop offset="25%" stop-color="#38bdf8"/>
+      <stop offset="50%" stop-color="#ffffff"/>
+      <stop offset="75%" stop-color="#bef264"/>
+      <stop offset="100%" stop-color="#fb923c"/>
+    </linearGradient>
+
+    <!-- Legacy Logo Rainbow Swoosh -->
+    <linearGradient id="swooshGrad" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#00a8cc"/>
+      <stop offset="15%" stop-color="#00c896"/>
+      <stop offset="35%" stop-color="#ffd500"/>
+      <stop offset="55%" stop-color="#ff7b00"/>
+      <stop offset="75%" stop-color="#e30613"/>
+      <stop offset="90%" stop-color="#9d20c0"/>
+      <stop offset="100%" stop-color="#4a00e0"/>
+    </linearGradient>
+
+    <!-- 20X Badge Metallic Gradient -->
+    <linearGradient id="goldGradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="50%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#e2e8f0"/>
+    </linearGradient>
+
+    <!-- Filters -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#091b3e" flood-opacity="0.2"/>
+    </filter>
+    
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="12" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- ==================== BACKGROUND ARTWORK ==================== -->
+  <!-- Solid White Canvas Base -->
+  <rect width="800" height="500" fill="#ffffff"/>
+
+  <!-- Left Ocean Blue Fluid Background -->
+  <path d="M 0,0 L 320,0 C 240,160 280,360 0,440 Z" fill="#0284c7"/>
+  <path d="M 0,0 L 380,0 C 260,200 320,380 0,500 Z" fill="#38bdf8" opacity="0.4"/>
+  <path d="M 0,260 C 140,280 220,380 0,500 Z" fill="#0369a1" opacity="0.6"/>
+
+  <!-- Top Right Lime Green Aura -->
+  <path d="M 480,0 L 800,0 L 800,240 C 680,180 580,80 480,0 Z" fill="#84cc16" opacity="0.75"/>
+  <path d="M 600,0 L 800,0 L 800,160 C 720,120 660,60 600,0 Z" fill="#facc15" opacity="0.5"/>
+
+  <!-- Bottom Right Pink / Red / Orange Gradient Flow -->
+  <path d="M 800,240 C 640,340 620,440 660,500 L 800,500 Z" fill="#ec4899" opacity="0.85"/>
+  <path d="M 800,320 C 720,380 690,450 720,500 L 800,500 Z" fill="#f97316" opacity="0.95"/>
+
+  <!-- Water Splash Swirl Rays -->
+  <path d="M 220,200 C 320,160 480,160 600,230" fill="none" stroke="#7dd3fc" stroke-width="3" opacity="0.4"/>
+  <path d="M 200,250 C 300,200 500,200 620,280" fill="none" stroke="#0284c7" stroke-width="3" stroke-dasharray="10,6" opacity="0.4"/>
+
+  <!-- ==================== TOP LEFT BADGE ==================== -->
+  <g transform="translate(24, 18)" filter="url(#shadow)">
+    <rect width="86" height="50" rx="8" fill="#0f172a"/>
+    <text x="43" y="19" font-size="13" font-weight="900" fill="#ffffff" text-anchor="middle" letter-spacing="1">NEW</text>
+    <text x="43" y="32" font-size="8" font-weight="700" fill="#94a3b8" text-anchor="middle">ADVANCED</text>
+    <text x="43" y="42" font-size="8" font-weight="700" fill="#94a3b8" text-anchor="middle">FORMULA</text>
+  </g>
+
+  <!-- ==================== TOP RIGHT BADGE ==================== -->
+  <g transform="translate(720, 42)" filter="url(#shadow)">
+    <circle cx="0" cy="0" r="34" fill="#16a34a" stroke="#ffffff" stroke-width="2.5"/>
+    <text x="0" y="-10" font-size="7.5" font-weight="900" fill="#ffffff" text-anchor="middle">PLANT BASED</text>
+    <!-- Leaf Icon -->
+    <path d="M -8,0 C -8,-10 0,-12 8,-4 C 8,6 0,8 -8,0 Z" fill="#ffffff"/>
+    <path d="M 8,-4 C 8,6 -2,8 -4,2 Z" fill="#dcfce7"/>
+    <text x="0" y="16" font-size="7.5" font-weight="900" fill="#ffffff" text-anchor="middle">FORMULA</text>
+  </g>
+
+  <!-- ==================== TOP CENTER OFFICIAL LOGO ==================== -->
+  <g transform="translate(400, 70) scale(0.68)">
+    <path d="M 160,-20 A 180 120 0 0 1 0,110 A 180 120 0 0 1 -180,-20" fill="none" stroke="url(#swooshGrad)" stroke-width="35" stroke-linecap="round" filter="url(#shadow)"/>
+    <path d="M -180,-20 A 180 120 0 0 1 -40,-120" fill="none" stroke="#00a8cc" stroke-width="35" stroke-linecap="round"/>
+    <ellipse cx="0" cy="-10" rx="150" ry="90" fill="#ffffff" filter="url(#shadow)"/>
+    <image href="https://estrip.in/cdn/shop/files/Primary-Logo_Blue-scaled_1.png?v=1777612281" x="-115" y="-55" width="230" height="90" />
+  </g>
+
+  <!-- ==================== HEADER TYPOGRAPHY ==================== -->
+  <text x="400" y="162" font-size="26" font-weight="900" fill="#0f172a" text-anchor="middle" letter-spacing="1.5">LAUNDRY DETERGENT SHEETS</text>
+
+  <!-- Fragrance Pill -->
+  <g transform="translate(400, 196)" text-anchor="middle">
+    <rect x="-110" y="-15" width="220" height="28" rx="14" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" filter="url(#shadow)"/>
+    <text x="0" y="3" font-size="14" font-weight="900" fill="#0284c7" letter-spacing="2.5">WHITE LINEN</text>
+    <text x="0" y="24" font-size="8.5" font-weight="800" fill="#64748b" letter-spacing="1.5">FRESH • CLEAN • COMFORT</text>
+  </g>
+
+  <!-- ==================== LEFT BADGE: 20X CONCENTRATED ==================== -->
+  <g transform="translate(105, 185)" filter="url(#shadow)">
+    <circle cx="0" cy="0" r="42" fill="url(#goldGradient)" stroke="#f59e0b" stroke-width="4"/>
+    <circle cx="0" cy="0" r="36" fill="none" stroke="#d97706" stroke-width="1" stroke-dasharray="4,3"/>
+    <text x="0" y="-5" font-size="22" font-weight="900" fill="#0f172a" text-anchor="middle">20X</text>
+    <text x="0" y="10" font-size="7.5" font-weight="800" fill="#475569" text-anchor="middle">CONCENTRATED</text>
+    <text x="0" y="19" font-size="6.5" font-weight="700" fill="#0284c7" text-anchor="middle">CLEANING POWER</text>
+  </g>
+
+  <!-- Left Callout Text -->
+  <g transform="translate(30, 295)" fill="#ffffff" filter="url(#shadow)">
+    <text x="0" y="0" font-size="17" font-weight="900">POWERFUL</text>
+    <text x="0" y="18" font-size="17" font-weight="900">CLEAN.</text>
+    <text x="0" y="38" font-size="12" font-weight="800" fill="#bae6fd">LESS PLASTIC.</text>
+    <text x="0" y="54" font-size="12" font-weight="900" fill="#fde047">LESS MESS.</text>
+  </g>
+
+  <!-- ==================== CENTER VISUAL: WATER SPLASH & SHEET ==================== -->
+  <g transform="translate(400, 275)">
+    <!-- Water Ring Splash -->
+    <path d="M -135,-45 C -95,-95 95,-95 135,-45 C 165,25 95,95 0,100 C -95,95 -165,25 -135,-45 Z" fill="#0284c7" opacity="0.15" filter="url(#softGlow)"/>
+    <path d="M -110,-35 C -75,-80 75,-80 110,-35 C 140,20 75,80 0,85 C -75,80 -140,20 -110,-35 Z" fill="none" stroke="#38bdf8" stroke-width="3.5" stroke-dasharray="8,5"/>
+    
+    <!-- Droplets -->
+    <circle cx="-120" cy="-25" r="5" fill="#38bdf8"/>
+    <circle cx="125" cy="-15" r="6" fill="#0284c7"/>
+    <circle cx="-100" cy="55" r="4" fill="#38bdf8"/>
+    <circle cx="110" cy="50" r="5" fill="#0284c7"/>
+
+    <!-- Detergent Sheet Graphic -->
+    <g transform="rotate(-12)" filter="url(#shadow)">
+      <rect x="-68" y="-42" width="136" height="84" rx="8" fill="#ffffff" stroke="#e2e8f0" stroke-width="2"/>
+      <line x1="-50" y1="-20" x2="50" y2="-20" stroke="#cbd5e1" stroke-width="1.5" opacity="0.6"/>
+      <line x1="-50" y1="0" x2="50" y2="0" stroke="#cbd5e1" stroke-width="1.5" opacity="0.6"/>
+      <line x1="-50" y1="20" x2="50" y2="20" stroke="#cbd5e1" stroke-width="1.5" opacity="0.6"/>
+      <text x="0" y="4" font-size="10" font-weight="900" fill="#94a3b8" text-anchor="middle" opacity="0.5">e&gt;strip</text>
+    </g>
+  </g>
+
+  <!-- ==================== RIGHT VISUAL: FOLDED TOWELS & LILY ==================== -->
+  <g transform="translate(660, 275)">
+    <!-- Stack of Folded Crisp White Towels -->
+    <rect x="-70" y="-50" width="120" height="24" rx="7" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" filter="url(#shadow)"/>
+    <rect x="-76" y="-24" width="132" height="26" rx="7" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" filter="url(#shadow)"/>
+    <rect x="-82" y="4" width="144" height="28" rx="7" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5" filter="url(#shadow)"/>
+
+    <!-- Flowers -->
+    <g transform="translate(-45, 32)">
+      <circle cx="-12" cy="10" r="15" fill="#ffffff" stroke="#e2e8f0"/>
+      <circle cx="6" cy="14" r="13" fill="#ffffff" stroke="#e2e8f0"/>
+      <circle cx="0" cy="0" r="10" fill="#fef08a"/>
+    </g>
+    
+    <!-- Washer Badge -->
+    <g transform="translate(28, 28)" filter="url(#shadow)">
+      <circle cx="0" cy="0" r="22" fill="#ffffff" stroke="#0284c7" stroke-width="2"/>
+      <text x="0" y="-5" font-size="6" font-weight="800" fill="#0f172a" text-anchor="middle">SUITABLE FOR</text>
+      <text x="0" y="5" font-size="6" font-weight="900" fill="#0284c7" text-anchor="middle">ALL WASHERS</text>
+    </g>
+  </g>
+
+  <!-- ==================== CENTER BOTTOM CONVERSION PILL ==================== -->
+  <g transform="translate(400, 382)" filter="url(#shadow)">
+    <rect x="-200" y="-24" width="400" height="48" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="2"/>
+    
+    <!-- 15 SHEETS -->
+    <g transform="translate(-135, 0)">
+      <rect x="-30" y="-14" width="28" height="28" rx="6" fill="#ffe4e6"/>
+      <rect x="-24" y="-9" width="16" height="12" rx="2" fill="#f43f5e"/>
+      <rect x="-22" y="-4" width="16" height="12" rx="2" fill="#fb7185"/>
+      <text x="6" y="-2" font-size="16" font-weight="900" fill="#0f172a">15</text>
+      <text x="6" y="10" font-size="8" font-weight="800" fill="#64748b">SHEETS</text>
+    </g>
+
+    <line x1="-50" y1="-14" x2="-50" y2="14" stroke="#e2e8f0" stroke-width="1.5"/>
+
+    <!-- 30 LOADS -->
+    <g transform="translate(-10, 0)">
+      <rect x="-24" y="-14" width="28" height="28" rx="6" fill="#dcfce7"/>
+      <rect x="-19" y="-9" width="18" height="18" rx="3" fill="none" stroke="#16a34a" stroke-width="2"/>
+      <circle cx="-10" cy="0" r="4" fill="none" stroke="#16a34a" stroke-width="2"/>
+      <text x="10" y="-2" font-size="16" font-weight="900" fill="#0f172a">30</text>
+      <text x="10" y="10" font-size="8" font-weight="800" fill="#64748b">LOADS</text>
+    </g>
+
+    <line x1="68" y1="-14" x2="68" y2="14" stroke="#e2e8f0" stroke-width="1.5"/>
+
+    <!-- 20X CONCENTRATED -->
+    <g transform="translate(108, 0)">
+      <circle cx="-14" cy="0" r="14" fill="#fef3c7"/>
+      <text x="-14" y="5" font-size="12" font-weight="900" fill="#d97706" text-anchor="middle">💧</text>
+      <text x="6" y="-2" font-size="15" font-weight="900" fill="#0f172a">20X</text>
+      <text x="6" y="10" font-size="8" font-weight="800" fill="#64748b">CONCENTRATED</text>
+    </g>
+  </g>
+
+  <!-- ==================== BOTTOM COLORFUL STRIP ==================== -->
+  <g transform="translate(0, 442)">
+    <!-- Block 1: Teal -->
+    <rect x="16" y="0" width="104" height="46" fill="#0d9488" rx="5"/>
+    <text x="68" y="21" font-size="8.5" font-weight="900" fill="#ffffff" text-anchor="middle">⚡ EASY</text>
+    <text x="68" y="32" font-size="8.5" font-weight="900" fill="#ffffff" text-anchor="middle">DISSOLVE</text>
+
+    <!-- Block 2: Green -->
+    <rect x="124" y="0" width="104" height="46" fill="#16a34a" rx="5"/>
+    <text x="176" y="21" font-size="8.5" font-weight="900" fill="#ffffff" text-anchor="middle">🌱 ECO</text>
+    <text x="176" y="32" font-size="8.5" font-weight="900" fill="#ffffff" text-anchor="middle">FRIENDLY</text>
+
+    <!-- Block 3: Cyan -->
+    <rect x="232" y="0" width="104" height="46" fill="#0284c7" rx="5"/>
+    <text x="284" y="21" font-size="8.5" font-weight="900" fill="#ffffff" text-anchor="middle">🧺 ALL</text>
+    <text x="284" y="32" font-size="8.5" font-weight="900" fill="#ffffff" text-anchor="middle">MACHINES</text>
+
+    <!-- Block 4: Purple -->
+    <rect x="340" y="0" width="104" height="46" fill="#9333ea" rx="5"/>
+    <text x="392" y="21" font-size="8.5" font-weight="900" fill="#ffffff" text-anchor="middle">💧 NO HARSH</text>
+    <text x="392" y="32" font-size="8.5" font-weight="900" fill="#ffffff" text-anchor="middle">CHEMICALS</text>
+
+    <!-- Block 5: Pink -->
+    <rect x="448" y="0" width="104" height="46" fill="#e11d48" rx="5"/>
+    <text x="500" y="21" font-size="8.5" font-weight="900" fill="#ffffff" text-anchor="middle">✨ TOUGH ON</text>
+    <text x="500" y="32" font-size="8.5" font-weight="900" fill="#ffffff" text-anchor="middle">STAINS</text>
+
+    <!-- Block 6: Orange -->
+    <rect x="556" y="0" width="104" height="46" fill="#ea580c" rx="5"/>
+    <text x="608" y="21" font-size="8.5" font-weight="900" fill="#ffffff" text-anchor="middle">👕 SAFE ON</text>
+    <text x="608" y="32" font-size="8.5" font-weight="900" fill="#ffffff" text-anchor="middle">FABRICS</text>
+
+    <!-- Block 7: Made in India (Far Right) -->
+    <g transform="translate(664, 0)">
+      <rect x="0" y="0" width="120" height="46" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" rx="5"/>
+      <text x="60" y="18" font-size="7.5" font-weight="900" fill="#0f172a" text-anchor="middle">MADE IN</text>
+      <text x="60" y="30" font-size="10" font-weight="900" fill="#0f172a" text-anchor="middle">INDIA</text>
+      <!-- Flag Stripes -->
+      <rect x="20" y="35" width="80" height="2.5" fill="#ff9933"/>
+      <rect x="20" y="37.5" width="80" height="2.5" fill="#ffffff"/>
+      <rect x="20" y="40" width="80" height="2.5" fill="#138808"/>
+    </g>
+  </g>
+</svg>
